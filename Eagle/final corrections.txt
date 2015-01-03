@@ -1,0 +1,25 @@
+VCC sümbol sinna panna (VBUS juurde) - check
+
+induktori sümbol õigeks - check
+
+teine sümbol kasutada wire terminalide jaoks - check
+
+step signaalid output compare jalgadele!
+16-bitiste OC jalgade peale stepid - check
+
+VCP jala peale kondekas VCC-le üle - check
+
+
+Regulaator 5V peale - check
+
+schokkey diood enne regulaatorit pärast high voltaget check
+
+schokkey diood USB peale - check
+
+
+üle kontrollida package'i mõõdud induktoril	check
+				prosel		check
+				draiveritel	check
+				fototransil	check
+				PTC-l		check
+				schokkey	

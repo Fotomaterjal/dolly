@@ -1,0 +1,40 @@
+Kivil peaks olema sees USB device, nt ATMEGA U4
+
+PEAB OLEMA:
+*kõik toited VCC-ga
+*kõik groundid peavad olema maaga ühenduses
+*iga toiteGND paari kohta peab olema 1 kondekas 100nF
+
+*AREF 100nF
+*resonaator peaks ka olema, USB nõuab 0,5% clocki täpsust
+*reseti pinn maaga, lüliti vahel. Vajadusel üks takisti ka juurde
+*nupp bootloaderisse minekuks, sinna takisti ka enne VCC
+*debug LEDid mõnede portide peale, 2k takisti nende juurde
+*POWER-ON LED võiks ka olla
+*vaikimisi on JTAG jalad sisse lülitatud, nõnda ei saa
+ GPIO-d kasutada. Kui neid on vaja, siis tuleb JTAG jalad
+ disable-da
+*SPI jalad on MISO, MOSI, SCK ja SS. SS on madal -> see slave
+ on aktiveeritud. Kasutada võib selle jaoks ka teisi suvalisi 
+ väljundeid
+*Arvuti transmit on kontrolleri receive-ga ühendatud
+*USB tahab pin1 peale PTC takistit
+*kondekaga tekkiv vooluring peab olema päris väike!!!!!!!!!!!
+
+
+*debugimiseks tuleks ühendada toiteplokk, millel piiranguks
+ umbes 40 mA
+ Kui voolud on korras, siis alles USB kaudu kasutada
+*Rajad, kus jookseb suur vool, peavad olema mitte väga kitsad
+*Võimalikult vähe jama teisele poole plaati
+ võimalusel null asja
+*Rajad ei tohiks joosta mõlemal pool plaati ühes suunas
+ routimisega võib tekkida probleeme
+*Plaat võiks täiesti valmis olema vähemalt kuu enne aine lõppu
+*kujundus ise juba palju varem, sest plaadid lähevad tellimisse
+
+
+
+RVP:
+Lipo kaitsel võiks olla kolma asja: laadimine, balanss ja kaitse
+

@@ -1,0 +1,40 @@
+Kas mu kristall on okei või peaks mingi muu pakendi/komponendi valima?
+kristall otsida välja farnellist!
+Mis on "corner connection capacitors"? - ei lähe vaja
+
+
+
+
+
+
+
+kuuesed micromatchid!
+smd nupud!
+smd kristall!
+
+~ENABLE 
+out2b - mähisest tagasi
+out2a - mähisesse
+out1b - mähisest tagasi
+out1a - mähisesse
+vbb2 - suur pinge IN
+vbb1 - suur pinge IN
+sense 2 - arvuta siia üks takisti, mis läheb maha
+sense 1 - arvuta siia üks takisti, mis läheb maha, sama
+	mis eelmisele
+Dir - igale mootorile eraldi pin MCU-st
+VCP - vt datasheet, mingi kondekas sinna visata
+reset - püsivalt VCC-ga ühendada. kas takisti vahele?
+rosc - 
+Step - igale moorotile eraldi PIN MCU-st
+REF - ühendada VCC-ga vist
+
+
+Kui skeem tundub olevat üsna okei, siis võiks
+move tooliga ühendused ära kontrollida!
+ERC ja DRC tee ka ära
+
+______________________________________________________________
+29.10 EDIT
+farnelli datasheet, 100uF polarized cap? or ceramic?
+

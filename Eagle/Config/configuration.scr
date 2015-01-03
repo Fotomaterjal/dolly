@@ -1,0 +1,96 @@
+# Configuration script for EagleCAD Board editor
+# Author: Erik / pro.a5d.biz
+#
+
+# Configuration for board editor
+BRD:
+
+# Hotkey macros for board editor
+
+ASSIGN C+Q move;
+ASSIGN C+W route;
+ASSIGN C+E group;
+ASSIGN C+R show;
+ASSIGN C+A copy;
+ASSIGN C+D rip;
+ASSIGN C+F info;
+
+# only calculates the airwires, won’t recalculate the polygons, a lot faster on boards with lots of components
+ASSIGN F1 set 'POLYGON_RATSNEST OFF; rat; SET POLYGON_RATSNEST ON';
+ASSIGN F2 rat;
+
+ASSIGN C+1 disp none unrouted dimension vias pads top bottom tplace bplace torigin borigin tdocu bdocu;
+ASSIGN C+2 disp none unrouted dimension vias pads top tplace torigin tdocu;
+ASSIGN C+3 disp none unrouted dimension vias pads bottom bplace borigin bdocu;
+ASSIGN C+5 disp none dimension unrouted vias pads top;
+ASSIGN C+6 disp none dimension unrouted vias pads bottom;
+
+# Set up GRID
+
+GRID on;
+
+GRID mm 0.2;
+
+GRID alt mm 0.05;
+
+# Set up favorite drilling widths
+
+
+# Configuration for schematic editor
+SCH:
+
+# Hotkey macros for schmetatic editor
+
+ASSIGN C+Q move;
+ASSIGN C+W net;
+ASSIGN C+E group;
+ASSIGN C+R show;
+ASSIGN C+A copy;
+ASSIGN C+D delete;
+ASSIGN C+F info;
+ASSIGN C+T name;
+ASSIGN C+G label;
+
+# Set up grid
+
+GRID on;
+
+# Configure xRef on
+
+CHANGE xref on;
+
+# Configure library editor
+
+LBR:
+
+# Device drawing configuration
+
+DEV:
+
+# Symbol drawing configuration
+
+SYM:
+
+ASSIGN C+Q move;
+ASSIGN C+W wire;
+ASSIGN C+E group;
+ASSIGN C+R show;
+ASSIGN C+A copy;
+ASSIGN C+D delete;
+ASSIGN C+F info;
+ASSIGN C+T text;
+
+# Package drawing configuration
+
+PAC:
+
+ASSIGN C+Q move;
+ASSIGN C+W wire;
+ASSIGN C+E group;
+ASSIGN C+R show;
+ASSIGN C+A copy;
+ASSIGN C+D delete;
+ASSIGN C+F info;
+ASSIGN C+T text;
+
+# Last line

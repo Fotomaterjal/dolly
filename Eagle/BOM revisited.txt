@@ -1,0 +1,20 @@
+Mida ma Digist ei leidnud: (1 plaat)
+
+5tk 0805 10uF
+3tk 220 nF 0603
+6tk 0.1 oomi 0805
+2tk 18 pF 0603
+180 oomi 0603
+1tk 100nF 1206
+7tk 1uF 0603
+
+
+
+
+1658880, 10, Salumaa 10UF 16V 0805	olemas
+2332680, 10, Salumaa 220NF, 16V, 0603	olemas
+1717812, 12, Salumaa RESISTOR 0805 0.1 ohm 0.33W	TEET saada meil
+1740595, 10, Salumaa 18PF 100V 0603	olemas
+2331716, 10, Salumaa 180R 0.2W 5% 0603	olemas 200 oomi
+2332842, 1, Salumaa CAP 100NF 100V 1206	
+2362099, 14, Salumaa CAP, 1UF 16V 0603	olemas

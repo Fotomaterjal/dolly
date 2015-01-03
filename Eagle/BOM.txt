@@ -1,0 +1,116 @@
+Partlist exported from C:/Users/Oll/Dropbox/2014kool/Lõputöö/Eagle/Bachelor/main_schematic.sch at 2.12.2014 10:23:13
+
+Part Value              Device              Package                 Description                                             MF MPN                OC_FARNELL OC_NEWARK PACKAGE SUPPLIER      
+C1   100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C2   100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C3   100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C4   100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C5   100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C6   100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C7   1uF                C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C8   18pF               C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C9   18pF               C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C10  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C11  220nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C12  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C13  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C14  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C15  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C16  1uF                C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C17  1uF                C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C18  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C19  100uF              CPOL-EUE/7260-38R   E/7260-38R              POLARIZED CAPACITOR, European symbol                                                                                     
+C20  10uF               C-EUC1206K          C1206K                  CAPACITOR, European symbol                                                                                               
+C21  220nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C22  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C23  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C24  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C25  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C26  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C27  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C28  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C29  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C30  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C31  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C32  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C33  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C34  1uF                C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C35  1uF                C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C36  100uF              CPOL-EUE/7260-38R   E/7260-38R              POLARIZED CAPACITOR, European symbol                                                                                     
+C37  10uF               C-EUC1206K          C1206K                  CAPACITOR, European symbol                                                                                               
+C38  220nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C39  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C40  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C41  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C42  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C43  1uF                C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C44  1uF                C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C45  100uF              CPOL-EUE/7260-38R   E/7260-38R              POLARIZED CAPACITOR, European symbol                                                                                     
+C46  10uF               C-EUC1206K          C1206K                  CAPACITOR, European symbol                                                                                               
+C47  10uF               C-EUC1206K          C1206K                  CAPACITOR, European symbol                                                                                               
+C48  100nF              C-EUC1206K          C1206K                  CAPACITOR, European symbol                                                                                               
+C49  22uF               C-EUC1206K          C1206K                  CAPACITOR, European symbol                                                                                               
+C50  22uF               C-EUC1206K          C1206K                  CAPACITOR, European symbol                                                                                               
+C51  10uF               C-EUC0805           C0805                   CAPACITOR, European symbol                                                                                               
+C52  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C53  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+C54  100nF              C-EUC0603K          C0603K                  CAPACITOR, European symbol                                                                                               
+CN1                     USBMINIB            USB-MINIB               USB Connectors                                                                                                           
+F1   MC36214            MC36214             MC36214                                                                                                                                          
+JP1                     PINHD-1X4           1X04                    PIN HEADER                                                                                                               
+JP2                     PINHD-1X2           1X02                    PIN HEADER                                                                                                               
+LED1                    LEDCHIP-LED0603     CHIP-LED0603            LED                                                                                                                      
+LED2                    LEDCHIP-LED0603     CHIP-LED0603            LED                                                                                                                      
+Q2   16MHz              CRYSTALSM49         SM49                    CRYSTAL                                                                       unknown    unknown                         
+R1   10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R2   0.33k              R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R3   22                 R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R4   22                 R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R5   10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R6   10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R7   10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R8   10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R9   10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R10  0.1                R-EU_R0805          R0805                   RESISTOR, European symbol                                                                                                
+R11  0.1                R-EU_R0805          R0805                   RESISTOR, European symbol                                                                                                
+R12  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R13  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R14  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R15  0.1                R-EU_R0805          R0805                   RESISTOR, European symbol                                                                                                
+R16  0.1                R-EU_R0805          R0805                   RESISTOR, European symbol                                                                                                
+R17  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R18  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R19  0.1                R-EU_R0805          R0805                   RESISTOR, European symbol                                                                                                
+R20  0.1                R-EU_R0805          R0805                   RESISTOR, European symbol                                                                                                
+R21  1k                 R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R22  1k                 R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R23  330                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R24  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R25  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R26  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R27  3.9k               R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R28  180                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R29  100k               R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R30  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R31  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+R32  10k                R-EU_R0603          R0603                   RESISTOR, European symbol                                                                                                
+SW7  SPST_TACT-EVQQ2    SPST_TACT-EVQQ2     EVQ-Q2                  SMT 6mm switch, EVQQ2 series                                                                                             
+SW8  SPST_TACT-EVQQ2    SPST_TACT-EVQQ2     EVQ-Q2                  SMT 6mm switch, EVQQ2 series                                                                                             
+SW9  SPST_TACT-EVQQ2    SPST_TACT-EVQQ2     EVQ-Q2                  SMT 6mm switch, EVQQ2 series                                                                                             
+U$1  A4982SLPTR-T       A4982SLPTR-T        TSSOP_24                                                                                                                                         
+U$2  A4982SLPTR-T       A4982SLPTR-T        TSSOP_24                                                                                                                                         
+U$3  A4982SLPTR-T       A4982SLPTR-T        TSSOP_24                                                                                                                                         
+U$4  SFH6156            SFH6156             SFH6165                                                                                                                                          
+U$5  B330B-13-F         SCHOTTK_YB330B-13-F B330B-13-F                                                                                                                                       
+U$6  6.8uH              VLF10040            VLF10040                                                                                                                                         
+U$7  B330B-13-F         SCHOTTK_YB330B-13-F B330B-13-F                                                                                                                                       
+U$8  B330B-13-F         SCHOTTK_YB330B-13-F B330B-13-F                                                                                                                                       
+U1   ATMEGA32U4-AU      ATMEGA32U4-AU       QFP80P1200X1200X120-44N 8-bit Microcontroller with ISP Flash and USB Controller    ATMEGA32U4-AU      1748525    26R5633   TQFP-44 Atmel         
+U2   ADP2302ARDZ-5.0-R7 ADP2302ARDZ-5.0-R7  SOIC127P600X175-9N      Step-Down Regulators                                       ADP2302ARDZ-5.0-R7 2312892    67W2704   SOIC-8  Analog Devices
+X1   MICROMATCH-4       MICROMATCH-4        MICROMATCH-4            MicroMaTch 4  7-215464-4 / 0-215464-4                      7-215464-4         3784629    19R8124                         
+X2   MICROMATCH-4       MICROMATCH-4        MICROMATCH-4            MicroMaTch 4  7-215464-4 / 0-215464-4                      7-215464-4         3784629    19R8124                         
+X3   MICROMATCH-4       MICROMATCH-4        MICROMATCH-4            MicroMaTch 4  7-215464-4 / 0-215464-4                      7-215464-4         3784629    19R8124                         
+X4                      W237-02P            W237-132                WAGO SREW CLAMP                                                               unknown    unknown                         
+X5                      W237-04P            W237-4P                 WAGO SREW CLAMP                                                               unknown    unknown                         
+X7                      W237-04P            W237-4P                 WAGO SREW CLAMP                                                               unknown    unknown                         
+X8                      W237-04P            W237-4P                 WAGO SREW CLAMP                                                               unknown    unknown                         
