@@ -1,0 +1,232 @@
+
+ul2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00000162  000001d6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000162  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .stab         000006cc  00000000  00000000  000001d8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  000008a4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000080  00000000  00000000  00000930  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000389  00000000  00000000  000009b0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000000d9  00000000  00000000  00000d39  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000002f5  00000000  00000000  00000e12  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000054  00000000  00000000  00001108  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000000b2  00000000  00000000  0000115c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000014  00000000  00000000  0000120e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 4c 00 	jmp	0x98	; 0x98 <__ctors_end>
+   4:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   8:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  10:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  14:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  18:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  1c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  2c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  3c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  40:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  44:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  48:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  4c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  50:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  54:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  58:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  5c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  60:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  64:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  68:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  6c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  70:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  74:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  78:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  7c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  80:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  84:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  88:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  8c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  90:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  94:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+
+00000098 <__ctors_end>:
+  98:	11 24       	eor	r1, r1
+  9a:	1f be       	out	0x3f, r1	; 63
+  9c:	cf ef       	ldi	r28, 0xFF	; 255
+  9e:	d0 e1       	ldi	r29, 0x10	; 16
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	cd bf       	out	0x3d, r28	; 61
+
+000000a4 <__do_copy_data>:
+  a4:	11 e0       	ldi	r17, 0x01	; 1
+  a6:	a0 e0       	ldi	r26, 0x00	; 0
+  a8:	b1 e0       	ldi	r27, 0x01	; 1
+  aa:	e2 e6       	ldi	r30, 0x62	; 98
+  ac:	f1 e0       	ldi	r31, 0x01	; 1
+  ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
+  b0:	05 90       	lpm	r0, Z+
+  b2:	0d 92       	st	X+, r0
+  b4:	a0 30       	cpi	r26, 0x00	; 0
+  b6:	b1 07       	cpc	r27, r17
+  b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0xc>
+
+000000ba <__do_clear_bss>:
+  ba:	11 e0       	ldi	r17, 0x01	; 1
+  bc:	a0 e0       	ldi	r26, 0x00	; 0
+  be:	b1 e0       	ldi	r27, 0x01	; 1
+  c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
+
+000000c2 <.do_clear_bss_loop>:
+  c2:	1d 92       	st	X+, r1
+
+000000c4 <.do_clear_bss_start>:
+  c4:	a0 30       	cpi	r26, 0x00	; 0
+  c6:	b1 07       	cpc	r27, r17
+  c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
+  ca:	0e 94 85 00 	call	0x10a	; 0x10a <main>
+  ce:	0c 94 af 00 	jmp	0x15e	; 0x15e <_exit>
+
+000000d2 <__bad_interrupt>:
+  d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000d6 <delayHalfSecond>:
+		delayHalfSecond();
+    }
+	
+}
+
+void delayHalfSecond(){
+  d6:	80 e5       	ldi	r24, 0x50	; 80
+  d8:	93 ec       	ldi	r25, 0xC3	; 195
+	for(uint16_t i = 0; i < 50000; i++){
+		asm("nop");
+  da:	00 00       	nop
+  dc:	01 97       	sbiw	r24, 0x01	; 1
+    }
+	
+}
+
+void delayHalfSecond(){
+	for(uint16_t i = 0; i < 50000; i++){
+  de:	e9 f7       	brne	.-6      	; 0xda <delayHalfSecond+0x4>
+		asm("nop");
+	}
+}
+  e0:	08 95       	ret
+
+000000e2 <shortSignal>:
+
+void shortSignal(){
+	PORTA = 0x01;
+  e2:	81 e0       	ldi	r24, 0x01	; 1
+  e4:	82 b9       	out	0x02, r24	; 2
+	delayHalfSecond();
+  e6:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+	PORTA = 0x00;
+  ea:	12 b8       	out	0x02, r1	; 2
+	delayHalfSecond();
+  ec:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+}
+  f0:	08 95       	ret
+
+000000f2 <longSignal>:
+
+void longSignal(){
+	PORTA = 0x01;
+  f2:	81 e0       	ldi	r24, 0x01	; 1
+  f4:	82 b9       	out	0x02, r24	; 2
+	delayHalfSecond();
+  f6:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+	delayHalfSecond();
+  fa:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+	delayHalfSecond();
+  fe:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+	PORTA = 0x00;
+ 102:	12 b8       	out	0x02, r1	; 2
+	delayHalfSecond();
+ 104:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+ 108:	08 95       	ret
+
+0000010a <main>:
+
+int main(void)
+{
+	int led = 0x01;
+
+	DDRA = led;			//data direction
+ 10a:	81 e0       	ldi	r24, 0x01	; 1
+ 10c:	81 b9       	out	0x01, r24	; 1
+	PORTA = led;		//light one LED
+ 10e:	82 b9       	out	0x02, r24	; 2
+		
+    while(1)
+    {
+		shortSignal();
+ 110:	0e 94 71 00 	call	0xe2	; 0xe2 <shortSignal>
+		shortSignal();
+ 114:	0e 94 71 00 	call	0xe2	; 0xe2 <shortSignal>
+		shortSignal();
+ 118:	0e 94 71 00 	call	0xe2	; 0xe2 <shortSignal>
+		
+		delayHalfSecond();
+ 11c:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+		delayHalfSecond();
+ 120:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+		
+		longSignal();
+ 124:	0e 94 79 00 	call	0xf2	; 0xf2 <longSignal>
+		longSignal();
+ 128:	0e 94 79 00 	call	0xf2	; 0xf2 <longSignal>
+		longSignal();
+ 12c:	0e 94 79 00 	call	0xf2	; 0xf2 <longSignal>
+
+		delayHalfSecond();
+ 130:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+		delayHalfSecond();
+ 134:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+		
+		shortSignal();
+ 138:	0e 94 71 00 	call	0xe2	; 0xe2 <shortSignal>
+		shortSignal();
+ 13c:	0e 94 71 00 	call	0xe2	; 0xe2 <shortSignal>
+		shortSignal();
+ 140:	0e 94 71 00 	call	0xe2	; 0xe2 <shortSignal>
+		
+		delayHalfSecond();
+ 144:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+		delayHalfSecond();
+ 148:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+		delayHalfSecond();
+ 14c:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+		delayHalfSecond();
+ 150:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+		delayHalfSecond();
+ 154:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+		delayHalfSecond();
+ 158:	0e 94 6b 00 	call	0xd6	; 0xd6 <delayHalfSecond>
+ 15c:	d9 cf       	rjmp	.-78     	; 0x110 <main+0x6>
+
+0000015e <_exit>:
+ 15e:	f8 94       	cli
+
+00000160 <__stop_program>:
+ 160:	ff cf       	rjmp	.-2      	; 0x160 <__stop_program>

@@ -1,0 +1,190 @@
+
+ul6.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00000110  00000184  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000110  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .stab         000006cc  00000000  00000000  00000184  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  00000850  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000080  00000000  00000000  000008d8  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000352  00000000  00000000  00000958  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000000c9  00000000  00000000  00000caa  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000289  00000000  00000000  00000d73  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000034  00000000  00000000  00000ffc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000098  00000000  00000000  00001030  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000001f  00000000  00000000  000010c8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000018  00000000  00000000  000010e7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 4c 00 	jmp	0x98	; 0x98 <__ctors_end>
+   4:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   8:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  10:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  14:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  18:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  1c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  2c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  3c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  40:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  44:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  48:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  4c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  50:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  54:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  58:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  5c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  60:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  64:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  68:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  6c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  70:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  74:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  78:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  7c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  80:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  84:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  88:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  8c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  90:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  94:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+
+00000098 <__ctors_end>:
+  98:	11 24       	eor	r1, r1
+  9a:	1f be       	out	0x3f, r1	; 63
+  9c:	cf ef       	ldi	r28, 0xFF	; 255
+  9e:	d0 e1       	ldi	r29, 0x10	; 16
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	cd bf       	out	0x3d, r28	; 61
+
+000000a4 <__do_copy_data>:
+  a4:	11 e0       	ldi	r17, 0x01	; 1
+  a6:	a0 e0       	ldi	r26, 0x00	; 0
+  a8:	b1 e0       	ldi	r27, 0x01	; 1
+  aa:	e0 e1       	ldi	r30, 0x10	; 16
+  ac:	f1 e0       	ldi	r31, 0x01	; 1
+  ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
+  b0:	05 90       	lpm	r0, Z+
+  b2:	0d 92       	st	X+, r0
+  b4:	a0 30       	cpi	r26, 0x00	; 0
+  b6:	b1 07       	cpc	r27, r17
+  b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0xc>
+
+000000ba <__do_clear_bss>:
+  ba:	11 e0       	ldi	r17, 0x01	; 1
+  bc:	a0 e0       	ldi	r26, 0x00	; 0
+  be:	b1 e0       	ldi	r27, 0x01	; 1
+  c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
+
+000000c2 <.do_clear_bss_loop>:
+  c2:	1d 92       	st	X+, r1
+
+000000c4 <.do_clear_bss_start>:
+  c4:	a0 30       	cpi	r26, 0x00	; 0
+  c6:	b1 07       	cpc	r27, r17
+  c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
+  ca:	0e 94 71 00 	call	0xe2	; 0xe2 <main>
+  ce:	0c 94 86 00 	jmp	0x10c	; 0x10c <_exit>
+
+000000d2 <__bad_interrupt>:
+  d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000d6 <checkButton>:
+		}
+    }
+}
+
+void checkButton(){
+	while((~PINF)&(1 << PF5)){
+  d6:	7d 99       	sbic	0x0f, 5	; 15
+  d8:	03 c0       	rjmp	.+6      	; 0xe0 <checkButton+0xa>
+		asm("nop");
+  da:	00 00       	nop
+		}
+    }
+}
+
+void checkButton(){
+	while((~PINF)&(1 << PF5)){
+  dc:	7d 9b       	sbis	0x0f, 5	; 15
+  de:	fd cf       	rjmp	.-6      	; 0xda <checkButton+0x4>
+  e0:	08 95       	ret
+
+000000e2 <main>:
+#include <avr/io.h>
+
+
+int main(void)
+{
+	MCUCR |= (1<<JTD);
+  e2:	85 b7       	in	r24, 0x35	; 53
+  e4:	80 68       	ori	r24, 0x80	; 128
+  e6:	85 bf       	out	0x35, r24	; 53
+	MCUCR |= (1<<JTD);
+  e8:	85 b7       	in	r24, 0x35	; 53
+  ea:	80 68       	ori	r24, 0x80	; 128
+  ec:	85 bf       	out	0x35, r24	; 53
+	DDRA = 0xFF;			//data direction
+  ee:	8f ef       	ldi	r24, 0xFF	; 255
+  f0:	81 b9       	out	0x01, r24	; 1
+	
+	PORTF = (1 << PF5 );
+  f2:	80 e2       	ldi	r24, 0x20	; 32
+  f4:	81 bb       	out	0x11, r24	; 17
+	
+	uint8_t which_led = 1;
+  f6:	c1 e0       	ldi	r28, 0x01	; 1
+    while(1)
+    {
+        if((~PINF)&(1 << PF5)){
+			which_led = which_led << 1;
+			if(which_led == 0){
+				which_led = 1;
+  f8:	d1 e0       	ldi	r29, 0x01	; 1
+	
+	uint8_t which_led = 1;
+	
+    while(1)
+    {
+        if((~PINF)&(1 << PF5)){
+  fa:	7d 99       	sbic	0x0f, 5	; 15
+  fc:	fe cf       	rjmp	.-4      	; 0xfa <main+0x18>
+			which_led = which_led << 1;
+  fe:	cc 0f       	add	r28, r28
+			if(which_led == 0){
+ 100:	09 f4       	brne	.+2      	; 0x104 <main+0x22>
+				which_led = 1;
+ 102:	cd 2f       	mov	r28, r29
+			}
+			PORTA = which_led;
+ 104:	c2 b9       	out	0x02, r28	; 2
+			checkButton();
+ 106:	0e 94 6b 00 	call	0xd6	; 0xd6 <checkButton>
+ 10a:	f7 cf       	rjmp	.-18     	; 0xfa <main+0x18>
+
+0000010c <_exit>:
+ 10c:	f8 94       	cli
+
+0000010e <__stop_program>:
+ 10e:	ff cf       	rjmp	.-2      	; 0x10e <__stop_program>
