@@ -1,0 +1,423 @@
+
+accelerometer.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00000240  000002b4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000240  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .stab         000006cc  00000000  00000000  000002b4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  00000980  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000080  00000000  00000000  00000a08  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000004bb  00000000  00000000  00000a88  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000189  00000000  00000000  00000f43  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000002fa  00000000  00000000  000010cc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000010c  00000000  00000000  000013c8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000175  00000000  00000000  000014d4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000205  00000000  00000000  00001649  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 4c 00 	jmp	0x98	; 0x98 <__ctors_end>
+   4:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   8:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  10:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  14:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  18:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  1c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  2c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  3c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  40:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  44:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  48:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  4c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  50:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  54:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  58:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  5c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  60:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  64:	0c 94 f5 00 	jmp	0x1ea	; 0x1ea <__vector_25>
+  68:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  6c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  70:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  74:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  78:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  7c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  80:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  84:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  88:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  8c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  90:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  94:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+
+00000098 <__ctors_end>:
+  98:	11 24       	eor	r1, r1
+  9a:	1f be       	out	0x3f, r1	; 63
+  9c:	cf ef       	ldi	r28, 0xFF	; 255
+  9e:	d0 e1       	ldi	r29, 0x10	; 16
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	cd bf       	out	0x3d, r28	; 61
+
+000000a4 <__do_copy_data>:
+  a4:	11 e0       	ldi	r17, 0x01	; 1
+  a6:	a0 e0       	ldi	r26, 0x00	; 0
+  a8:	b1 e0       	ldi	r27, 0x01	; 1
+  aa:	e0 e4       	ldi	r30, 0x40	; 64
+  ac:	f2 e0       	ldi	r31, 0x02	; 2
+  ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
+  b0:	05 90       	lpm	r0, Z+
+  b2:	0d 92       	st	X+, r0
+  b4:	a0 30       	cpi	r26, 0x00	; 0
+  b6:	b1 07       	cpc	r27, r17
+  b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0xc>
+
+000000ba <__do_clear_bss>:
+  ba:	11 e0       	ldi	r17, 0x01	; 1
+  bc:	a0 e0       	ldi	r26, 0x00	; 0
+  be:	b1 e0       	ldi	r27, 0x01	; 1
+  c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
+
+000000c2 <.do_clear_bss_loop>:
+  c2:	1d 92       	st	X+, r1
+
+000000c4 <.do_clear_bss_start>:
+  c4:	a0 30       	cpi	r26, 0x00	; 0
+  c6:	b1 07       	cpc	r27, r17
+  c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
+  ca:	0e 94 ad 00 	call	0x15a	; 0x15a <main>
+  ce:	0c 94 1e 01 	jmp	0x23c	; 0x23c <_exit>
+
+000000d2 <__bad_interrupt>:
+  d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000d6 <SPI_MasterInit>:
+
+
+void SPI_MasterInit(void)
+{
+	/* Set MOSI and SCK output, all others input */
+	DDR_SPI = (1<<DD_MOSI)|(1<<DD_SCK);
+  d6:	86 e0       	ldi	r24, 0x06	; 6
+  d8:	84 b9       	out	0x04, r24	; 4
+	/* Enable SPI, Master, set clock rate fck/16 */
+	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0)|(1<<SPIE);
+  da:	81 ed       	ldi	r24, 0xD1	; 209
+  dc:	8c bd       	out	0x2c, r24	; 44
+}
+  de:	08 95       	ret
+
+000000e0 <SPI_MasterTransmit>:
+
+uint8_t SPI_MasterTransmit(uint8_t cData)
+{
+	
+	/* Start transmission */
+	SPDR = cData;
+  e0:	8e bd       	out	0x2e, r24	; 46
+	/* Wait for transmission complete */
+	while(!(SPSR & (1<<SPIF)))
+  e2:	0d b4       	in	r0, 0x2d	; 45
+  e4:	07 fe       	sbrs	r0, 7
+  e6:	fd cf       	rjmp	.-6      	; 0xe2 <SPI_MasterTransmit+0x2>
+	;
+	SPCR ^= (1<<4);
+  e8:	9c b5       	in	r25, 0x2c	; 44
+  ea:	80 e1       	ldi	r24, 0x10	; 16
+  ec:	89 27       	eor	r24, r25
+  ee:	8c bd       	out	0x2c, r24	; 44
+	return SPDR;
+  f0:	8e b5       	in	r24, 0x2e	; 46
+}
+  f2:	08 95       	ret
+
+000000f4 <SPI_SlaveInit>:
+
+void SPI_SlaveInit(void)
+{
+	/* Set MISO output, all others input */
+	DDR_SPI = (1<<DD_MISO);
+  f4:	88 e0       	ldi	r24, 0x08	; 8
+  f6:	84 b9       	out	0x04, r24	; 4
+	/* Enable SPI */
+	SPCR = (1<<SPE);
+  f8:	80 e4       	ldi	r24, 0x40	; 64
+  fa:	8c bd       	out	0x2c, r24	; 44
+}
+  fc:	08 95       	ret
+
+000000fe <SPI_SlaveReceive>:
+
+char SPI_SlaveReceive(void)
+{
+	//SPSR ^= (1<<SPIF);
+	/* Wait for reception complete */
+	while(!(SPSR & (1<<SPIF)));
+  fe:	0d b4       	in	r0, 0x2d	; 45
+ 100:	07 fe       	sbrs	r0, 7
+ 102:	fd cf       	rjmp	.-6      	; 0xfe <SPI_SlaveReceive>
+	//SPSR ^= (1<<SPIF);				//CHANGED
+	/* Return Data Register */
+	return SPDR;
+ 104:	8e b5       	in	r24, 0x2e	; 46
+}
+ 106:	08 95       	ret
+
+00000108 <sendCharToPC>:
+
+void sendCharToPC(uint8_t number){
+	//load value to UART sending register
+	UDR1 = number;
+ 108:	80 93 ce 00 	sts	0x00CE, r24
+	//wait loop for send to be completed
+	while(~UCSR1A&(1 << TXC1)){
+ 10c:	80 91 c8 00 	lds	r24, 0x00C8
+ 110:	86 fd       	sbrc	r24, 6
+ 112:	06 c0       	rjmp	.+12     	; 0x120 <sendCharToPC+0x18>
+ 114:	e8 ec       	ldi	r30, 0xC8	; 200
+ 116:	f0 e0       	ldi	r31, 0x00	; 0
+		asm("nop");
+ 118:	00 00       	nop
+
+void sendCharToPC(uint8_t number){
+	//load value to UART sending register
+	UDR1 = number;
+	//wait loop for send to be completed
+	while(~UCSR1A&(1 << TXC1)){
+ 11a:	80 81       	ld	r24, Z
+ 11c:	86 ff       	sbrs	r24, 6
+ 11e:	fc cf       	rjmp	.-8      	; 0x118 <sendCharToPC+0x10>
+		asm("nop");
+	}
+	//clearing TX complete flag
+	UCSR1A |= (1 << TXC1);
+ 120:	e8 ec       	ldi	r30, 0xC8	; 200
+ 122:	f0 e0       	ldi	r31, 0x00	; 0
+ 124:	80 81       	ld	r24, Z
+ 126:	80 64       	ori	r24, 0x40	; 64
+ 128:	80 83       	st	Z, r24
+}
+ 12a:	08 95       	ret
+
+0000012c <sendLetter>:
+
+void sendLetter(uint8_t letter){
+	while ((UCSR1A & (1 << UDRE1)) == 0) ;
+ 12c:	e8 ec       	ldi	r30, 0xC8	; 200
+ 12e:	f0 e0       	ldi	r31, 0x00	; 0
+ 130:	90 81       	ld	r25, Z
+ 132:	95 ff       	sbrs	r25, 5
+ 134:	fd cf       	rjmp	.-6      	; 0x130 <sendLetter+0x4>
+	//load value to UART sending register
+	UDR1 = letter;
+ 136:	80 93 ce 00 	sts	0x00CE, r24
+	//wait loop for send to be completed
+	while(~UCSR1A&(1 << TXC1)){
+ 13a:	80 91 c8 00 	lds	r24, 0x00C8
+ 13e:	86 fd       	sbrc	r24, 6
+ 140:	06 c0       	rjmp	.+12     	; 0x14e <sendLetter+0x22>
+ 142:	e8 ec       	ldi	r30, 0xC8	; 200
+ 144:	f0 e0       	ldi	r31, 0x00	; 0
+		asm("nop");
+ 146:	00 00       	nop
+void sendLetter(uint8_t letter){
+	while ((UCSR1A & (1 << UDRE1)) == 0) ;
+	//load value to UART sending register
+	UDR1 = letter;
+	//wait loop for send to be completed
+	while(~UCSR1A&(1 << TXC1)){
+ 148:	80 81       	ld	r24, Z
+ 14a:	86 ff       	sbrs	r24, 6
+ 14c:	fc cf       	rjmp	.-8      	; 0x146 <sendLetter+0x1a>
+		asm("nop");
+	}
+	//clearing TX complete flag
+	UCSR1A |= (1 << TXC1);
+ 14e:	e8 ec       	ldi	r30, 0xC8	; 200
+ 150:	f0 e0       	ldi	r31, 0x00	; 0
+ 152:	80 81       	ld	r24, Z
+ 154:	80 64       	ori	r24, 0x40	; 64
+ 156:	80 83       	st	Z, r24
+}
+ 158:	08 95       	ret
+
+0000015a <main>:
+	unsigned char recievedData;
+	unsigned char SPICongfigData;
+	
+	//UART
+	//setting baud rate to 9600
+	UBRR1 = 25;
+ 15a:	89 e1       	ldi	r24, 0x19	; 25
+ 15c:	90 e0       	ldi	r25, 0x00	; 0
+ 15e:	90 93 cd 00 	sts	0x00CD, r25
+ 162:	80 93 cc 00 	sts	0x00CC, r24
+	UCSR1A |= (1 << U2X1);
+ 166:	e8 ec       	ldi	r30, 0xC8	; 200
+ 168:	f0 e0       	ldi	r31, 0x00	; 0
+ 16a:	80 81       	ld	r24, Z
+ 16c:	82 60       	ori	r24, 0x02	; 2
+ 16e:	80 83       	st	Z, r24
+	//setting up 8 data bits
+	UCSR1C |= (1 << UCSZ10) | (1 << UCSZ11);
+ 170:	ea ec       	ldi	r30, 0xCA	; 202
+ 172:	f0 e0       	ldi	r31, 0x00	; 0
+ 174:	80 81       	ld	r24, Z
+ 176:	86 60       	ori	r24, 0x06	; 6
+ 178:	80 83       	st	Z, r24
+	//enabling transmitter
+	//enabling transmitter, receiver, receive complete interrupt
+	UCSR1B = (1 << TXEN1 | 1 << RXEN1 | 1 << RXCIE1);
+ 17a:	88 e9       	ldi	r24, 0x98	; 152
+ 17c:	80 93 c9 00 	sts	0x00C9, r24
+	sei();
+ 180:	78 94       	sei
+	
+	
+	SPI_MasterInit();
+ 182:	0e 94 6b 00 	call	0xd6	; 0xd6 <SPI_MasterInit>
+    {
+        ////TODO:: Please write your application code
+		//letter = 'k';
+		//sendLetter(letter); 
+		letter = 1;
+		sendLetter(letter);
+ 186:	81 e0       	ldi	r24, 0x01	; 1
+ 188:	0e 94 96 00 	call	0x12c	; 0x12c <sendLetter>
+		SPICongfigData = 2;
+		letter = SPI_MasterTransmit(SPICongfigData);
+ 18c:	82 e0       	ldi	r24, 0x02	; 2
+ 18e:	0e 94 70 00 	call	0xe0	; 0xe0 <SPI_MasterTransmit>
+		sendLetter(letter);
+ 192:	0e 94 96 00 	call	0x12c	; 0x12c <sendLetter>
+		letter = 1;
+		sendLetter(letter);
+ 196:	81 e0       	ldi	r24, 0x01	; 1
+ 198:	0e 94 96 00 	call	0x12c	; 0x12c <sendLetter>
+ 19c:	f4 cf       	rjmp	.-24     	; 0x186 <main+0x2c>
+
+0000019e <sendName>:
+	}
+	//clearing TX complete flag
+	UCSR1A |= (1 << TXC1);
+}
+
+void sendName(char name[]){
+ 19e:	ef 92       	push	r14
+ 1a0:	ff 92       	push	r15
+ 1a2:	0f 93       	push	r16
+ 1a4:	1f 93       	push	r17
+ 1a6:	cf 93       	push	r28
+ 1a8:	df 93       	push	r29
+ 1aa:	f8 2e       	mov	r15, r24
+ 1ac:	e9 2e       	mov	r14, r25
+	for( int i = 0; i < strlen(name); i++){
+ 1ae:	08 2f       	mov	r16, r24
+ 1b0:	19 2f       	mov	r17, r25
+ 1b2:	c0 e0       	ldi	r28, 0x00	; 0
+ 1b4:	d0 e0       	ldi	r29, 0x00	; 0
+ 1b6:	06 c0       	rjmp	.+12     	; 0x1c4 <sendName+0x26>
+		sendLetter(name[i]);
+ 1b8:	f8 01       	movw	r30, r16
+ 1ba:	81 91       	ld	r24, Z+
+ 1bc:	8f 01       	movw	r16, r30
+ 1be:	0e 94 96 00 	call	0x12c	; 0x12c <sendLetter>
+	//clearing TX complete flag
+	UCSR1A |= (1 << TXC1);
+}
+
+void sendName(char name[]){
+	for( int i = 0; i < strlen(name); i++){
+ 1c2:	21 96       	adiw	r28, 0x01	; 1
+ 1c4:	ef 2d       	mov	r30, r15
+ 1c6:	fe 2d       	mov	r31, r14
+ 1c8:	df 01       	movw	r26, r30
+ 1ca:	0d 90       	ld	r0, X+
+ 1cc:	00 20       	and	r0, r0
+ 1ce:	e9 f7       	brne	.-6      	; 0x1ca <sendName+0x2c>
+ 1d0:	11 97       	sbiw	r26, 0x01	; 1
+ 1d2:	ae 1b       	sub	r26, r30
+ 1d4:	bf 0b       	sbc	r27, r31
+ 1d6:	ca 17       	cp	r28, r26
+ 1d8:	db 07       	cpc	r29, r27
+ 1da:	70 f3       	brcs	.-36     	; 0x1b8 <sendName+0x1a>
+		sendLetter(name[i]);
+	}
+}
+ 1dc:	df 91       	pop	r29
+ 1de:	cf 91       	pop	r28
+ 1e0:	1f 91       	pop	r17
+ 1e2:	0f 91       	pop	r16
+ 1e4:	ff 90       	pop	r15
+ 1e6:	ef 90       	pop	r14
+ 1e8:	08 95       	ret
+
+000001ea <__vector_25>:
+
+SIGNAL(USART1_RX_vect){
+ 1ea:	1f 92       	push	r1
+ 1ec:	0f 92       	push	r0
+ 1ee:	0f b6       	in	r0, 0x3f	; 63
+ 1f0:	0f 92       	push	r0
+ 1f2:	11 24       	eor	r1, r1
+ 1f4:	2f 93       	push	r18
+ 1f6:	3f 93       	push	r19
+ 1f8:	4f 93       	push	r20
+ 1fa:	5f 93       	push	r21
+ 1fc:	6f 93       	push	r22
+ 1fe:	7f 93       	push	r23
+ 200:	8f 93       	push	r24
+ 202:	9f 93       	push	r25
+ 204:	af 93       	push	r26
+ 206:	bf 93       	push	r27
+ 208:	ef 93       	push	r30
+ 20a:	ff 93       	push	r31
+	// Enable timer interrupts
+	TIMSK1 = (1<<OCIE1A);
+ 20c:	82 e0       	ldi	r24, 0x02	; 2
+ 20e:	80 93 6f 00 	sts	0x006F, r24
+	// Read UART
+	uint8_t a = UDR1;
+ 212:	80 91 ce 00 	lds	r24, 0x00CE
+	sendLetter(a);
+ 216:	0e 94 96 00 	call	0x12c	; 0x12c <sendLetter>
+ 21a:	ff 91       	pop	r31
+ 21c:	ef 91       	pop	r30
+ 21e:	bf 91       	pop	r27
+ 220:	af 91       	pop	r26
+ 222:	9f 91       	pop	r25
+ 224:	8f 91       	pop	r24
+ 226:	7f 91       	pop	r23
+ 228:	6f 91       	pop	r22
+ 22a:	5f 91       	pop	r21
+ 22c:	4f 91       	pop	r20
+ 22e:	3f 91       	pop	r19
+ 230:	2f 91       	pop	r18
+ 232:	0f 90       	pop	r0
+ 234:	0f be       	out	0x3f, r0	; 63
+ 236:	0f 90       	pop	r0
+ 238:	1f 90       	pop	r1
+ 23a:	18 95       	reti
+
+0000023c <_exit>:
+ 23c:	f8 94       	cli
+
+0000023e <__stop_program>:
+ 23e:	ff cf       	rjmp	.-2      	; 0x23e <__stop_program>

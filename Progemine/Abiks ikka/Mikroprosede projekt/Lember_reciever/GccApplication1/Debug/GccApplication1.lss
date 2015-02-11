@@ -1,0 +1,441 @@
+
+GccApplication1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00000250  000002c4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000250  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .stab         000006cc  00000000  00000000  000002c4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  00000990  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000080  00000000  00000000  00000a18  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000588  00000000  00000000  00000a98  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000131  00000000  00000000  00001020  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000003ca  00000000  00000000  00001151  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000034  00000000  00000000  0000151c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000015c  00000000  00000000  00001550  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000370  00000000  00000000  000016ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 4c 00 	jmp	0x98	; 0x98 <__ctors_end>
+   4:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   8:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  10:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  14:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  18:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  1c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  2c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  3c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  40:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  44:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  48:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  4c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  50:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  54:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  58:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  5c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  60:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  64:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  68:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  6c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  70:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  74:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  78:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  7c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  80:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  84:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  88:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  8c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  90:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  94:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+
+00000098 <__ctors_end>:
+  98:	11 24       	eor	r1, r1
+  9a:	1f be       	out	0x3f, r1	; 63
+  9c:	cf ef       	ldi	r28, 0xFF	; 255
+  9e:	d0 e1       	ldi	r29, 0x10	; 16
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	cd bf       	out	0x3d, r28	; 61
+
+000000a4 <__do_copy_data>:
+  a4:	11 e0       	ldi	r17, 0x01	; 1
+  a6:	a0 e0       	ldi	r26, 0x00	; 0
+  a8:	b1 e0       	ldi	r27, 0x01	; 1
+  aa:	e0 e5       	ldi	r30, 0x50	; 80
+  ac:	f2 e0       	ldi	r31, 0x02	; 2
+  ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
+  b0:	05 90       	lpm	r0, Z+
+  b2:	0d 92       	st	X+, r0
+  b4:	a0 30       	cpi	r26, 0x00	; 0
+  b6:	b1 07       	cpc	r27, r17
+  b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0xc>
+
+000000ba <__do_clear_bss>:
+  ba:	11 e0       	ldi	r17, 0x01	; 1
+  bc:	a0 e0       	ldi	r26, 0x00	; 0
+  be:	b1 e0       	ldi	r27, 0x01	; 1
+  c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
+
+000000c2 <.do_clear_bss_loop>:
+  c2:	1d 92       	st	X+, r1
+
+000000c4 <.do_clear_bss_start>:
+  c4:	a0 30       	cpi	r26, 0x00	; 0
+  c6:	b1 07       	cpc	r27, r17
+  c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
+  ca:	0e 94 74 00 	call	0xe8	; 0xe8 <main>
+  ce:	0c 94 26 01 	jmp	0x24c	; 0x24c <_exit>
+
+000000d2 <__bad_interrupt>:
+  d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000d6 <PWM_init>:
+    } 
+} 
+  
+void PWM_init() 
+{ 
+    TCCR1A = (1<<COM1A1|1<<WGM10|1<<WGM11);   //Clear on compare match, 10-bit PWM 
+  d6:	83 e8       	ldi	r24, 0x83	; 131
+  d8:	80 93 80 00 	sts	0x0080, r24
+    TCCR1B = (1<<WGM12|1<<CS10);    //10bit PWM, clk/1 prescaler 
+  dc:	89 e0       	ldi	r24, 0x09	; 9
+  de:	80 93 81 00 	sts	0x0081, r24
+    DDRB = 1<<PB5;    //attach LED to PWM 
+  e2:	80 e2       	ldi	r24, 0x20	; 32
+  e4:	84 b9       	out	0x04, r24	; 4
+} 
+  e6:	08 95       	ret
+
+000000e8 <main>:
+    uint8_t LEDID;              //hetkel põlevate LEDide andmemassiiv. 
+    int8_t hetkenihe = 0;       //kuhu hetkel on vaja põlevad LEDid seadistada. 
+    uint8_t SUUND_VASAK = 1;    //kas liigutada LEDe vasakule või mitte(paremale) 
+    //uint16_t ADC_sisend; 
+      
+    DDRA = 0xFF; 
+  e8:	8f ef       	ldi	r24, 0xFF	; 255
+  ea:	81 b9       	out	0x01, r24	; 1
+    DDRE &= ~(1 << PE5); 
+  ec:	6d 98       	cbi	0x0d, 5	; 13
+      
+    OCR1A = 0; 
+  ee:	10 92 89 00 	sts	0x0089, r1
+  f2:	10 92 88 00 	sts	0x0088, r1
+    PWM_init(); 
+  f6:	0e 94 6b 00 	call	0xd6	; 0xd6 <PWM_init>
+      
+    //testimiseks 
+    //ADC_init(); 
+    kiirus = 1; 
+      
+    while(bit_is_set(PINE,PE5)); 
+  fa:	65 99       	sbic	0x0c, 5	; 12
+  fc:	fe cf       	rjmp	.-4      	; 0xfa <main+0x12>
+  fe:	41 e0       	ldi	r20, 0x01	; 1
+ 100:	80 e0       	ldi	r24, 0x00	; 0
+ 102:	61 e0       	ldi	r22, 0x01	; 1
+ 104:	90 e0       	ldi	r25, 0x00	; 0
+        if(bit_is_clear(PINE,PE5))  //check if data transmission has started 
+        { 
+            _delay_us(PULSIDELAY);          //to reduce the impact of skew 
+              
+            _delay_us(PULSIPIKKUS);         //read bit 1, MSB of data 
+            if(bit_is_clear(PINE,PE5)) data += 8; 
+ 106:	c8 e0       	ldi	r28, 0x08	; 8
+      
+    while(bit_is_set(PINE,PE5)); 
+      
+    while(1) 
+    { 
+        data = 0; 
+ 108:	50 e0       	ldi	r21, 0x00	; 0
+          
+          
+        aeglusti += 1; 
+        if(aeglusti & (1 << 3)) //aeglustab PWM ledi heleduse muutumise kiirust 
+        { 
+            OCR1A += kiirus; 
+ 10a:	e8 e8       	ldi	r30, 0x88	; 136
+ 10c:	f0 e0       	ldi	r31, 0x00	; 0
+        { 
+            OCR1A = 0; 
+            if(SUUND_VASAK) hetkenihe +=1; 
+            else hetkenihe -=1; 
+            if(hetkenihe > 4) SUUND_VASAK = 0;   //muudab ledide liikumise suunda 
+            if(hetkenihe < -5) SUUND_VASAK = 1; 
+ 10e:	71 e0       	ldi	r23, 0x01	; 1
+    while(bit_is_set(PINE,PE5)); 
+      
+    while(1) 
+    { 
+        data = 0; 
+        if(bit_is_clear(PINE,PE5))  //check if data transmission has started 
+ 110:	65 99       	sbic	0x0c, 5	; 12
+ 112:	28 c0       	rjmp	.+80     	; 0x164 <main+0x7c>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 114:	0a e4       	ldi	r16, 0x4A	; 74
+ 116:	0a 95       	dec	r16
+ 118:	f1 f7       	brne	.-4      	; 0x116 <main+0x2e>
+ 11a:	ab e2       	ldi	r26, 0x2B	; 43
+ 11c:	b2 e0       	ldi	r27, 0x02	; 2
+ 11e:	11 97       	sbiw	r26, 0x01	; 1
+ 120:	f1 f7       	brne	.-4      	; 0x11e <main+0x36>
+ 122:	00 00       	nop
+        { 
+            _delay_us(PULSIDELAY);          //to reduce the impact of skew 
+              
+            _delay_us(PULSIPIKKUS);         //read bit 1, MSB of data 
+            if(bit_is_clear(PINE,PE5)) data += 8; 
+ 124:	65 9b       	sbis	0x0c, 5	; 12
+ 126:	02 c0       	rjmp	.+4      	; 0x12c <main+0x44>
+      
+    while(bit_is_set(PINE,PE5)); 
+      
+    while(1) 
+    { 
+        data = 0; 
+ 128:	65 2f       	mov	r22, r21
+ 12a:	01 c0       	rjmp	.+2      	; 0x12e <main+0x46>
+        if(bit_is_clear(PINE,PE5))  //check if data transmission has started 
+        { 
+            _delay_us(PULSIDELAY);          //to reduce the impact of skew 
+              
+            _delay_us(PULSIPIKKUS);         //read bit 1, MSB of data 
+            if(bit_is_clear(PINE,PE5)) data += 8; 
+ 12c:	6c 2f       	mov	r22, r28
+ 12e:	ab e2       	ldi	r26, 0x2B	; 43
+ 130:	b2 e0       	ldi	r27, 0x02	; 2
+ 132:	11 97       	sbiw	r26, 0x01	; 1
+ 134:	f1 f7       	brne	.-4      	; 0x132 <main+0x4a>
+ 136:	00 00       	nop
+              
+            _delay_us(PULSIPIKKUS);         //read bit 2 
+            if(bit_is_clear(PINE,PE5)) data += 4; 
+ 138:	65 9b       	sbis	0x0c, 5	; 12
+ 13a:	6c 5f       	subi	r22, 0xFC	; 252
+ 13c:	ab e2       	ldi	r26, 0x2B	; 43
+ 13e:	b2 e0       	ldi	r27, 0x02	; 2
+ 140:	11 97       	sbiw	r26, 0x01	; 1
+ 142:	f1 f7       	brne	.-4      	; 0x140 <main+0x58>
+ 144:	00 00       	nop
+              
+            _delay_us(PULSIPIKKUS);         //read bit 3 
+            if(bit_is_clear(PINE,PE5)) data += 2; 
+ 146:	65 9b       	sbis	0x0c, 5	; 12
+ 148:	6e 5f       	subi	r22, 0xFE	; 254
+ 14a:	ab e2       	ldi	r26, 0x2B	; 43
+ 14c:	b2 e0       	ldi	r27, 0x02	; 2
+ 14e:	11 97       	sbiw	r26, 0x01	; 1
+ 150:	f1 f7       	brne	.-4      	; 0x14e <main+0x66>
+ 152:	00 00       	nop
+              
+            _delay_us(PULSIPIKKUS);         //read bit 4, LSB of data 
+            if(bit_is_clear(PINE,PE5)) data += 1; 
+ 154:	65 9b       	sbis	0x0c, 5	; 12
+ 156:	6f 5f       	subi	r22, 0xFF	; 255
+ 158:	ab e2       	ldi	r26, 0x2B	; 43
+ 15a:	b2 e0       	ldi	r27, 0x02	; 2
+ 15c:	11 97       	sbiw	r26, 0x01	; 1
+ 15e:	f1 f7       	brne	.-4      	; 0x15c <main+0x74>
+ 160:	00 00       	nop
+              
+            _delay_us(PULSIPIKKUS); 
+              
+            kiirus = data+1; 
+ 162:	6f 5f       	subi	r22, 0xFF	; 255
+        //testimiseks 
+        //ADC_sisend = ADC_get(); 
+        //kiirus =  ((ADC_sisend & 0x03C0) >> 6)+1; 
+          
+          
+        aeglusti += 1; 
+ 164:	9f 5f       	subi	r25, 0xFF	; 255
+        if(aeglusti & (1 << 3)) //aeglustab PWM ledi heleduse muutumise kiirust 
+ 166:	93 ff       	sbrs	r25, 3
+ 168:	07 c0       	rjmp	.+14     	; 0x178 <main+0x90>
+        { 
+            OCR1A += kiirus; 
+ 16a:	20 81       	ld	r18, Z
+ 16c:	31 81       	ldd	r19, Z+1	; 0x01
+ 16e:	26 0f       	add	r18, r22
+ 170:	31 1d       	adc	r19, r1
+ 172:	31 83       	std	Z+1, r19	; 0x01
+ 174:	20 83       	st	Z, r18
+            aeglusti = 0; 
+ 176:	95 2f       	mov	r25, r21
+        } 
+          
+        if(OCR1A>1000) 
+ 178:	20 81       	ld	r18, Z
+ 17a:	31 81       	ldd	r19, Z+1	; 0x01
+ 17c:	b3 e0       	ldi	r27, 0x03	; 3
+ 17e:	29 3e       	cpi	r18, 0xE9	; 233
+ 180:	3b 07       	cpc	r19, r27
+ 182:	68 f0       	brcs	.+26     	; 0x19e <main+0xb6>
+        { 
+            OCR1A = 0; 
+ 184:	11 82       	std	Z+1, r1	; 0x01
+ 186:	10 82       	st	Z, r1
+            if(SUUND_VASAK) hetkenihe +=1; 
+ 188:	44 23       	and	r20, r20
+ 18a:	11 f0       	breq	.+4      	; 0x190 <main+0xa8>
+ 18c:	8f 5f       	subi	r24, 0xFF	; 255
+ 18e:	01 c0       	rjmp	.+2      	; 0x192 <main+0xaa>
+            else hetkenihe -=1; 
+ 190:	81 50       	subi	r24, 0x01	; 1
+            if(hetkenihe > 4) SUUND_VASAK = 0;   //muudab ledide liikumise suunda 
+ 192:	85 30       	cpi	r24, 0x05	; 5
+ 194:	0c f0       	brlt	.+2      	; 0x198 <main+0xb0>
+ 196:	45 2f       	mov	r20, r21
+            if(hetkenihe < -5) SUUND_VASAK = 1; 
+ 198:	8b 3f       	cpi	r24, 0xFB	; 251
+ 19a:	0c f4       	brge	.+2      	; 0x19e <main+0xb6>
+ 19c:	50 c0       	rjmp	.+160    	; 0x23e <main+0x156>
+        } 
+          
+        LEDID = 0; 
+        PWMdata = (PINB & (1 << PB5));    //kopeerib pwm-ledi hetkeoleku tavaledide peale 
+ 19e:	33 b1       	in	r19, 0x03	; 3
+ 1a0:	30 72       	andi	r19, 0x20	; 32
+        PWMdata_vastand = (~PWMdata & 32); 
+ 1a2:	b3 2f       	mov	r27, r19
+ 1a4:	b0 95       	com	r27
+ 1a6:	b0 72       	andi	r27, 0x20	; 32
+        if(SUUND_VASAK)     //kui ledid liiguvad vasakule 
+ 1a8:	44 23       	and	r20, r20
+ 1aa:	21 f1       	breq	.+72     	; 0x1f4 <main+0x10c>
+        { 
+            if(hetkenihe>0) LEDID = ((PWMdata_vastand >> 2) | 16 | PWMdata) << hetkenihe; 
+ 1ac:	18 16       	cp	r1, r24
+ 1ae:	6c f4       	brge	.+26     	; 0x1ca <main+0xe2>
+ 1b0:	23 2f       	mov	r18, r19
+ 1b2:	20 61       	ori	r18, 0x10	; 16
+ 1b4:	b6 95       	lsr	r27
+ 1b6:	b6 95       	lsr	r27
+ 1b8:	2b 2b       	or	r18, r27
+ 1ba:	30 e0       	ldi	r19, 0x00	; 0
+ 1bc:	08 2e       	mov	r0, r24
+ 1be:	02 c0       	rjmp	.+4      	; 0x1c4 <main+0xdc>
+ 1c0:	22 0f       	add	r18, r18
+ 1c2:	33 1f       	adc	r19, r19
+ 1c4:	0a 94       	dec	r0
+ 1c6:	e2 f7       	brpl	.-8      	; 0x1c0 <main+0xd8>
+ 1c8:	38 c0       	rjmp	.+112    	; 0x23a <main+0x152>
+            else LEDID = ((PWMdata_vastand >> 2) | 16 | PWMdata) >> -hetkenihe; 
+ 1ca:	30 61       	ori	r19, 0x10	; 16
+ 1cc:	b6 95       	lsr	r27
+ 1ce:	b6 95       	lsr	r27
+ 1d0:	3b 2b       	or	r19, r27
+ 1d2:	a3 2f       	mov	r26, r19
+ 1d4:	b0 e0       	ldi	r27, 0x00	; 0
+ 1d6:	28 2f       	mov	r18, r24
+ 1d8:	33 27       	eor	r19, r19
+ 1da:	27 fd       	sbrc	r18, 7
+ 1dc:	30 95       	com	r19
+ 1de:	30 95       	com	r19
+ 1e0:	21 95       	neg	r18
+ 1e2:	3f 4f       	sbci	r19, 0xFF	; 255
+ 1e4:	8d 01       	movw	r16, r26
+ 1e6:	02 c0       	rjmp	.+4      	; 0x1ec <main+0x104>
+ 1e8:	15 95       	asr	r17
+ 1ea:	07 95       	ror	r16
+ 1ec:	2a 95       	dec	r18
+ 1ee:	e2 f7       	brpl	.-8      	; 0x1e8 <main+0x100>
+ 1f0:	98 01       	movw	r18, r16
+ 1f2:	23 c0       	rjmp	.+70     	; 0x23a <main+0x152>
+        }  
+        else
+        { 
+            if(hetkenihe>0) LEDID = ((PWMdata >> 2) | 16 | PWMdata_vastand) << hetkenihe; 
+ 1f4:	18 16       	cp	r1, r24
+ 1f6:	6c f4       	brge	.+26     	; 0x212 <main+0x12a>
+ 1f8:	36 95       	lsr	r19
+ 1fa:	36 95       	lsr	r19
+ 1fc:	30 61       	ori	r19, 0x10	; 16
+ 1fe:	b3 2b       	or	r27, r19
+ 200:	2b 2f       	mov	r18, r27
+ 202:	30 e0       	ldi	r19, 0x00	; 0
+ 204:	08 2e       	mov	r0, r24
+ 206:	02 c0       	rjmp	.+4      	; 0x20c <main+0x124>
+ 208:	22 0f       	add	r18, r18
+ 20a:	33 1f       	adc	r19, r19
+ 20c:	0a 94       	dec	r0
+ 20e:	e2 f7       	brpl	.-8      	; 0x208 <main+0x120>
+ 210:	14 c0       	rjmp	.+40     	; 0x23a <main+0x152>
+            else LEDID = ((PWMdata >> 2) | 16 | PWMdata_vastand) >> -hetkenihe; 
+ 212:	36 95       	lsr	r19
+ 214:	36 95       	lsr	r19
+ 216:	30 61       	ori	r19, 0x10	; 16
+ 218:	b3 2b       	or	r27, r19
+ 21a:	ab 2f       	mov	r26, r27
+ 21c:	b0 e0       	ldi	r27, 0x00	; 0
+ 21e:	28 2f       	mov	r18, r24
+ 220:	33 27       	eor	r19, r19
+ 222:	27 fd       	sbrc	r18, 7
+ 224:	30 95       	com	r19
+ 226:	30 95       	com	r19
+ 228:	21 95       	neg	r18
+ 22a:	3f 4f       	sbci	r19, 0xFF	; 255
+ 22c:	8d 01       	movw	r16, r26
+ 22e:	02 c0       	rjmp	.+4      	; 0x234 <main+0x14c>
+ 230:	15 95       	asr	r17
+ 232:	07 95       	ror	r16
+ 234:	2a 95       	dec	r18
+ 236:	e2 f7       	brpl	.-8      	; 0x230 <main+0x148>
+ 238:	98 01       	movw	r18, r16
+        }  
+        PORTA = LEDID;  //paneb LEDid põlema õigesti 
+ 23a:	22 b9       	out	0x02, r18	; 2
+    } 
+ 23c:	69 cf       	rjmp	.-302    	; 0x110 <main+0x28>
+            if(hetkenihe > 4) SUUND_VASAK = 0;   //muudab ledide liikumise suunda 
+            if(hetkenihe < -5) SUUND_VASAK = 1; 
+        } 
+          
+        LEDID = 0; 
+        PWMdata = (PINB & (1 << PB5));    //kopeerib pwm-ledi hetkeoleku tavaledide peale 
+ 23e:	33 b1       	in	r19, 0x03	; 3
+ 240:	30 72       	andi	r19, 0x20	; 32
+        PWMdata_vastand = (~PWMdata & 32); 
+ 242:	b3 2f       	mov	r27, r19
+ 244:	b0 95       	com	r27
+ 246:	b0 72       	andi	r27, 0x20	; 32
+        { 
+            OCR1A = 0; 
+            if(SUUND_VASAK) hetkenihe +=1; 
+            else hetkenihe -=1; 
+            if(hetkenihe > 4) SUUND_VASAK = 0;   //muudab ledide liikumise suunda 
+            if(hetkenihe < -5) SUUND_VASAK = 1; 
+ 248:	47 2f       	mov	r20, r23
+ 24a:	b0 cf       	rjmp	.-160    	; 0x1ac <main+0xc4>
+
+0000024c <_exit>:
+ 24c:	f8 94       	cli
+
+0000024e <__stop_program>:
+ 24e:	ff cf       	rjmp	.-2      	; 0x24e <__stop_program>

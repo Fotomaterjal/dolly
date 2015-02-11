@@ -1,0 +1,294 @@
+
+ul3.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000000c  00800100  000001bc  00000230  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         000001bc  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .stab         000006cc  00000000  00000000  0000023c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  00000908  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000080  00000000  00000000  00000990  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000003ef  00000000  00000000  00000a10  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000150  00000000  00000000  00000dff  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000002bc  00000000  00000000  00000f4f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000094  00000000  00000000  0000120c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000000be  00000000  00000000  000012a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000116  00000000  00000000  0000135e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 4c 00 	jmp	0x98	; 0x98 <__ctors_end>
+   4:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   8:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  10:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  14:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  18:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  1c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  2c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  3c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  40:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  44:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  48:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  4c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  50:	0c 94 cd 00 	jmp	0x19a	; 0x19a <__vector_20>
+  54:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  58:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  5c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  60:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  64:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  68:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  6c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  70:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  74:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  78:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  7c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  80:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  84:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  88:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  8c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  90:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  94:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+
+00000098 <__ctors_end>:
+  98:	11 24       	eor	r1, r1
+  9a:	1f be       	out	0x3f, r1	; 63
+  9c:	cf ef       	ldi	r28, 0xFF	; 255
+  9e:	d0 e1       	ldi	r29, 0x10	; 16
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	cd bf       	out	0x3d, r28	; 61
+
+000000a4 <__do_copy_data>:
+  a4:	11 e0       	ldi	r17, 0x01	; 1
+  a6:	a0 e0       	ldi	r26, 0x00	; 0
+  a8:	b1 e0       	ldi	r27, 0x01	; 1
+  aa:	ec eb       	ldi	r30, 0xBC	; 188
+  ac:	f1 e0       	ldi	r31, 0x01	; 1
+  ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
+  b0:	05 90       	lpm	r0, Z+
+  b2:	0d 92       	st	X+, r0
+  b4:	ac 30       	cpi	r26, 0x0C	; 12
+  b6:	b1 07       	cpc	r27, r17
+  b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0xc>
+
+000000ba <__do_clear_bss>:
+  ba:	11 e0       	ldi	r17, 0x01	; 1
+  bc:	ac e0       	ldi	r26, 0x0C	; 12
+  be:	b1 e0       	ldi	r27, 0x01	; 1
+  c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
+
+000000c2 <.do_clear_bss_loop>:
+  c2:	1d 92       	st	X+, r1
+
+000000c4 <.do_clear_bss_start>:
+  c4:	ac 30       	cpi	r26, 0x0C	; 12
+  c6:	b1 07       	cpc	r27, r17
+  c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
+  ca:	0e 94 99 00 	call	0x132	; 0x132 <main>
+  ce:	0c 94 dc 00 	jmp	0x1b8	; 0x1b8 <_exit>
+
+000000d2 <__bad_interrupt>:
+  d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000d6 <sendLetter>:
+    }
+}
+
+
+void sendLetter(uint8_t letter){
+	while ((UCSR1A & (1 << UDRE1)) == 0) ;
+  d6:	e8 ec       	ldi	r30, 0xC8	; 200
+  d8:	f0 e0       	ldi	r31, 0x00	; 0
+  da:	90 81       	ld	r25, Z
+  dc:	95 ff       	sbrs	r25, 5
+  de:	fd cf       	rjmp	.-6      	; 0xda <sendLetter+0x4>
+	//load value to UART sending register
+	UDR1 = letter;
+  e0:	80 93 ce 00 	sts	0x00CE, r24
+}
+  e4:	08 95       	ret
+
+000000e6 <sendName>:
+
+void sendName(char name[]){
+  e6:	ef 92       	push	r14
+  e8:	ff 92       	push	r15
+  ea:	0f 93       	push	r16
+  ec:	1f 93       	push	r17
+  ee:	cf 93       	push	r28
+  f0:	df 93       	push	r29
+  f2:	f8 2e       	mov	r15, r24
+  f4:	e9 2e       	mov	r14, r25
+	for( int i = 0; i < strlen(name); i++){
+  f6:	08 2f       	mov	r16, r24
+  f8:	19 2f       	mov	r17, r25
+  fa:	c0 e0       	ldi	r28, 0x00	; 0
+  fc:	d0 e0       	ldi	r29, 0x00	; 0
+  fe:	06 c0       	rjmp	.+12     	; 0x10c <sendName+0x26>
+		sendLetter(name[i]);
+ 100:	f8 01       	movw	r30, r16
+ 102:	81 91       	ld	r24, Z+
+ 104:	8f 01       	movw	r16, r30
+ 106:	0e 94 6b 00 	call	0xd6	; 0xd6 <sendLetter>
+	//load value to UART sending register
+	UDR1 = letter;
+}
+
+void sendName(char name[]){
+	for( int i = 0; i < strlen(name); i++){
+ 10a:	21 96       	adiw	r28, 0x01	; 1
+ 10c:	ef 2d       	mov	r30, r15
+ 10e:	fe 2d       	mov	r31, r14
+ 110:	df 01       	movw	r26, r30
+ 112:	0d 90       	ld	r0, X+
+ 114:	00 20       	and	r0, r0
+ 116:	e9 f7       	brne	.-6      	; 0x112 <sendName+0x2c>
+ 118:	11 97       	sbiw	r26, 0x01	; 1
+ 11a:	ae 1b       	sub	r26, r30
+ 11c:	bf 0b       	sbc	r27, r31
+ 11e:	ca 17       	cp	r28, r26
+ 120:	db 07       	cpc	r29, r27
+ 122:	70 f3       	brcs	.-36     	; 0x100 <sendName+0x1a>
+		sendLetter(name[i]);
+	}
+}
+ 124:	df 91       	pop	r29
+ 126:	cf 91       	pop	r28
+ 128:	1f 91       	pop	r17
+ 12a:	0f 91       	pop	r16
+ 12c:	ff 90       	pop	r15
+ 12e:	ef 90       	pop	r14
+ 130:	08 95       	ret
+
+00000132 <main>:
+void sendLetter(uint8_t letter);
+void sendName(char name[]);
+//SIGNAL(TIMER0_OVF_vect);
+
+int main(void)
+{
+ 132:	cf 93       	push	r28
+ 134:	df 93       	push	r29
+ 136:	cd b7       	in	r28, 0x3d	; 61
+ 138:	de b7       	in	r29, 0x3e	; 62
+ 13a:	2c 97       	sbiw	r28, 0x0c	; 12
+ 13c:	0f b6       	in	r0, 0x3f	; 63
+ 13e:	f8 94       	cli
+ 140:	de bf       	out	0x3e, r29	; 62
+ 142:	0f be       	out	0x3f, r0	; 63
+ 144:	cd bf       	out	0x3d, r28	; 61
+	//UART
+	//setting baud rate to 9600
+	UBRR1 = 25;
+ 146:	89 e1       	ldi	r24, 0x19	; 25
+ 148:	90 e0       	ldi	r25, 0x00	; 0
+ 14a:	90 93 cd 00 	sts	0x00CD, r25
+ 14e:	80 93 cc 00 	sts	0x00CC, r24
+	UCSR1A = (1 << U2X1);
+ 152:	82 e0       	ldi	r24, 0x02	; 2
+ 154:	80 93 c8 00 	sts	0x00C8, r24
+	//setting up 8 data bits
+	UCSR1C = (1 << UCSZ10) | (1 << UCSZ11);
+ 158:	86 e0       	ldi	r24, 0x06	; 6
+ 15a:	80 93 ca 00 	sts	0x00CA, r24
+	//enabling transmitter
+	UCSR1B = (1 << TXEN1);
+ 15e:	88 e0       	ldi	r24, 0x08	; 8
+ 160:	80 93 c9 00 	sts	0x00C9, r24
+	
+	//LED initialization
+	DDRA = 0xFF;
+ 164:	8f ef       	ldi	r24, 0xFF	; 255
+ 166:	81 b9       	out	0x01, r24	; 1
+	PORTA = 0xFF;
+ 168:	82 b9       	out	0x02, r24	; 2
+	
+	//TIMER
+	//initializing timer values
+	TCCR1A = 0;
+ 16a:	10 92 80 00 	sts	0x0080, r1
+	TCCR1C = 0;
+ 16e:	10 92 82 00 	sts	0x0082, r1
+	//setting default clock (CPU clock)
+	TCCR1B = (1 << CS10);
+ 172:	81 e0       	ldi	r24, 0x01	; 1
+ 174:	80 93 81 00 	sts	0x0081, r24
+	////loading value to compare match
+	//OCR1A = 2000;
+	
+	//INTERRUPTS
+	//global interrupt enable
+	sei();
+ 178:	78 94       	sei
+	//Timer/Counter1 Interrupt Mask Register, Compare match A interrupt enable			
+	TIMSK1 = (1 << TOIE1);
+ 17a:	80 93 6f 00 	sts	0x006F, r24
+	
+		
+	
+	char name[] = "Sten-Oliver";
+ 17e:	de 01       	movw	r26, r28
+ 180:	11 96       	adiw	r26, 0x01	; 1
+ 182:	e0 e0       	ldi	r30, 0x00	; 0
+ 184:	f1 e0       	ldi	r31, 0x01	; 1
+ 186:	8c e0       	ldi	r24, 0x0C	; 12
+ 188:	01 90       	ld	r0, Z+
+ 18a:	0d 92       	st	X+, r0
+ 18c:	81 50       	subi	r24, 0x01	; 1
+ 18e:	e1 f7       	brne	.-8      	; 0x188 <main+0x56>
+	
+    while(1)
+    {
+		sendName(name);
+ 190:	ce 01       	movw	r24, r28
+ 192:	01 96       	adiw	r24, 0x01	; 1
+ 194:	0e 94 73 00 	call	0xe6	; 0xe6 <sendName>
+ 198:	fb cf       	rjmp	.-10     	; 0x190 <main+0x5e>
+
+0000019a <__vector_20>:
+	for( int i = 0; i < strlen(name); i++){
+		sendLetter(name[i]);
+	}
+}
+
+SIGNAL(TIMER1_OVF_vect){
+ 19a:	1f 92       	push	r1
+ 19c:	0f 92       	push	r0
+ 19e:	0f b6       	in	r0, 0x3f	; 63
+ 1a0:	0f 92       	push	r0
+ 1a2:	11 24       	eor	r1, r1
+ 1a4:	8f 93       	push	r24
+	PORTA ^= 0xFF;
+ 1a6:	82 b1       	in	r24, 0x02	; 2
+ 1a8:	80 95       	com	r24
+ 1aa:	82 b9       	out	0x02, r24	; 2
+ 1ac:	8f 91       	pop	r24
+ 1ae:	0f 90       	pop	r0
+ 1b0:	0f be       	out	0x3f, r0	; 63
+ 1b2:	0f 90       	pop	r0
+ 1b4:	1f 90       	pop	r1
+ 1b6:	18 95       	reti
+
+000001b8 <_exit>:
+ 1b8:	f8 94       	cli
+
+000001ba <__stop_program>:
+ 1ba:	ff cf       	rjmp	.-2      	; 0x1ba <__stop_program>

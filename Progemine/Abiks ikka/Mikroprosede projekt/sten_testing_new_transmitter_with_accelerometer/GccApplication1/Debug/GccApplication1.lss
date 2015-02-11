@@ -1,0 +1,484 @@
+
+GccApplication1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  0000026e  00000302  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         0000026e  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000001  00800100  00800100  00000302  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  00000304  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000085  00000000  00000000  000009d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_aranges 00000080  00000000  00000000  00000a58  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000062d  00000000  00000000  00000ad8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000001db  00000000  00000000  00001105  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000003d9  00000000  00000000  000012e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  0000009c  00000000  00000000  000016bc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000001a9  00000000  00000000  00001758  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000000f5  00000000  00000000  00001901  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 4c 00 	jmp	0x98	; 0x98 <__ctors_end>
+   4:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   8:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  10:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  14:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  18:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  1c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  2c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  3c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  40:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  44:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  48:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  4c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  50:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  54:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  58:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  5c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  60:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  64:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  68:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  6c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  70:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  74:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  78:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  7c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  80:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  84:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  88:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  8c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  90:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  94:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+
+00000098 <__ctors_end>:
+  98:	11 24       	eor	r1, r1
+  9a:	1f be       	out	0x3f, r1	; 63
+  9c:	cf ef       	ldi	r28, 0xFF	; 255
+  9e:	d0 e1       	ldi	r29, 0x10	; 16
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	cd bf       	out	0x3d, r28	; 61
+
+000000a4 <__do_copy_data>:
+  a4:	11 e0       	ldi	r17, 0x01	; 1
+  a6:	a0 e0       	ldi	r26, 0x00	; 0
+  a8:	b1 e0       	ldi	r27, 0x01	; 1
+  aa:	ee e6       	ldi	r30, 0x6E	; 110
+  ac:	f2 e0       	ldi	r31, 0x02	; 2
+  ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
+  b0:	05 90       	lpm	r0, Z+
+  b2:	0d 92       	st	X+, r0
+  b4:	a0 30       	cpi	r26, 0x00	; 0
+  b6:	b1 07       	cpc	r27, r17
+  b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0xc>
+
+000000ba <__do_clear_bss>:
+  ba:	11 e0       	ldi	r17, 0x01	; 1
+  bc:	a0 e0       	ldi	r26, 0x00	; 0
+  be:	b1 e0       	ldi	r27, 0x01	; 1
+  c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
+
+000000c2 <.do_clear_bss_loop>:
+  c2:	1d 92       	st	X+, r1
+
+000000c4 <.do_clear_bss_start>:
+  c4:	a1 30       	cpi	r26, 0x01	; 1
+  c6:	b1 07       	cpc	r27, r17
+  c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
+  ca:	0e 94 f3 00 	call	0x1e6	; 0x1e6 <main>
+  ce:	0c 94 35 01 	jmp	0x26a	; 0x26a <_exit>
+
+000000d2 <__bad_interrupt>:
+  d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000d6 <send_zero>:
+    }
+}
+
+
+// signal that generates '0' in the receiver
+void send_zero(){
+  d6:	84 e1       	ldi	r24, 0x14	; 20
+	for(uint8_t i=0; i<20; i++){
+		// keep output HIGH for ~27 us
+		PORTD |= 0x20;
+  d8:	5d 9a       	sbi	0x0b, 5	; 11
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  da:	97 e0       	ldi	r25, 0x07	; 7
+  dc:	9a 95       	dec	r25
+  de:	f1 f7       	brne	.-4      	; 0xdc <send_zero+0x6>
+  e0:	00 c0       	rjmp	.+0      	; 0xe2 <send_zero+0xc>
+		_delay_us(23);
+		// keep output LOW for ~27 us
+		PORTD &= ~(0x20);
+  e2:	5d 98       	cbi	0x0b, 5	; 11
+  e4:	97 e0       	ldi	r25, 0x07	; 7
+  e6:	9a 95       	dec	r25
+  e8:	f1 f7       	brne	.-4      	; 0xe6 <send_zero+0x10>
+  ea:	00 c0       	rjmp	.+0      	; 0xec <send_zero+0x16>
+  ec:	81 50       	subi	r24, 0x01	; 1
+}
+
+
+// signal that generates '0' in the receiver
+void send_zero(){
+	for(uint8_t i=0; i<20; i++){
+  ee:	a1 f7       	brne	.-24     	; 0xd8 <send_zero+0x2>
+		_delay_us(23);
+		// keep output LOW for ~27 us
+		PORTD &= ~(0x20);
+		_delay_us(23);
+	}
+}
+  f0:	08 95       	ret
+
+000000f2 <send_one>:
+
+// signal that generates '1' in the receiver
+void send_one(){
+  f2:	84 e1       	ldi	r24, 0x14	; 20
+	for(uint8_t i=0; i<20; i++){
+		// keep output LOW for ~27 us
+		PORTD &= ~(0x20);
+  f4:	5d 98       	cbi	0x0b, 5	; 11
+  f6:	97 e0       	ldi	r25, 0x07	; 7
+  f8:	9a 95       	dec	r25
+  fa:	f1 f7       	brne	.-4      	; 0xf8 <send_one+0x6>
+  fc:	00 c0       	rjmp	.+0      	; 0xfe <send_one+0xc>
+		_delay_us(23);
+		// keep output LOW for ~27 us
+		PORTD &= ~(0x20);
+  fe:	5d 98       	cbi	0x0b, 5	; 11
+ 100:	97 e0       	ldi	r25, 0x07	; 7
+ 102:	9a 95       	dec	r25
+ 104:	f1 f7       	brne	.-4      	; 0x102 <send_one+0x10>
+ 106:	00 c0       	rjmp	.+0      	; 0x108 <send_one+0x16>
+ 108:	81 50       	subi	r24, 0x01	; 1
+	}
+}
+
+// signal that generates '1' in the receiver
+void send_one(){
+	for(uint8_t i=0; i<20; i++){
+ 10a:	a1 f7       	brne	.-24     	; 0xf4 <send_one+0x2>
+		_delay_us(23);
+		// keep output LOW for ~27 us
+		PORTD &= ~(0x20);
+		_delay_us(23);
+	}
+}
+ 10c:	08 95       	ret
+
+0000010e <SPI_MasterInit>:
+
+// ACCELEROMETER STUFF
+void SPI_MasterInit(void)
+{
+	/* Set MOSI and SCK and SS output, all others input */
+	DDR_SPI = (1<<DD_MOSI)|(1<<DD_SCK)|(1<<DD_SS);
+ 10e:	87 e0       	ldi	r24, 0x07	; 7
+ 110:	84 b9       	out	0x04, r24	; 4
+	/* Enable SPI, Master, set clock rate fck/16 */
+	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
+ 112:	81 e5       	ldi	r24, 0x51	; 81
+ 114:	8c bd       	out	0x2c, r24	; 44
+}
+ 116:	08 95       	ret
+
+00000118 <SPI_MasterTransmit>:
+
+void SPI_MasterTransmit(char accReg, char cData)
+{
+	/* Start transmission, set SS low */
+	PORTB = (0<<PB0);
+ 118:	15 b8       	out	0x05, r1	; 5
+	/* Start transmission, select register*/
+	SPDR = accReg;
+ 11a:	8e bd       	out	0x2e, r24	; 46
+	/* Wait for transmission complete */
+	while(!(SPSR & (1<<SPIF)));
+ 11c:	0d b4       	in	r0, 0x2d	; 45
+ 11e:	07 fe       	sbrs	r0, 7
+ 120:	fd cf       	rjmp	.-6      	; 0x11c <SPI_MasterTransmit+0x4>
+	/* Send real data */
+	SPDR = cData;
+ 122:	6e bd       	out	0x2e, r22	; 46
+	/* Wait for transmission complete */
+	while(!(SPSR & (1<<SPIF)));
+ 124:	0d b4       	in	r0, 0x2d	; 45
+ 126:	07 fe       	sbrs	r0, 7
+ 128:	fd cf       	rjmp	.-6      	; 0x124 <SPI_MasterTransmit+0xc>
+	/* Set SS high again, end transmission */
+	PORTB = (1<<PB0);
+ 12a:	81 e0       	ldi	r24, 0x01	; 1
+ 12c:	85 b9       	out	0x05, r24	; 5
+}
+ 12e:	08 95       	ret
+
+00000130 <measureX>:
+
+int16_t measureX(void){
+ 130:	cf 93       	push	r28
+ 132:	df 93       	push	r29
+	int16_t xValue;
+	//measure value of X axis, register 28 (OUT_X_L)
+	SPI_MasterTransmit(0xA8, 0xFF);
+ 134:	88 ea       	ldi	r24, 0xA8	; 168
+ 136:	6f ef       	ldi	r22, 0xFF	; 255
+ 138:	0e 94 8c 00 	call	0x118	; 0x118 <SPI_MasterTransmit>
+	xValue |= SPDR;
+ 13c:	ce b5       	in	r28, 0x2e	; 46
+ 13e:	d0 e0       	ldi	r29, 0x00	; 0
+	//measure value of X axis, register 29 (OUT_X_H)
+	SPI_MasterTransmit(0xA9, 0xFF);
+ 140:	89 ea       	ldi	r24, 0xA9	; 169
+ 142:	6f ef       	ldi	r22, 0xFF	; 255
+ 144:	0e 94 8c 00 	call	0x118	; 0x118 <SPI_MasterTransmit>
+	xValue |= (SPDR << 8);
+ 148:	2e b5       	in	r18, 0x2e	; 46
+ 14a:	92 2f       	mov	r25, r18
+ 14c:	80 e0       	ldi	r24, 0x00	; 0
+ 14e:	8c 2b       	or	r24, r28
+ 150:	9d 2b       	or	r25, r29
+	
+
+	xValue += 0x1FF;
+ 152:	81 50       	subi	r24, 0x01	; 1
+ 154:	9e 4f       	sbci	r25, 0xFE	; 254
+	// reducing jumping
+	if(xValue < 0x0AFF && xValue > 0){
+ 156:	9c 01       	movw	r18, r24
+ 158:	21 50       	subi	r18, 0x01	; 1
+ 15a:	30 40       	sbci	r19, 0x00	; 0
+ 15c:	4a e0       	ldi	r20, 0x0A	; 10
+ 15e:	2e 3f       	cpi	r18, 0xFE	; 254
+ 160:	34 07       	cpc	r19, r20
+ 162:	18 f4       	brcc	.+6      	; 0x16a <measureX+0x3a>
+		whatToDo = 0x00;
+ 164:	10 92 00 01 	sts	0x0100, r1
+ 168:	0a c0       	rjmp	.+20     	; 0x17e <measureX+0x4e>
+	}else if(xValue > 0x00F0){
+ 16a:	81 3f       	cpi	r24, 0xF1	; 241
+ 16c:	91 05       	cpc	r25, r1
+ 16e:	24 f0       	brlt	.+8      	; 0x178 <measureX+0x48>
+		whatToDo = 0x05;
+ 170:	25 e0       	ldi	r18, 0x05	; 5
+ 172:	20 93 00 01 	sts	0x0100, r18
+ 176:	03 c0       	rjmp	.+6      	; 0x17e <measureX+0x4e>
+	}else{
+		whatToDo = 0x0A;
+ 178:	2a e0       	ldi	r18, 0x0A	; 10
+ 17a:	20 93 00 01 	sts	0x0100, r18
+	}
+	return xValue;
+}
+ 17e:	df 91       	pop	r29
+ 180:	cf 91       	pop	r28
+ 182:	08 95       	ret
+
+00000184 <measureY>:
+
+int16_t measureY(void){
+ 184:	cf 93       	push	r28
+ 186:	df 93       	push	r29
+	int16_t yValue;
+	//measure value of X axis, register 28 (OUT_X_L)
+	SPI_MasterTransmit(0xAA, 0xFF);
+ 188:	8a ea       	ldi	r24, 0xAA	; 170
+ 18a:	6f ef       	ldi	r22, 0xFF	; 255
+ 18c:	0e 94 8c 00 	call	0x118	; 0x118 <SPI_MasterTransmit>
+	yValue |= SPDR;
+ 190:	ce b5       	in	r28, 0x2e	; 46
+ 192:	d0 e0       	ldi	r29, 0x00	; 0
+	//measure value of X axis, register 29 (OUT_X_H)
+	SPI_MasterTransmit(0xAB, 0xFF);
+ 194:	8b ea       	ldi	r24, 0xAB	; 171
+ 196:	6f ef       	ldi	r22, 0xFF	; 255
+ 198:	0e 94 8c 00 	call	0x118	; 0x118 <SPI_MasterTransmit>
+	yValue |= (SPDR << 8);
+ 19c:	2e b5       	in	r18, 0x2e	; 46
+ 19e:	92 2f       	mov	r25, r18
+ 1a0:	80 e0       	ldi	r24, 0x00	; 0
+ 1a2:	8c 2b       	or	r24, r28
+ 1a4:	9d 2b       	or	r25, r29
+	
+
+	yValue += 0x1FF;
+ 1a6:	81 50       	subi	r24, 0x01	; 1
+ 1a8:	9e 4f       	sbci	r25, 0xFE	; 254
+	// reducing jumping
+	if(yValue < 0x0AFF && yValue > 0){
+ 1aa:	9c 01       	movw	r18, r24
+ 1ac:	21 50       	subi	r18, 0x01	; 1
+ 1ae:	30 40       	sbci	r19, 0x00	; 0
+ 1b0:	4a e0       	ldi	r20, 0x0A	; 10
+ 1b2:	2e 3f       	cpi	r18, 0xFE	; 254
+ 1b4:	34 07       	cpc	r19, r20
+ 1b6:	10 f4       	brcc	.+4      	; 0x1bc <measureY+0x38>
+		asm("nop");
+ 1b8:	00 00       	nop
+ 1ba:	12 c0       	rjmp	.+36     	; 0x1e0 <measureY+0x5c>
+	}else if(yValue > 0x00F0 && whatToDo == 0x00){
+ 1bc:	81 3f       	cpi	r24, 0xF1	; 241
+ 1be:	91 05       	cpc	r25, r1
+ 1c0:	44 f0       	brlt	.+16     	; 0x1d2 <measureY+0x4e>
+ 1c2:	20 91 00 01 	lds	r18, 0x0100
+ 1c6:	22 23       	and	r18, r18
+ 1c8:	59 f4       	brne	.+22     	; 0x1e0 <measureY+0x5c>
+		whatToDo = 0x09;
+ 1ca:	29 e0       	ldi	r18, 0x09	; 9
+ 1cc:	20 93 00 01 	sts	0x0100, r18
+ 1d0:	07 c0       	rjmp	.+14     	; 0x1e0 <measureY+0x5c>
+	}else if(whatToDo == 0x00){
+ 1d2:	20 91 00 01 	lds	r18, 0x0100
+ 1d6:	22 23       	and	r18, r18
+ 1d8:	19 f4       	brne	.+6      	; 0x1e0 <measureY+0x5c>
+		whatToDo = 0x06;
+ 1da:	26 e0       	ldi	r18, 0x06	; 6
+ 1dc:	20 93 00 01 	sts	0x0100, r18
+	}
+	return yValue;
+ 1e0:	df 91       	pop	r29
+ 1e2:	cf 91       	pop	r28
+ 1e4:	08 95       	ret
+
+000001e6 <main>:
+
+int main(void)
+{
+	
+	
+	DDRD = 0x20;
+ 1e6:	80 e2       	ldi	r24, 0x20	; 32
+ 1e8:	8a b9       	out	0x0a, r24	; 10
+	// Initialize SPI as master
+	SPI_MasterInit();
+ 1ea:	0e 94 87 00 	call	0x10e	; 0x10e <SPI_MasterInit>
+	// Configure accelerometer in CTRL_REG1
+	// Enable X and Y, disable Z, set measurement frequency to 400 Hz
+	SPI_MasterTransmit(0x20, 0x73);
+ 1ee:	80 e2       	ldi	r24, 0x20	; 32
+ 1f0:	63 e7       	ldi	r22, 0x73	; 115
+ 1f2:	0e 94 8c 00 	call	0x118	; 0x118 <SPI_MasterTransmit>
+	// global interrupt enable
+	sei();
+ 1f6:	78 94       	sei
+	
+	
+	DDRA = 0xFF;		//for testing
+ 1f8:	8f ef       	ldi	r24, 0xFF	; 255
+ 1fa:	81 b9       	out	0x01, r24	; 1
+	
+    while(1)
+    {	
+		send_zero();
+ 1fc:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+        
+			// is the first bit '1' ?
+			if(whatToDo & 0x01){
+ 200:	80 91 00 01 	lds	r24, 0x0100
+ 204:	80 ff       	sbrs	r24, 0
+ 206:	03 c0       	rjmp	.+6      	; 0x20e <main+0x28>
+				send_zero();
+ 208:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+ 20c:	02 c0       	rjmp	.+4      	; 0x212 <main+0x2c>
+			}else{
+				send_one();
+ 20e:	0e 94 79 00 	call	0xf2	; 0xf2 <send_one>
+			}
+			// is the second bit '1' ?
+			if((whatToDo >> 1) & 0x01){
+ 212:	80 91 00 01 	lds	r24, 0x0100
+ 216:	81 ff       	sbrs	r24, 1
+ 218:	03 c0       	rjmp	.+6      	; 0x220 <main+0x3a>
+				send_zero();
+ 21a:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+ 21e:	02 c0       	rjmp	.+4      	; 0x224 <main+0x3e>
+			}else{
+				send_one();
+ 220:	0e 94 79 00 	call	0xf2	; 0xf2 <send_one>
+			}
+			// is the third bit '1' ?
+			if((whatToDo >> 2) & 0x01){
+ 224:	80 91 00 01 	lds	r24, 0x0100
+ 228:	82 ff       	sbrs	r24, 2
+ 22a:	03 c0       	rjmp	.+6      	; 0x232 <main+0x4c>
+				send_zero();
+ 22c:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+ 230:	02 c0       	rjmp	.+4      	; 0x236 <main+0x50>
+			}else{
+				send_one();
+ 232:	0e 94 79 00 	call	0xf2	; 0xf2 <send_one>
+			}
+			// is the fourth bit '1' ?
+			if((whatToDo >> 3) & 0x01){
+ 236:	80 91 00 01 	lds	r24, 0x0100
+ 23a:	83 ff       	sbrs	r24, 3
+ 23c:	03 c0       	rjmp	.+6      	; 0x244 <main+0x5e>
+				send_zero();
+ 23e:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+ 242:	02 c0       	rjmp	.+4      	; 0x248 <main+0x62>
+			}else{
+				send_one();
+ 244:	0e 94 79 00 	call	0xf2	; 0xf2 <send_one>
+			}
+			PORTA = whatToDo;
+ 248:	80 91 00 01 	lds	r24, 0x0100
+ 24c:	82 b9       	out	0x02, r24	; 2
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 24e:	8f e5       	ldi	r24, 0x5F	; 95
+ 250:	9a ee       	ldi	r25, 0xEA	; 234
+ 252:	a0 e0       	ldi	r26, 0x00	; 0
+ 254:	81 50       	subi	r24, 0x01	; 1
+ 256:	90 40       	sbci	r25, 0x00	; 0
+ 258:	a0 40       	sbci	r26, 0x00	; 0
+ 25a:	e1 f7       	brne	.-8      	; 0x254 <main+0x6e>
+ 25c:	00 c0       	rjmp	.+0      	; 0x25e <main+0x78>
+ 25e:	00 00       	nop
+			// wait and chill
+			
+			
+			
+			_delay_ms(300);
+			measureX();
+ 260:	0e 94 98 00 	call	0x130	; 0x130 <measureX>
+			measureY();			
+ 264:	0e 94 c2 00 	call	0x184	; 0x184 <measureY>
+		
+    }
+ 268:	c9 cf       	rjmp	.-110    	; 0x1fc <main+0x16>
+
+0000026a <_exit>:
+ 26a:	f8 94       	cli
+
+0000026c <__stop_program>:
+ 26c:	ff cf       	rjmp	.-2      	; 0x26c <__stop_program>

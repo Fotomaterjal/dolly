@@ -1,0 +1,35 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.52</VERSION>
+ <DEVICE>"ATmega1280"</DEVICE>
+ <WORKING_DIR>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\ATMEL\Atmel Studio 6.0\extensions\Atmel\AVRAssembler\2.1.51.64\AvrAssembler/Include</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\ATMEL\Atmel Studio 6.0\extensions\Atmel\AVRAssembler\2.1.51.64\AvrAssembler/Include\m1280def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\Debug/ul7.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\Debug/ul7.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\Debug\ul7.map</FILE>
+  <FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\Debug\ul7.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <main><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>16</LINE></main>
+  <loop1><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>19</LINE></loop1>
+  <shortSignalProcedure><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>83</LINE></shortSignalProcedure>
+  <loop2><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>26</LINE></loop2>
+  <longSignalProcedure><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>94</LINE></longSignalProcedure>
+  <loop3><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>33</LINE></loop3>
+  <loop4><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>40</LINE></loop4>
+  <delay_16bit><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>51</LINE></delay_16bit>
+  <iterator><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>58</LINE></iterator>
+  <delay_1ms><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>69</LINE></delay_1ms>
+  <loop><FILE>F:\Kool\Mikroprotsessorid\Praks 2\ul7\ul7\ul7\ul7.asm</FILE><LINE>72</LINE></loop>
+ </LABELS>
+</ASSEMBLER_INFO>

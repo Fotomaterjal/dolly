@@ -1,0 +1,420 @@
+
+acc2.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00000250  000002c4  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000250  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .stab         000006cc  00000000  00000000  000002c4  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  00000990  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000080  00000000  00000000  00000a18  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000004dd  00000000  00000000  00000a98  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000018a  00000000  00000000  00000f75  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000380  00000000  00000000  000010ff  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000009c  00000000  00000000  00001480  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000016e  00000000  00000000  0000151c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000120  00000000  00000000  0000168a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 4c 00 	jmp	0x98	; 0x98 <__ctors_end>
+   4:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   8:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  10:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  14:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  18:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  1c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  2c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  3c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  40:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  44:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  48:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  4c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  50:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  54:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  58:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  5c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  60:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  64:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  68:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  6c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  70:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  74:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  78:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  7c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  80:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  84:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  88:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  8c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  90:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  94:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+
+00000098 <__ctors_end>:
+  98:	11 24       	eor	r1, r1
+  9a:	1f be       	out	0x3f, r1	; 63
+  9c:	cf ef       	ldi	r28, 0xFF	; 255
+  9e:	d0 e1       	ldi	r29, 0x10	; 16
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	cd bf       	out	0x3d, r28	; 61
+
+000000a4 <__do_copy_data>:
+  a4:	11 e0       	ldi	r17, 0x01	; 1
+  a6:	a0 e0       	ldi	r26, 0x00	; 0
+  a8:	b1 e0       	ldi	r27, 0x01	; 1
+  aa:	e0 e5       	ldi	r30, 0x50	; 80
+  ac:	f2 e0       	ldi	r31, 0x02	; 2
+  ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
+  b0:	05 90       	lpm	r0, Z+
+  b2:	0d 92       	st	X+, r0
+  b4:	a0 30       	cpi	r26, 0x00	; 0
+  b6:	b1 07       	cpc	r27, r17
+  b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0xc>
+
+000000ba <__do_clear_bss>:
+  ba:	11 e0       	ldi	r17, 0x01	; 1
+  bc:	a0 e0       	ldi	r26, 0x00	; 0
+  be:	b1 e0       	ldi	r27, 0x01	; 1
+  c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
+
+000000c2 <.do_clear_bss_loop>:
+  c2:	1d 92       	st	X+, r1
+
+000000c4 <.do_clear_bss_start>:
+  c4:	a0 30       	cpi	r26, 0x00	; 0
+  c6:	b1 07       	cpc	r27, r17
+  c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
+  ca:	0e 94 f5 00 	call	0x1ea	; 0x1ea <main>
+  ce:	0c 94 26 01 	jmp	0x24c	; 0x24c <_exit>
+
+000000d2 <__bad_interrupt>:
+  d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000d6 <SPI_MasterInit>:
+
+
+void SPI_MasterInit(void)
+{
+	/* Set MOSI and SCK output, all others input */
+	DDR_SPI = (1<<DD_MOSI)|(1<<DD_SCK)|(1<<DD_SS);
+  d6:	87 e0       	ldi	r24, 0x07	; 7
+  d8:	84 b9       	out	0x04, r24	; 4
+	/* Enable SPI, Master, set clock rate fck/16 */
+	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);
+  da:	81 e5       	ldi	r24, 0x51	; 81
+  dc:	8c bd       	out	0x2c, r24	; 44
+}
+  de:	08 95       	ret
+
+000000e0 <SPI_MasterTransmit>:
+
+void SPI_MasterTransmit(char accReg, char cData)
+{
+	/* Start transmission, set SS low */
+	PORTB = (0<<PB0);
+  e0:	15 b8       	out	0x05, r1	; 5
+	/* Start transmission, select register*/
+	SPDR = accReg;
+  e2:	8e bd       	out	0x2e, r24	; 46
+	/* Wait for transmission complete */
+	while(!(SPSR & (1<<SPIF)));
+  e4:	0d b4       	in	r0, 0x2d	; 45
+  e6:	07 fe       	sbrs	r0, 7
+  e8:	fd cf       	rjmp	.-6      	; 0xe4 <SPI_MasterTransmit+0x4>
+	/* Send real data */
+	SPDR = cData;
+  ea:	6e bd       	out	0x2e, r22	; 46
+	/* Wait for transmission complete */
+	while(!(SPSR & (1<<SPIF)));
+  ec:	0d b4       	in	r0, 0x2d	; 45
+  ee:	07 fe       	sbrs	r0, 7
+  f0:	fd cf       	rjmp	.-6      	; 0xec <SPI_MasterTransmit+0xc>
+	/* Set SS high again, end transmission */
+	PORTB = (1<<PB0);
+  f2:	81 e0       	ldi	r24, 0x01	; 1
+  f4:	85 b9       	out	0x05, r24	; 5
+}
+  f6:	08 95       	ret
+
+000000f8 <sendLetter>:
+
+void sendLetter(uint8_t letter){
+	while ((UCSR1A & (1 << UDRE1)) == 0) ;
+  f8:	e8 ec       	ldi	r30, 0xC8	; 200
+  fa:	f0 e0       	ldi	r31, 0x00	; 0
+  fc:	90 81       	ld	r25, Z
+  fe:	95 ff       	sbrs	r25, 5
+ 100:	fd cf       	rjmp	.-6      	; 0xfc <sendLetter+0x4>
+	//load value to UART sending register
+	UDR1 = letter;
+ 102:	80 93 ce 00 	sts	0x00CE, r24
+	//wait loop for send to be completed
+	while(~UCSR1A&(1 << TXC1)){
+ 106:	80 91 c8 00 	lds	r24, 0x00C8
+ 10a:	86 fd       	sbrc	r24, 6
+ 10c:	06 c0       	rjmp	.+12     	; 0x11a <sendLetter+0x22>
+ 10e:	e8 ec       	ldi	r30, 0xC8	; 200
+ 110:	f0 e0       	ldi	r31, 0x00	; 0
+		asm("nop");
+ 112:	00 00       	nop
+void sendLetter(uint8_t letter){
+	while ((UCSR1A & (1 << UDRE1)) == 0) ;
+	//load value to UART sending register
+	UDR1 = letter;
+	//wait loop for send to be completed
+	while(~UCSR1A&(1 << TXC1)){
+ 114:	80 81       	ld	r24, Z
+ 116:	86 ff       	sbrs	r24, 6
+ 118:	fc cf       	rjmp	.-8      	; 0x112 <sendLetter+0x1a>
+		asm("nop");
+	}
+	//clearing TX complete flag
+	UCSR1A |= (1 << TXC1);
+ 11a:	e8 ec       	ldi	r30, 0xC8	; 200
+ 11c:	f0 e0       	ldi	r31, 0x00	; 0
+ 11e:	80 81       	ld	r24, Z
+ 120:	80 64       	ori	r24, 0x40	; 64
+ 122:	80 83       	st	Z, r24
+}
+ 124:	08 95       	ret
+
+00000126 <measureX>:
+
+
+int16_t measureX(void){
+ 126:	0f 93       	push	r16
+ 128:	1f 93       	push	r17
+ 12a:	cf 93       	push	r28
+ 12c:	df 93       	push	r29
+	int16_t xValue;
+	//measure value of X axis, register 28 (OUT_X_L)
+	SPI_MasterTransmit(0xA8, 0xFF);
+ 12e:	88 ea       	ldi	r24, 0xA8	; 168
+ 130:	6f ef       	ldi	r22, 0xFF	; 255
+ 132:	0e 94 70 00 	call	0xe0	; 0xe0 <SPI_MasterTransmit>
+	xValue |= SPDR;
+ 136:	0e b5       	in	r16, 0x2e	; 46
+ 138:	10 e0       	ldi	r17, 0x00	; 0
+	//measure value of X axis, register 29 (OUT_X_H)
+	SPI_MasterTransmit(0xA9, 0xFF);
+ 13a:	89 ea       	ldi	r24, 0xA9	; 169
+ 13c:	6f ef       	ldi	r22, 0xFF	; 255
+ 13e:	0e 94 70 00 	call	0xe0	; 0xe0 <SPI_MasterTransmit>
+	xValue |= (SPDR << 8);
+ 142:	8e b5       	in	r24, 0x2e	; 46
+ 144:	d8 2f       	mov	r29, r24
+ 146:	20 e0       	ldi	r18, 0x00	; 0
+ 148:	c2 2f       	mov	r28, r18
+ 14a:	c0 2b       	or	r28, r16
+ 14c:	d1 2b       	or	r29, r17
+	
+
+	xValue += 0x1FF;
+ 14e:	c1 50       	subi	r28, 0x01	; 1
+ 150:	de 4f       	sbci	r29, 0xFE	; 254
+	// reducing jumping	
+	if(xValue < 0x0AFF && xValue > 0){
+ 152:	ce 01       	movw	r24, r28
+ 154:	01 97       	sbiw	r24, 0x01	; 1
+ 156:	2a e0       	ldi	r18, 0x0A	; 10
+ 158:	8e 3f       	cpi	r24, 0xFE	; 254
+ 15a:	92 07       	cpc	r25, r18
+ 15c:	20 f4       	brcc	.+8      	; 0x166 <measureX+0x40>
+		sendLetter('0');
+ 15e:	80 e3       	ldi	r24, 0x30	; 48
+ 160:	0e 94 7c 00 	call	0xf8	; 0xf8 <sendLetter>
+ 164:	0a c0       	rjmp	.+20     	; 0x17a <measureX+0x54>
+	}else if(xValue > 0x00F0){
+ 166:	c1 3f       	cpi	r28, 0xF1	; 241
+ 168:	d1 05       	cpc	r29, r1
+ 16a:	24 f0       	brlt	.+8      	; 0x174 <measureX+0x4e>
+		sendLetter('a');
+ 16c:	81 e6       	ldi	r24, 0x61	; 97
+ 16e:	0e 94 7c 00 	call	0xf8	; 0xf8 <sendLetter>
+ 172:	03 c0       	rjmp	.+6      	; 0x17a <measureX+0x54>
+	}else{
+		sendLetter('b');
+ 174:	82 e6       	ldi	r24, 0x62	; 98
+ 176:	0e 94 7c 00 	call	0xf8	; 0xf8 <sendLetter>
+	}	
+	return xValue;	
+}
+ 17a:	8c 2f       	mov	r24, r28
+ 17c:	9d 2f       	mov	r25, r29
+ 17e:	df 91       	pop	r29
+ 180:	cf 91       	pop	r28
+ 182:	1f 91       	pop	r17
+ 184:	0f 91       	pop	r16
+ 186:	08 95       	ret
+
+00000188 <measureY>:
+
+int16_t measureY(void){
+ 188:	0f 93       	push	r16
+ 18a:	1f 93       	push	r17
+ 18c:	cf 93       	push	r28
+ 18e:	df 93       	push	r29
+	int16_t yValue;
+	//measure value of X axis, register 28 (OUT_X_L)
+	SPI_MasterTransmit(0xAA, 0xFF);
+ 190:	8a ea       	ldi	r24, 0xAA	; 170
+ 192:	6f ef       	ldi	r22, 0xFF	; 255
+ 194:	0e 94 70 00 	call	0xe0	; 0xe0 <SPI_MasterTransmit>
+	yValue |= SPDR;
+ 198:	0e b5       	in	r16, 0x2e	; 46
+ 19a:	10 e0       	ldi	r17, 0x00	; 0
+	//measure value of X axis, register 29 (OUT_X_H)
+	SPI_MasterTransmit(0xAB, 0xFF);
+ 19c:	8b ea       	ldi	r24, 0xAB	; 171
+ 19e:	6f ef       	ldi	r22, 0xFF	; 255
+ 1a0:	0e 94 70 00 	call	0xe0	; 0xe0 <SPI_MasterTransmit>
+	yValue |= (SPDR << 8);
+ 1a4:	8e b5       	in	r24, 0x2e	; 46
+ 1a6:	d8 2f       	mov	r29, r24
+ 1a8:	20 e0       	ldi	r18, 0x00	; 0
+ 1aa:	c2 2f       	mov	r28, r18
+ 1ac:	c0 2b       	or	r28, r16
+ 1ae:	d1 2b       	or	r29, r17
+	
+
+	yValue += 0x1FF;
+ 1b0:	c1 50       	subi	r28, 0x01	; 1
+ 1b2:	de 4f       	sbci	r29, 0xFE	; 254
+	// reducing jumping
+	if(yValue < 0x0AFF && yValue > 0){
+ 1b4:	ce 01       	movw	r24, r28
+ 1b6:	01 97       	sbiw	r24, 0x01	; 1
+ 1b8:	2a e0       	ldi	r18, 0x0A	; 10
+ 1ba:	8e 3f       	cpi	r24, 0xFE	; 254
+ 1bc:	92 07       	cpc	r25, r18
+ 1be:	20 f4       	brcc	.+8      	; 0x1c8 <measureY+0x40>
+		sendLetter('1');
+ 1c0:	81 e3       	ldi	r24, 0x31	; 49
+ 1c2:	0e 94 7c 00 	call	0xf8	; 0xf8 <sendLetter>
+ 1c6:	0a c0       	rjmp	.+20     	; 0x1dc <measureY+0x54>
+	}else if(yValue > 0x00F0){
+ 1c8:	c1 3f       	cpi	r28, 0xF1	; 241
+ 1ca:	d1 05       	cpc	r29, r1
+ 1cc:	24 f0       	brlt	.+8      	; 0x1d6 <measureY+0x4e>
+		sendLetter('c');
+ 1ce:	83 e6       	ldi	r24, 0x63	; 99
+ 1d0:	0e 94 7c 00 	call	0xf8	; 0xf8 <sendLetter>
+ 1d4:	03 c0       	rjmp	.+6      	; 0x1dc <measureY+0x54>
+	}else{
+		sendLetter('d');
+ 1d6:	84 e6       	ldi	r24, 0x64	; 100
+ 1d8:	0e 94 7c 00 	call	0xf8	; 0xf8 <sendLetter>
+	}
+	return yValue;
+}
+ 1dc:	8c 2f       	mov	r24, r28
+ 1de:	9d 2f       	mov	r25, r29
+ 1e0:	df 91       	pop	r29
+ 1e2:	cf 91       	pop	r28
+ 1e4:	1f 91       	pop	r17
+ 1e6:	0f 91       	pop	r16
+ 1e8:	08 95       	ret
+
+000001ea <main>:
+int main(void)
+{
+	
+	//UART
+	//setting baud rate to 9600
+	UBRR1 = 25;
+ 1ea:	89 e1       	ldi	r24, 0x19	; 25
+ 1ec:	90 e0       	ldi	r25, 0x00	; 0
+ 1ee:	90 93 cd 00 	sts	0x00CD, r25
+ 1f2:	80 93 cc 00 	sts	0x00CC, r24
+	UCSR1A |= (1 << U2X1);
+ 1f6:	e8 ec       	ldi	r30, 0xC8	; 200
+ 1f8:	f0 e0       	ldi	r31, 0x00	; 0
+ 1fa:	80 81       	ld	r24, Z
+ 1fc:	82 60       	ori	r24, 0x02	; 2
+ 1fe:	80 83       	st	Z, r24
+	//setting up 8 data bits
+	UCSR1C |= (1 << UCSZ10) | (1 << UCSZ11);
+ 200:	ea ec       	ldi	r30, 0xCA	; 202
+ 202:	f0 e0       	ldi	r31, 0x00	; 0
+ 204:	80 81       	ld	r24, Z
+ 206:	86 60       	ori	r24, 0x06	; 6
+ 208:	80 83       	st	Z, r24
+	//enabling transmitter
+	//enabling transmitter, receiver, receive complete interrupt
+	UCSR1B = (1 << TXEN1 | 1 << RXEN1 | 1 << RXCIE1);
+ 20a:	88 e9       	ldi	r24, 0x98	; 152
+ 20c:	80 93 c9 00 	sts	0x00C9, r24
+	sei();
+ 210:	78 94       	sei
+	
+	// Init SPI as master
+	SPI_MasterInit();
+ 212:	0e 94 6b 00 	call	0xd6	; 0xd6 <SPI_MasterInit>
+	// Configure accelerometer in CTRL_REG1
+	// Enable X and Y, disable Z, set measurement frequency to 400 Hz
+	SPI_MasterTransmit(0x20, 0x73);
+ 216:	80 e2       	ldi	r24, 0x20	; 32
+ 218:	63 e7       	ldi	r22, 0x73	; 115
+ 21a:	0e 94 70 00 	call	0xe0	; 0xe0 <SPI_MasterTransmit>
+	
+	
+    while(1)
+    {
+		//SPI_MasterTransmit(SPICongfigData);
+		measureX();
+ 21e:	0e 94 93 00 	call	0x126	; 0x126 <measureX>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 222:	8f e9       	ldi	r24, 0x9F	; 159
+ 224:	96 e8       	ldi	r25, 0x86	; 134
+ 226:	a1 e0       	ldi	r26, 0x01	; 1
+ 228:	81 50       	subi	r24, 0x01	; 1
+ 22a:	90 40       	sbci	r25, 0x00	; 0
+ 22c:	a0 40       	sbci	r26, 0x00	; 0
+ 22e:	e1 f7       	brne	.-8      	; 0x228 <main+0x3e>
+ 230:	00 c0       	rjmp	.+0      	; 0x232 <main+0x48>
+ 232:	00 00       	nop
+		//sendLetter(measureX()>>8);
+		//sendLetter(measureX());
+		//sendLetter('\n');
+		_delay_ms(500);
+		measureY();
+ 234:	0e 94 c4 00 	call	0x188	; 0x188 <measureY>
+ 238:	8f e9       	ldi	r24, 0x9F	; 159
+ 23a:	96 e8       	ldi	r25, 0x86	; 134
+ 23c:	a1 e0       	ldi	r26, 0x01	; 1
+ 23e:	81 50       	subi	r24, 0x01	; 1
+ 240:	90 40       	sbci	r25, 0x00	; 0
+ 242:	a0 40       	sbci	r26, 0x00	; 0
+ 244:	e1 f7       	brne	.-8      	; 0x23e <main+0x54>
+ 246:	00 c0       	rjmp	.+0      	; 0x248 <main+0x5e>
+ 248:	00 00       	nop
+ 24a:	e9 cf       	rjmp	.-46     	; 0x21e <main+0x34>
+
+0000024c <_exit>:
+ 24c:	f8 94       	cli
+
+0000024e <__stop_program>:
+ 24e:	ff cf       	rjmp	.-2      	; 0x24e <__stop_program>

@@ -1,0 +1,288 @@
+
+GccApplication1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000002  00800100  00000180  00000214  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000180  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000005  00800102  00800102  00000216  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  00000218  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000085  00000000  00000000  000008e4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_aranges 00000080  00000000  00000000  00000970  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000059d  00000000  00000000  000009f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000017b  00000000  00000000  00000f8d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000374  00000000  00000000  00001108  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000044  00000000  00000000  0000147c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000160  00000000  00000000  000014c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000028  00000000  00000000  00001620  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 4c 00 	jmp	0x98	; 0x98 <__ctors_end>
+   4:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   8:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+   c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  10:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  14:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  18:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  1c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  20:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  24:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  28:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  2c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  30:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  34:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  38:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  3c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  40:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  44:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  48:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  4c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  50:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  54:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  58:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  5c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  60:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  64:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  68:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  6c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  70:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  74:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  78:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  7c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  80:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  84:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  88:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  8c:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  90:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+  94:	0c 94 69 00 	jmp	0xd2	; 0xd2 <__bad_interrupt>
+
+00000098 <__ctors_end>:
+  98:	11 24       	eor	r1, r1
+  9a:	1f be       	out	0x3f, r1	; 63
+  9c:	cf ef       	ldi	r28, 0xFF	; 255
+  9e:	d0 e1       	ldi	r29, 0x10	; 16
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	cd bf       	out	0x3d, r28	; 61
+
+000000a4 <__do_copy_data>:
+  a4:	11 e0       	ldi	r17, 0x01	; 1
+  a6:	a0 e0       	ldi	r26, 0x00	; 0
+  a8:	b1 e0       	ldi	r27, 0x01	; 1
+  aa:	e0 e8       	ldi	r30, 0x80	; 128
+  ac:	f1 e0       	ldi	r31, 0x01	; 1
+  ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x10>
+  b0:	05 90       	lpm	r0, Z+
+  b2:	0d 92       	st	X+, r0
+  b4:	a2 30       	cpi	r26, 0x02	; 2
+  b6:	b1 07       	cpc	r27, r17
+  b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0xc>
+
+000000ba <__do_clear_bss>:
+  ba:	11 e0       	ldi	r17, 0x01	; 1
+  bc:	a2 e0       	ldi	r26, 0x02	; 2
+  be:	b1 e0       	ldi	r27, 0x01	; 1
+  c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
+
+000000c2 <.do_clear_bss_loop>:
+  c2:	1d 92       	st	X+, r1
+
+000000c4 <.do_clear_bss_start>:
+  c4:	a7 30       	cpi	r26, 0x07	; 7
+  c6:	b1 07       	cpc	r27, r17
+  c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
+  ca:	0e 94 87 00 	call	0x10e	; 0x10e <main>
+  ce:	0c 94 be 00 	jmp	0x17c	; 0x17c <_exit>
+
+000000d2 <__bad_interrupt>:
+  d2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000d6 <send_zero>:
+    }
+}
+
+
+// signal that generates '0' in the receiver
+void send_zero(){
+  d6:	84 e1       	ldi	r24, 0x14	; 20
+	uint8_t k = 0;
+	while(k<20){
+		// keep output HIGH for ~27 us
+		PORTD |= 0x20;
+  d8:	5d 9a       	sbi	0x0b, 5	; 11
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  da:	97 e0       	ldi	r25, 0x07	; 7
+  dc:	9a 95       	dec	r25
+  de:	f1 f7       	brne	.-4      	; 0xdc <send_zero+0x6>
+  e0:	00 c0       	rjmp	.+0      	; 0xe2 <send_zero+0xc>
+		_delay_us(23);
+		// keep output LOW for ~27 us
+		PORTD &= ~(0x20);
+  e2:	5d 98       	cbi	0x0b, 5	; 11
+  e4:	97 e0       	ldi	r25, 0x07	; 7
+  e6:	9a 95       	dec	r25
+  e8:	f1 f7       	brne	.-4      	; 0xe6 <send_zero+0x10>
+  ea:	00 c0       	rjmp	.+0      	; 0xec <send_zero+0x16>
+  ec:	81 50       	subi	r24, 0x01	; 1
+
+
+// signal that generates '0' in the receiver
+void send_zero(){
+	uint8_t k = 0;
+	while(k<20){
+  ee:	a1 f7       	brne	.-24     	; 0xd8 <send_zero+0x2>
+		// keep output LOW for ~27 us
+		PORTD &= ~(0x20);
+		_delay_us(23);
+		k++;
+	}
+}
+  f0:	08 95       	ret
+
+000000f2 <send_one>:
+
+// signal that generates '1' in the receiver
+void send_one(){
+  f2:	84 e1       	ldi	r24, 0x14	; 20
+	uint8_t k = 0;
+	while(k<20){
+		// keep output LOW for ~27 us
+		asm("nop");
+  f4:	00 00       	nop
+  f6:	97 e0       	ldi	r25, 0x07	; 7
+  f8:	9a 95       	dec	r25
+  fa:	f1 f7       	brne	.-4      	; 0xf8 <send_one+0x6>
+  fc:	00 c0       	rjmp	.+0      	; 0xfe <send_one+0xc>
+		_delay_us(23);
+		// keep output LOW for ~27 us
+		asm("nop");
+  fe:	00 00       	nop
+ 100:	97 e0       	ldi	r25, 0x07	; 7
+ 102:	9a 95       	dec	r25
+ 104:	f1 f7       	brne	.-4      	; 0x102 <send_one+0x10>
+ 106:	00 c0       	rjmp	.+0      	; 0x108 <send_one+0x16>
+ 108:	81 50       	subi	r24, 0x01	; 1
+}
+
+// signal that generates '1' in the receiver
+void send_one(){
+	uint8_t k = 0;
+	while(k<20){
+ 10a:	a1 f7       	brne	.-24     	; 0xf4 <send_one+0x2>
+		// keep output LOW for ~27 us
+		asm("nop");
+		_delay_us(23);
+		k++;
+	}
+}
+ 10c:	08 95       	ret
+
+0000010e <main>:
+char whatToDoArray[4];
+
+
+int main(void)
+{
+	DDRA = 0xFF;
+ 10e:	8f ef       	ldi	r24, 0xFF	; 255
+ 110:	81 b9       	out	0x01, r24	; 1
+	
+    while(1)
+    {	
+		send_zero();
+ 112:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+			// is the first bit '1' ?
+			if(whatToDo & 0x01){
+ 116:	80 91 00 01 	lds	r24, 0x0100
+ 11a:	80 ff       	sbrs	r24, 0
+ 11c:	03 c0       	rjmp	.+6      	; 0x124 <main+0x16>
+				send_zero();
+ 11e:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+ 122:	02 c0       	rjmp	.+4      	; 0x128 <main+0x1a>
+			}else{
+				send_one();
+ 124:	0e 94 79 00 	call	0xf2	; 0xf2 <send_one>
+			}
+			// is the second bit '1' ?
+			if((whatToDo >> 1) & 0x01){
+ 128:	80 91 00 01 	lds	r24, 0x0100
+ 12c:	81 ff       	sbrs	r24, 1
+ 12e:	03 c0       	rjmp	.+6      	; 0x136 <main+0x28>
+				send_zero();
+ 130:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+ 134:	02 c0       	rjmp	.+4      	; 0x13a <main+0x2c>
+			}else{
+				send_one();
+ 136:	0e 94 79 00 	call	0xf2	; 0xf2 <send_one>
+			}
+			//PORTA = 0x04;
+			// is the third bit '1' ?
+			if((whatToDo >> 2) & 0x01){
+ 13a:	80 91 00 01 	lds	r24, 0x0100
+ 13e:	82 ff       	sbrs	r24, 2
+ 140:	03 c0       	rjmp	.+6      	; 0x148 <main+0x3a>
+				send_zero();
+ 142:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+ 146:	02 c0       	rjmp	.+4      	; 0x14c <main+0x3e>
+			}else{
+				send_one();
+ 148:	0e 94 79 00 	call	0xf2	; 0xf2 <send_one>
+			}
+			// is the fourth bit '1' ?
+			if((whatToDo >> 3) & 0x01){
+ 14c:	80 91 00 01 	lds	r24, 0x0100
+ 150:	83 ff       	sbrs	r24, 3
+ 152:	03 c0       	rjmp	.+6      	; 0x15a <main+0x4c>
+				send_zero();
+ 154:	0e 94 6b 00 	call	0xd6	; 0xd6 <send_zero>
+ 158:	02 c0       	rjmp	.+4      	; 0x15e <main+0x50>
+			}else{
+				send_one();
+ 15a:	0e 94 79 00 	call	0xf2	; 0xf2 <send_one>
+			}
+			// wait and chill
+			PORTA ^= whatToDo;
+ 15e:	92 b1       	in	r25, 0x02	; 2
+ 160:	80 91 00 01 	lds	r24, 0x0100
+ 164:	89 27       	eor	r24, r25
+ 166:	82 b9       	out	0x02, r24	; 2
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 168:	8f e7       	ldi	r24, 0x7F	; 127
+ 16a:	9a e1       	ldi	r25, 0x1A	; 26
+ 16c:	a6 e0       	ldi	r26, 0x06	; 6
+ 16e:	81 50       	subi	r24, 0x01	; 1
+ 170:	90 40       	sbci	r25, 0x00	; 0
+ 172:	a0 40       	sbci	r26, 0x00	; 0
+ 174:	e1 f7       	brne	.-8      	; 0x16e <main+0x60>
+ 176:	00 c0       	rjmp	.+0      	; 0x178 <main+0x6a>
+ 178:	00 00       	nop
+ 17a:	cb cf       	rjmp	.-106    	; 0x112 <main+0x4>
+
+0000017c <_exit>:
+ 17c:	f8 94       	cli
+
+0000017e <__stop_program>:
+ 17e:	ff cf       	rjmp	.-2      	; 0x17e <__stop_program>

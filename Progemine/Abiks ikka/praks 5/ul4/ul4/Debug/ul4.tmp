@@ -1,0 +1,43 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.52</VERSION>
+ <DEVICE>"ATmega1280"</DEVICE>
+ <WORKING_DIR>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\ATMEL\Atmel Studio 6.0\extensions\Atmel\AVRAssembler\2.1.51.64\AvrAssembler/Include</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\ATMEL\Atmel Studio 6.0\extensions\Atmel\AVRAssembler\2.1.51.64\AvrAssembler/Include\m1280def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\Debug/ul4.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\Debug/ul4.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\Debug\ul4.map</FILE>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\Debug\ul4.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <program_start><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>15</LINE></program_start>
+  <compare_match_TC1A_interrupt><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>65</LINE></compare_match_TC1A_interrupt>
+  <uart_interrupt><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>85</LINE></uart_interrupt>
+  <hang><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>60</LINE></hang>
+  <wait_data><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>97</LINE></wait_data>
+  <sendLetter><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>226</LINE></sendLetter>
+  <zero><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>117</LINE></zero>
+  <one><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>126</LINE></one>
+  <write_values><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>208</LINE></write_values>
+  <two><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>134</LINE></two>
+  <three><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>142</LINE></three>
+  <four><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>150</LINE></four>
+  <five><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>158</LINE></five>
+  <six><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>166</LINE></six>
+  <seven><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>174</LINE></seven>
+  <eight><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>182</LINE></eight>
+  <nine><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>190</LINE></nine>
+  <xten><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>198</LINE></xten>
+  <wait><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul4\ul4\ul4.asm</FILE><LINE>232</LINE></wait>
+ </LABELS>
+</ASSEMBLER_INFO>

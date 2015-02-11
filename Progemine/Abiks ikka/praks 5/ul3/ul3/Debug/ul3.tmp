@@ -1,0 +1,30 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.52</VERSION>
+ <DEVICE>"ATmega1280"</DEVICE>
+ <WORKING_DIR>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\ATMEL\Atmel Studio 6.0\extensions\Atmel\AVRAssembler\2.1.51.64\AvrAssembler/Include</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\ul3.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\ATMEL\Atmel Studio 6.0\extensions\Atmel\AVRAssembler\2.1.51.64\AvrAssembler/Include\m1280def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\Debug/ul3.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\Debug/ul3.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\Debug\ul3.map</FILE>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\Debug\ul3.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <program_start><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\ul3.asm</FILE><LINE>14</LINE></program_start>
+  <compare_match_TC1B_interrupt><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\ul3.asm</FILE><LINE>76</LINE></compare_match_TC1B_interrupt>
+  <hang><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\ul3.asm</FILE><LINE>57</LINE></hang>
+  <blinkSlower><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\ul3.asm</FILE><LINE>111</LINE></blinkSlower>
+  <blinkFaster><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\ul3.asm</FILE><LINE>99</LINE></blinkFaster>
+  <delayLoop><FILE>F:\Kool\Mikroprotsessorid\praks 5\ul3\ul3\ul3.asm</FILE><LINE>123</LINE></delayLoop>
+ </LABELS>
+</ASSEMBLER_INFO>

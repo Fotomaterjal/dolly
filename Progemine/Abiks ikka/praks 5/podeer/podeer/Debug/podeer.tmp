@@ -1,0 +1,40 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.1.52</VERSION>
+ <DEVICE>"AT90USB647"</DEVICE>
+ <WORKING_DIR>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:\Program Files (x86)\ATMEL\Atmel Studio 6.0\extensions\Atmel\AVRAssembler\2.1.51.64\AvrAssembler/Include</DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:\Program Files (x86)\ATMEL\Atmel Studio 6.0\extensions\Atmel\AVRAssembler\2.1.51.64\AvrAssembler/Include\usb647def.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\Debug/podeer.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\Debug/podeer.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\Debug\podeer.map</FILE>
+  <FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\Debug\podeer.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <main><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>9</LINE></main>
+  <aegVilgutada><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>41</LINE></aegVilgutada>
+  <aegMuutaKiirust><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>55</LINE></aegMuutaKiirust>
+  <LOOP><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>38</LINE></LOOP>
+  <A0><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>85</LINE></A0>
+  <A1><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>93</LINE></A1>
+  <A2><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>97</LINE></A2>
+  <A3><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>101</LINE></A3>
+  <A4><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>105</LINE></A4>
+  <A5><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>109</LINE></A5>
+  <A6><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>113</LINE></A6>
+  <A7><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>117</LINE></A7>
+  <A8><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>121</LINE></A8>
+  <A9><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>125</LINE></A9>
+  <AX><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>129</LINE></AX>
+  <ALOPP><FILE>F:\Kool\Mikroprotsessorid\praks 5\podeer\podeer\podeer.asm</FILE><LINE>136</LINE></ALOPP>
+ </LABELS>
+</ASSEMBLER_INFO>
