@@ -13,11 +13,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .debug_aranges 00000058  00000000  00000000  00000302  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0000025d  00000000  00000000  0000035a  2**0
+  5 .debug_info   0000025c  00000000  00000000  0000035a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 000001a5  00000000  00000000  000005b7  2**0
+  6 .debug_abbrev 000001a5  00000000  00000000  000005b6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000158  00000000  00000000  0000075c  2**0
+  7 .debug_line   00000158  00000000  00000000  0000075b  2**0
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  000000c8  00000000  00000000  000008b4  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -130,7 +130,6 @@ void init_Timer1(){
   f4:	90 91 03 01 	lds	r25, 0x0103
   f8:	90 93 89 00 	sts	0x0089, r25
   fc:	80 93 88 00 	sts	0x0088, r24
-	
 	// enable Timer Overflow Interrupt
 	TIMSK1 |= (1<<OCIE1A);
  100:	ef e6       	ldi	r30, 0x6F	; 111
@@ -195,32 +194,27 @@ SIGNAL(TIMER1_COMPA_vect){
 
 00000150 <setCurrentLimiter_T4>:
 
-// current limit set
+// current limit set, TIMER4 PWM
 // I_tripMax = V_ref/(8*R_s), R_s = 0.1 Ohm
 // 200 mA = V_ref/0.8 -> V_ref = 0.16V = 3.2% uptime -> OCR4D = 8
 void setCurrentLimiter_T4(int ocr_value){
-	DDRD |= (1<<PD7);			//OCR4D to output
+	DDRD |= (1<<PD7);					//OCR4D to output
  150:	57 9a       	sbi	0x0a, 7	; 10
-	OCR4D = ocr_value;
+	OCR4D = ocr_value;					// set count limit
  152:	80 93 d2 00 	sts	0x00D2, r24
-	//TCCR4A = 0x00;
-	//TCCR4B = 0x00;
-	//TCCR4C = 0x00;
-	
 	TCCR4C |= (1<<COM4D1)|(1<<PWM4D);	// set fast PWM mode - clear on CM, enable PWM @ OCR4D
  156:	e2 ec       	ldi	r30, 0xC2	; 194
  158:	f0 e0       	ldi	r31, 0x00	; 0
  15a:	80 81       	ld	r24, Z
  15c:	89 60       	ori	r24, 0x09	; 9
  15e:	80 83       	st	Z, r24
-	TCCR4B |= (1<<CS40);
+	TCCR4B |= (1<<CS40);				// set CPU clock for timer clock
  160:	e1 ec       	ldi	r30, 0xC1	; 193
  162:	f0 e0       	ldi	r31, 0x00	; 0
  164:	80 81       	ld	r24, Z
  166:	81 60       	ori	r24, 0x01	; 1
  168:	80 83       	st	Z, r24
-	//TCCR4D = 0x00;
-	TCNT4 = 0x000;	
+	TCNT4 = 0x000;						// init count
  16a:	10 92 bf 00 	sts	0x00BF, r1
  16e:	10 92 be 00 	sts	0x00BE, r1
  172:	08 95       	ret
@@ -267,8 +261,8 @@ int getOSCR1A(int freq){
 	init_Timer1();
  1a4:	0e 94 75 00 	call	0xea	; 0xea <init_Timer1>
 	//TEST WITH POWER SUPPLY
-	setCurrentLimiter_T4(32);	// 3,2% duty cycle
- 1a8:	80 e2       	ldi	r24, 0x20	; 32
+	setCurrentLimiter_T4(8);	// 3,2% duty cycle
+ 1a8:	88 e0       	ldi	r24, 0x08	; 8
  1aa:	90 e0       	ldi	r25, 0x00	; 0
  1ac:	0e 94 a8 00 	call	0x150	; 0x150 <setCurrentLimiter_T4>
 	sei();

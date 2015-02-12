@@ -486,9 +486,9 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x25d
+.debug_info     0x00000000      0x25c
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x25d first.o
+ .debug_info    0x00000000      0x25c first.o
 
 .debug_abbrev   0x00000000      0x1a5
  *(.debug_abbrev)
