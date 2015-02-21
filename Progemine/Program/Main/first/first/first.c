@@ -12,52 +12,125 @@
 #define CKDIV_16 1024
 #define TIM_MAX_16 65536
 
-
-
 void init_Timer1();
 void setCurrentLimiter_T4(int ocr_value);
 int getOSCR1A(int freq);
 void init_UART();
+void init_steppers();
+void rmCLKDIV8();
 
 void sendString(char name[]);
 void sendLetter(uint8_t letter);
 
-int freq1 = 2;
-int TCNT1_value;
+struct keyFrame readKeyframe(uint8_t bits);
+uint16_t USARTgetWord();
+
+int freq1 = 1;
 int OCR1A_value;
 
+uint16_t curDist = 0;
+
+
+struct keyFrame{
+	uint16_t distance;
+	uint16_t horDeg;
+	uint16_t vertDeg;
+	uint16_t timeStamp;
+};
+
+struct keyFrame keyframes[10];
 
 
 int main(void){
-	// Remove CLKDIV8
-	CLKPR = 0x80;
-	CLKPR = 0x00;
+
+	rmCLKDIV8();
+	////////////// Blinking LED freq //////////////////////
 	// get compare match value for timer 1
 	OCR1A_value = getOSCR1A(freq1);
+	// debug LED to output
+	int led = 0x20;
+	DDRD |= led;
 	
+	////////////// Init Stepper CurrentLimit & DDRs ///////
 	cli();
 	init_Timer1();
 	// !!!TEST WITH POWER SUPPLY!!!
 	setCurrentLimiter_T4(8);	// 3,2% duty cycle
+	init_steppers();
 	sei();
 	
+	////////////// UART testing //////////////////////////
 	char str[] = "JOUJOU";
-	
-	// debug LED to output
-	int led = 0x20;
-	DDRD |= led;	
-	//init_UART();		
+	init_UART();		
 
+	
+	
+	
 
 	
     while(1)
     {
         //TODO:: Please write your application code	
 		//sendString(str);		
+		
+		
+		//sendLetter('o');
+		//while(!(UCSR1A & (1<<RXC1)));
+		//uint8_t firstBit = UDR1;
+		//sendLetter(firstBit);
+		//if(firstBit == 'k'){	//gonna be receiving a keyframe, aka four 16bit numbers
+			////sendWord(1200);
+			//keyframes[0] = readKeyframe(2);
+			//sendWord(keyframes[0].distance);
+			//
+			//
+		//}
+		
+		//sendWord(0xFFFF);
+		
+		//sendLetter(0xFF);
     }
+	
+}
+
+struct keyFrame readKeyframe(uint8_t bytes){
+	struct keyFrame receivedKeyframe;
+	for(int i=0; i<4; i++){	
+		sendLetter('a');	
+		
+		switch(i){
+			case 0:
+				sendLetter('b');
+				receivedKeyframe.distance = USARTgetWord();
+				break;
+			case 1:
+				sendLetter('c');
+				receivedKeyframe.horDeg = USARTgetWord();
+				break;
+			case 2:
+				sendLetter('d');				
+				receivedKeyframe.vertDeg = USARTgetWord();
+				break;
+			case 3:
+				sendLetter('e');				
+				receivedKeyframe.timeStamp = USARTgetWord();				
+				break;
+		}
+	}
+	sendLetter('f');	
+	return receivedKeyframe;
 }
 
 
+uint16_t USARTgetWord(){
+	uint16_t receivedWord = 0;		//init variable	
+	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	receivedWord = (UDR1<<8);		//fill the high byte	
+	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	receivedWord |= (UDR1);			//fill the low byte
+		
+	return receivedWord;
+}
 
 void init_Timer1(){	
 	// setting CPU clock/1024
@@ -76,18 +149,6 @@ int getOSCR1A(int freq){
 	return (F_CPU/CKDIV_16/freq);	
 }
 
-SIGNAL(TIMER1_COMPA_vect){
-	TCNT1 = 0x0000;
-	//PD5 = DEBUG_LED
-	PORTD = PORTD^(1<<PD5);	// invert LED value
-	//Step on step2 (PB5)
-	//TEST WITHH POWER SUPPLY
-	//PB5 = STEP2
-	PORTB = PORTB^(1<<PB5);
-	asm("NOP");
-	PORTB = PORTB^(1<<PB5);	
-	asm("NOP");
-}
 
 // current limit set, TIMER4 PWM
 // I_tripMax = V_ref/(8*R_s), R_s = 0.1 Ohm
@@ -108,8 +169,8 @@ void init_UART(){
 	UCSR1A = (1 << U2X1);	
 	// set up 8 data bits
 	UCSR1C |= (1<<UCSZ10) | (1<<UCSZ11);
-	// enable transmitter
-	UCSR1B |= (1<<TXEN1);
+	// enable transmitter, receiever, receive complete interrupt
+	UCSR1B |= (1<<TXEN1 | 1 << RXEN1 | 1 << RXCIE1);
 	
 }
 
@@ -120,9 +181,107 @@ void sendLetter(uint8_t letter){
 	UDR1 = letter;
 }
 
+void sendWord(uint16_t word){
+	// while last value not yet cleared
+	while ((UCSR1A & (1 << UDRE1)) == 0) ;
+	// else load value to UART sending register
+	UDR1 = (word>>8) & 0xFF;
+	// while last value not yet cleared
+	while ((UCSR1A & (1 << UDRE1)) == 0) ;
+	// else load value to UART sending register
+	UDR1 = word;
+}
+
 void sendString(char name[]){
 	for( int i = 0; i < strlen(name); i++){
 		sendLetter(name[i]);
 	}
 }
 
+void rmCLKDIV8(){
+	// Remove CLKDIV8
+	CLKPR = 0x80;
+	CLKPR = 0x00;
+}
+
+void init_steppers(){
+	// STEP2 (bottom stepper) is PB5
+	DDRB |= (1 << PB5);
+	// DIR2
+	DDRB |= (1 << PB4);
+	PORTB |= (1 << PB4);
+	// STEP3 (middle stepper) is PC6
+	DDRC |= (1 << PC6);
+	// STEP1 (upper stepper) is PB6
+	DDRB |= (1 << PB6);
+	// Change upper stepper DIR
+	DDRD |= (1 << PD1);
+	
+	//// Change step mode
+	//DDRB |= (1 << PB0) | (1 << PB1);
+	//PORTB |= (1 << PB0) | (1 << PB1);
+	
+	
+}
+
+SIGNAL(TIMER1_COMPA_vect){
+	TCNT1 = 0x0000;
+	//PD5 = DEBUG_LED
+	PORTD = PORTD^(1<<PD5);	// invert LED value
+	//Step on step2 (PB5)
+	//TEST WITHH POWER SUPPLY
+	//PB5 = STEP2
+	//PORTB = PORTB^(1<<PB5);
+	//asm("NOP");
+	//asm("NOP");
+	//asm("NOP");
+	//PORTB = PORTB^(1<<PB5);
+	//asm("NOP");
+	//asm("NOP");
+	//asm("NOP");
+	
+	//TEST WITHH POWER SUPPLY
+	//PC6 = STEP3
+	//PORTC = PORTC^(1<<PC6);
+	//asm("NOP");
+	//asm("NOP");
+	//asm("NOP");
+	//PORTC = PORTC^(1<<PC6);
+	//asm("NOP");
+	//asm("NOP");
+	//asm("NOP");
+
+	//TEST WITHH POWER SUPPLY
+	//PB6 = STEP1
+	//PORTD ^= (1 << PD1);
+	PORTB = PORTB^(1<<PB6);
+	asm("NOP");
+	asm("NOP");
+	asm("NOP");
+	PORTB = PORTB^(1<<PB6);
+	asm("NOP");
+	asm("NOP");
+	asm("NOP");
+}
+
+SIGNAL(USART1_RX_vect){
+	cli();
+	//PORTD = PORTD^(1<<PD5);	// invert LED value
+	
+	uint8_t firstBit = UDR1;
+	//freq1 = (a-0x30)*10;
+	//OCR1A = getOSCR1A(freq1);
+	sendLetter(firstBit);
+	//asm("nop");
+	
+	if(firstBit == 'k'){	//gonna be receiving a keyframe, aka four 16bit numbers
+		//sendWord(1200);
+		sendLetter('s');
+		keyframes[0] = readKeyframe(2);
+		//sendWord(1200);
+		sendWord(keyframes[0].distance);
+		//sendWord(USARTgetWord());
+		sendLetter('x');
+	}
+	sei();
+}
