@@ -4,31 +4,37 @@
  * Created: 25.01.2015 12:03:36
  *  Author: Oll
  */ 
+// Include headers
 #include <string.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
+// Define constants
 #define F_CPU 16000000
 #define CKDIV_16 1024
 #define TIM_MAX_16 65536
 
+// Declare functions in this file
 void init_Timer1();
 void setCurrentLimiter_T4(int ocr_value);
 int getOSCR1A(int freq);
 void init_UART();
 void init_steppers();
 void rmCLKDIV8();
-
+// USART functions
 void sendString(char name[]);
 void sendLetter(uint8_t letter);
-
+void sendWord(uint16_t word);
 struct keyFrame readKeyframe(uint8_t bits);
 uint16_t USARTgetWord();
 
+// Define global variables
 int freq1 = 1;
 int OCR1A_value;
-
 uint16_t curDist = 0;
+uint16_t curHorDeg = 0;
+uint16_t curVerDeg = 0;
+uint16_t curTime = 0;
 
 
 struct keyFrame{
@@ -44,33 +50,40 @@ struct keyFrame keyframes[10];
 int main(void){
 
 	rmCLKDIV8();
-	////////////// Blinking LED freq //////////////////////
+	////////////// Blinking LED freq /////////////////////
 	// get compare match value for timer 1
 	OCR1A_value = getOSCR1A(freq1);
 	// debug LED to output
 	int led = 0x20;
 	DDRD |= led;
 	
-	////////////// Init Stepper CurrentLimit & DDRs ///////
+	////////////// Init Stepper CurrentLimit & DDRs //////
 	cli();
 	init_Timer1();
 	// !!!TEST WITH POWER SUPPLY!!!
 	setCurrentLimiter_T4(8);	// 3,2% duty cycle
-	init_steppers();
+	init_steppers();			// PORT & DDR stuff for step and direction
 	sei();
 	
 	////////////// UART testing //////////////////////////
 	char str[] = "JOUJOU";
-	init_UART();		
+	init_UART();		// settings and RX TX enable stuff
 
 	
-	
-	
-
-	
+	///////////// Main loop //////////////////////////////
     while(1)
     {
-        //TODO:: Please write your application code	
+		for(uint32_t k = 0; k<2000000; k++){
+			asm("nop");
+		}
+		
+		sendWord(keyframes[0].distance);	// send confirmation
+		sendWord(keyframes[0].horDeg);	// send confirmation
+		sendWord(keyframes[0].vertDeg);	// send confirmation
+		sendWord(keyframes[0].timeStamp);	// send confirmation
+		sendLetter('o');
+		
+		//TODO:: Please write your application code	
 		//sendString(str);		
 		
 		
@@ -96,39 +109,52 @@ int main(void){
 struct keyFrame readKeyframe(uint8_t bytes){
 	struct keyFrame receivedKeyframe;
 	for(int i=0; i<4; i++){	
-		sendLetter('a');	
+		//sendLetter('a');	
 		
 		switch(i){
 			case 0:
-				sendLetter('b');
+				//sendLetter('b');
 				receivedKeyframe.distance = USARTgetWord();
+				//sendWord(receivedKeyframe.distance);
 				break;
 			case 1:
-				sendLetter('c');
+				//sendLetter('c');
 				receivedKeyframe.horDeg = USARTgetWord();
+				//sendWord(receivedKeyframe.horDeg);
 				break;
 			case 2:
-				sendLetter('d');				
+				//sendLetter('d');				
 				receivedKeyframe.vertDeg = USARTgetWord();
+				//sendWord(receivedKeyframe.vertDeg);
 				break;
 			case 3:
-				sendLetter('e');				
+				//sendLetter('e');				
 				receivedKeyframe.timeStamp = USARTgetWord();				
+				//sendWord(receivedKeyframe.timeStamp);
 				break;
 		}
 	}
-	sendLetter('f');	
+	//sendLetter('f');	
 	return receivedKeyframe;
 }
 
 
 uint16_t USARTgetWord(){
+	uint8_t receivedByte;
 	uint16_t receivedWord = 0;		//init variable	
+	
 	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
-	receivedWord = (UDR1<<8);		//fill the high byte	
+	receivedByte = UDR1;
+	receivedWord = (receivedByte<<8);		//fill the high byte	
+	//sendLetter('h');
+	//sendLetter(receivedByte);
+	asm("nop");
+	asm("nop");
 	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
-	receivedWord |= (UDR1);			//fill the low byte
-		
+	receivedByte = UDR1;
+	receivedWord |= receivedByte;			//fill the low byte
+	//sendLetter('i');
+	//sendLetter(receivedByte);	
 	return receivedWord;
 }
 
@@ -265,23 +291,24 @@ SIGNAL(TIMER1_COMPA_vect){
 }
 
 SIGNAL(USART1_RX_vect){
-	cli();
+	
 	//PORTD = PORTD^(1<<PD5);	// invert LED value
 	
 	uint8_t firstBit = UDR1;
 	//freq1 = (a-0x30)*10;
 	//OCR1A = getOSCR1A(freq1);
-	sendLetter(firstBit);
+	//sendLetter(firstBit);
 	//asm("nop");
 	
 	if(firstBit == 'k'){	//gonna be receiving a keyframe, aka four 16bit numbers
+		//cli();
 		//sendWord(1200);
 		sendLetter('s');
 		keyframes[0] = readKeyframe(2);
 		//sendWord(1200);
-		sendWord(keyframes[0].distance);
+		
 		//sendWord(USARTgetWord());
-		sendLetter('x');
+		//sendLetter('x');
+		//sei();
 	}
-	sei();
 }
