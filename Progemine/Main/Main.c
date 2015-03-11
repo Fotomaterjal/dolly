@@ -23,23 +23,29 @@ int getOSCR1A(int freq);
 void init_UART();
 void init_steppers();
 void rmCLKDIV8();
+void startLapse();
 // USART functions
 void sendString(char name[]);
 void sendLetter(uint8_t letter);
 void sendWord(uint16_t word);
 struct keyFrame readKeyframe(uint8_t bits);
 uint16_t USARTgetWord();
+uint8_t USARTgetLetter();
 uint16_t calcOCR1A(uint16_t recDistance, uint16_t recTime);
 
 // Define global variables
 int freq1 = 1;
 uint8_t keyFramePointer = 0;
 uint8_t keyFrameReadPointer = 0;
+uint8_t sendPointer = 0;
 int OCR1A_value;
 uint16_t curDist = 0;
 uint16_t curHorDeg = 0;
 uint16_t curVerDeg = 0;
 uint16_t curTime = 0;
+
+uint8_t usartReceivePrevByte = 0;
+uint8_t usartReceiveNowByte = 1;
 
 
 struct keyFrame{
@@ -79,43 +85,32 @@ int main(void){
     while(1)
     {
 		for(uint32_t k = 0; k<2000000; k++){
-			asm("nop");
-			//sendLetter('k');
-			
+			asm("nop");	
 		}
-		sendLetter(0xFF);
-		//sendWord(OCR1A);
-		sendWord(keyframes[keyFrameReadPointer].distance);
-		sendWord(keyframes[keyFrameReadPointer].horDeg);
-		sendWord(keyframes[keyFrameReadPointer].vertDeg);
-		sendWord(keyframes[keyFrameReadPointer].timeStamp);
+		// Debugging
+		sendWord(keyframes[sendPointer].distance);
+		sendWord(keyframes[sendPointer].horDeg);
+		sendWord(keyframes[sendPointer].vertDeg);
+		sendWord(keyframes[sendPointer].timeStamp);
 		
-		
-		if (keyFrameReadPointer < 10){
-			keyFrameReadPointer++;
+		if (sendPointer < 9){
+			sendPointer++;
 		}else{
-			keyFrameReadPointer = 0;
+			sendPointer = 0;
 			sendLetter(0xFF);
 			sendLetter(0xFF);
 			sendLetter(0xFF);
 			sendLetter(0xFF);
 		}
 		
-		//
-		//sendWord(keyframes[0].distance);	// send confirmation
-		////sendWord(keyframes[0].horDeg);	// send confirmation
-		////sendWord(keyframes[0].vertDeg);	// send confirmation
-		//sendWord(keyframes[0].timeStamp);	// send confirmation
-		////sendLetter('o');
-		//
-		//if(keyframes[0].distance != '\0\0'){
-			//OCR1A = calcOCR1A(keyframes[0].distance, keyframes[0].timeStamp);
-			//TCNT1 = 0x00;
-		//}
     }
 	
 }
 
+
+//calculates needed OCR1A value to travel needed distance in given time
+//linear horizontal movement
+//recDistance given in steps, recTime in seconds
 uint16_t calcOCR1A(uint16_t recDistance, uint16_t recTime){
 	float wantedStepFreq = (recDistance*STEPDIV)/recTime;
 	TCNT1 = 0x00;
@@ -125,29 +120,30 @@ uint16_t calcOCR1A(uint16_t recDistance, uint16_t recTime){
 	return wat;	
 }
 
+
+//Reads four 16-bit integers into keyframes[]
 struct keyFrame readKeyframe(uint8_t bytes){
 	struct keyFrame receivedKeyframe;
 	for(int i=0; i<4; i++){	
-		//sendLetter('a');	
-		
+
 		switch(i){
 			case 0:
-				sendLetter('b');
+				//sendLetter('b');
 				receivedKeyframe.distance = USARTgetWord();
 				sendWord(receivedKeyframe.distance);
 				break;
 			case 1:
-				sendLetter('c');
+				//sendLetter('c');
 				receivedKeyframe.horDeg = USARTgetWord();
 				sendWord(receivedKeyframe.horDeg);
 				break;
 			case 2:
-				sendLetter('d');				
+				//sendLetter('d');				
 				receivedKeyframe.vertDeg = USARTgetWord();
 				sendWord(receivedKeyframe.vertDeg);
 				break;
 			case 3:
-				sendLetter('e');				
+				//sendLetter('e');				
 				receivedKeyframe.timeStamp = USARTgetWord();				
 				sendWord(receivedKeyframe.timeStamp);
 				break;
@@ -158,9 +154,10 @@ struct keyFrame readKeyframe(uint8_t bytes){
 }
 
 
+//Reads one 16-bit integer from USART
 uint16_t USARTgetWord(){
 	uint8_t receivedByte;
-	uint16_t receivedWord = 0;		//init variable	
+	uint16_t receivedWord = 0;		//initialize variable	
 
 	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
 	receivedByte = UDR1;
@@ -171,6 +168,16 @@ uint16_t USARTgetWord(){
 	return receivedWord;
 }
 
+
+//Reads one byte from USART
+uint8_t USARTgetLetter(){
+	uint8_t receivedByte;
+	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	receivedByte = UDR1;
+	return receivedByte;
+}
+
+//Initialize Timer1
 void init_Timer1(){	
 	TCCR1A = 0x00;
 	// setting CPU clock/1024
@@ -201,6 +208,7 @@ void setCurrentLimiter_T4(int ocr_value){
 	TCNT4 = 0x000;						// init count
 }
 
+//Initialize USART
 void init_UART(){
 	// UART
 	// setting baud rate to 9600
@@ -209,11 +217,11 @@ void init_UART(){
 	UCSR1A = (1 << U2X1);	
 	// set up 8 data bits
 	UCSR1C |= (1<<UCSZ10) | (1<<UCSZ11);
-	// enable transmitter, receiever, receive complete interrupt
-	UCSR1B |= (1<<TXEN1 | 1 << RXEN1 | 1 << RXCIE1);
-	
+	// enable transmitter, receiver, receive complete interrupt
+	UCSR1B |= (1<<TXEN1 | 1 << RXEN1 | 1 << RXCIE1);	
 }
 
+//Send a byte over USART
 void sendLetter(uint8_t letter){
 	// while last value not yet cleared
 	while ((UCSR1A & (1 << UDRE1)) == 0) ;
@@ -221,6 +229,8 @@ void sendLetter(uint8_t letter){
 	UDR1 = letter;
 }
 
+
+//Send a word over USART
 void sendWord(uint16_t word){
 	// while last value not yet cleared
 	while ((UCSR1A & (1 << UDRE1)) == 0) ;
@@ -232,18 +242,21 @@ void sendWord(uint16_t word){
 	UDR1 = word;
 }
 
+//Send a string over USART
 void sendString(char name[]){
 	for( int i = 0; i < strlen(name); i++){
 		sendLetter(name[i]);
 	}
 }
 
-void rmCLKDIV8(){
-	// Remove CLKDIV8
+// Remove CLKDIV8
+void rmCLKDIV8(){	
 	CLKPR = 0x80;
 	CLKPR = 0x00;
 }
 
+
+//Initialize stepper motor outputs (step&direction&mode)
 void init_steppers(){
 	// STEP2 (bottom stepper) is PB5
 	DDRB |= (1 << PB5);
@@ -260,9 +273,9 @@ void init_steppers(){
 	//// Change step mode
 	//DDRB |= (1 << PB0) | (1 << PB1);
 	//PORTB |= (1 << PB0) | (1 << PB1);
-	
-	
 }
+
+
 
 SIGNAL(TIMER1_COMPA_vect){
 	//TCNT1 = 0x0000;
@@ -304,28 +317,19 @@ SIGNAL(TIMER1_COMPA_vect){
 	asm("NOP");
 }
 
+//Interrupt, got data from HC-06 module
 SIGNAL(USART1_RX_vect){
-	uint8_t firstBit = UDR1;	
-	uint16_t OCR1A_value_here;
-	if(firstBit == 0x6B){	//gonna be receiving a keyframe, aka four 16bit numbers
-		//sendLetter('s');
-		keyframes[keyFramePointer] = readKeyframe(2);
-		if(keyFramePointer < 10){
-			keyFramePointer ++;	
-		}else{
-			keyFramePointer = 0;
-		}
+	uint8_t firstByte = USARTgetLetter();
+	uint8_t secondByte;
+	
+	if (firstByte == 'k'){	//gonna be receiving a keyframe, aka four 16bit numbers
 		
-		
-		OCR1A_value_here = calcOCR1A(keyframes[0].distance, keyframes[0].timeStamp);
-		OCR1A = OCR1A_value_here;
-		//	sendWord(OCR1A_value_here);
-		//sendWord(keyframes[0].distance);
-		//sendWord(keyframes[0].horDeg);
-		//sendWord(keyframes[0].vertDeg);
-		//sendWord(keyframes[0].timeStamp);
+		keyframes[keyFrameReadPointer] = readKeyframe(2);
+	
+	}else if(firstByte == 's'){	//receiving some metadata (exactly which keyFrame is coming)
+		secondByte = USARTgetLetter();
+		keyFrameReadPointer = secondByte;
+	}else if(firstByte == 'z'){
+		startLapse();
 	}
-	//sendLetter('s');
-	//sendLetter(firstBit);
-	//OCR1A = firstBit * 100;
 }
