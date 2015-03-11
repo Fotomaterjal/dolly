@@ -33,6 +33,8 @@ uint16_t calcOCR1A(uint16_t recDistance, uint16_t recTime);
 
 // Define global variables
 int freq1 = 1;
+uint8_t keyFramePointer = 0;
+uint8_t keyFrameReadPointer = 0;
 int OCR1A_value;
 uint16_t curDist = 0;
 uint16_t curHorDeg = 0;
@@ -76,9 +78,29 @@ int main(void){
 	///////////// Main loop //////////////////////////////
     while(1)
     {
-		//for(uint32_t k = 0; k<2000000; k++){
-			//asm("nop");
-		//}
+		for(uint32_t k = 0; k<2000000; k++){
+			asm("nop");
+			//sendLetter('k');
+			
+		}
+		sendLetter(0xFF);
+		//sendWord(OCR1A);
+		sendWord(keyframes[keyFrameReadPointer].distance);
+		sendWord(keyframes[keyFrameReadPointer].horDeg);
+		sendWord(keyframes[keyFrameReadPointer].vertDeg);
+		sendWord(keyframes[keyFrameReadPointer].timeStamp);
+		
+		
+		if (keyFrameReadPointer < 10){
+			keyFrameReadPointer++;
+		}else{
+			keyFrameReadPointer = 0;
+			sendLetter(0xFF);
+			sendLetter(0xFF);
+			sendLetter(0xFF);
+			sendLetter(0xFF);
+		}
+		
 		//
 		//sendWord(keyframes[0].distance);	// send confirmation
 		////sendWord(keyframes[0].horDeg);	// send confirmation
@@ -90,27 +112,6 @@ int main(void){
 			//OCR1A = calcOCR1A(keyframes[0].distance, keyframes[0].timeStamp);
 			//TCNT1 = 0x00;
 		//}
-		
-		//calcOCR1A(keyframes[0].distance, keyframes[0].timeStamp);
-		//TODO:: Please write your application code	
-		//sendString(str);		
-		
-		//OCR1A = keyframes[0].distance;
-		//sendLetter('o');
-		//while(!(UCSR1A & (1<<RXC1)));
-		//uint8_t firstBit = UDR1;
-		//sendLetter(firstBit);
-		//if(firstBit == 'k'){	//gonna be receiving a keyframe, aka four 16bit numbers
-			////sendWord(1200);
-			//keyframes[0] = readKeyframe(2);
-			//sendWord(keyframes[0].distance);
-			//
-			//
-		//}
-		
-		//sendWord(0xFFFF);
-		
-		//sendLetter(0xFF);
     }
 	
 }
@@ -131,24 +132,24 @@ struct keyFrame readKeyframe(uint8_t bytes){
 		
 		switch(i){
 			case 0:
-				//sendLetter('b');
+				sendLetter('b');
 				receivedKeyframe.distance = USARTgetWord();
-				//sendWord(receivedKeyframe.distance);
+				sendWord(receivedKeyframe.distance);
 				break;
 			case 1:
-				//sendLetter('c');
+				sendLetter('c');
 				receivedKeyframe.horDeg = USARTgetWord();
-				//sendWord(receivedKeyframe.horDeg);
+				sendWord(receivedKeyframe.horDeg);
 				break;
 			case 2:
-				//sendLetter('d');				
+				sendLetter('d');				
 				receivedKeyframe.vertDeg = USARTgetWord();
-				//sendWord(receivedKeyframe.vertDeg);
+				sendWord(receivedKeyframe.vertDeg);
 				break;
 			case 3:
-				//sendLetter('e');				
+				sendLetter('e');				
 				receivedKeyframe.timeStamp = USARTgetWord();				
-				//sendWord(receivedKeyframe.timeStamp);
+				sendWord(receivedKeyframe.timeStamp);
 				break;
 		}
 	}
@@ -160,19 +161,13 @@ struct keyFrame readKeyframe(uint8_t bytes){
 uint16_t USARTgetWord(){
 	uint8_t receivedByte;
 	uint16_t receivedWord = 0;		//init variable	
-	
+
 	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
 	receivedByte = UDR1;
 	receivedWord = (receivedByte<<8);		//fill the high byte	
-	//sendLetter('h');
-	//sendLetter(receivedByte);
-	asm("nop");
-	asm("nop");
 	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
 	receivedByte = UDR1;
 	receivedWord |= receivedByte;			//fill the low byte
-	//sendLetter('i');
-	//sendLetter(receivedByte);	
 	return receivedWord;
 }
 
@@ -310,25 +305,27 @@ SIGNAL(TIMER1_COMPA_vect){
 }
 
 SIGNAL(USART1_RX_vect){
-	
-	//PORTD = PORTD^(1<<PD5);	// invert LED value
-	
-	uint8_t firstBit = UDR1;
-	//freq1 = (a-0x30)*10;
-	//OCR1A = getOSCR1A(freq1);
-	//sendLetter(firstBit);
-	//asm("nop");
-	
-	if(firstBit == 'k'){	//gonna be receiving a keyframe, aka four 16bit numbers
-		//cli();
-		//sendWord(1200);
-		sendLetter('s');
-		keyframes[0] = readKeyframe(2);
-		//sendWord(1200);
-		OCR1A = calcOCR1A(keyframes[0].distance, keyframes[0].timeStamp);
+	uint8_t firstBit = UDR1;	
+	uint16_t OCR1A_value_here;
+	if(firstBit == 0x6B){	//gonna be receiving a keyframe, aka four 16bit numbers
+		//sendLetter('s');
+		keyframes[keyFramePointer] = readKeyframe(2);
+		if(keyFramePointer < 10){
+			keyFramePointer ++;	
+		}else{
+			keyFramePointer = 0;
+		}
 		
-		//sendWord(USARTgetWord());
-		//sendLetter('x');
-		//sei();
+		
+		OCR1A_value_here = calcOCR1A(keyframes[0].distance, keyframes[0].timeStamp);
+		OCR1A = OCR1A_value_here;
+		//	sendWord(OCR1A_value_here);
+		//sendWord(keyframes[0].distance);
+		//sendWord(keyframes[0].horDeg);
+		//sendWord(keyframes[0].vertDeg);
+		//sendWord(keyframes[0].timeStamp);
 	}
+	//sendLetter('s');
+	//sendLetter(firstBit);
+	//OCR1A = firstBit * 100;
 }
