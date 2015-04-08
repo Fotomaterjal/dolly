@@ -8,6 +8,8 @@
 #include <string.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 // Define constants
 #define F_CPU 16000000
@@ -61,6 +63,10 @@ uint16_t curHorDeg = 0;
 uint16_t curVerDeg = 0;
 uint16_t curTime = 0;
 
+uint8_t distDirFlag = 1;
+uint8_t horDirFlag = 1;
+uint8_t verDirFlag = 1;
+
 uint8_t usartReceivePrevByte = 0;
 uint8_t usartReceiveNowByte = 1;
 
@@ -85,7 +91,7 @@ int main(void){
 	rmCLKDIV8();
 	////////////// Blinking LED freq /////////////////////
 	// get compare match value for timer 1
-	OCR1A_value = getOSCR1A(freq1);
+	//OCR1A_value = getOSCR1A(freq1);
 	// debug LED to output
 	int led = 0x20;
 	DDRD |= led;
@@ -102,69 +108,9 @@ int main(void){
 	////////////// UART testing //////////////////////////
 	init_UART();		// settings and RX TX enable stuff
 	
-	
-	// initialize timer
-	OCR1A = OCR1A_value;
-	// initialize 1-second CTC
-	//OCR1C = 15625;
 	///////////// Main loop //////////////////////////////
-    while(1)
-    {
-		
-		//if(curTime >= keyframes[curKeyFramePointer].timeStamp){
-			//curKeyFramePointer++;
-		//}
-		//if(curKeyFramePointer >= 9){
-			//stopSequence();
-		//}
-		
-		
-		
-		//TODO: problem here:
-		//somehow doesn't go into this if clause
-		//for(uint32_t k = 0; k<1000000; k++){
-			//asm("nop");
-		//}
-		//sendLetter(startedFlag);
-		//if(startedFlag == 0x01){
-			//sendLetter(0x02);
-			//sendWord(keyframes[curKeyFramePointer].distance);
-			//sendWord(keyframes[curKeyFramePointer].horDeg);
-			//sendWord(keyframes[curKeyFramePointer].vertDeg);
-			//sendWord(keyframes[curKeyFramePointer].timeStamp);
-			//
-			//
-			//
-			//sendWord(OCR1A);
-			//if(OCR1A != OCR1A_value){
-			//
-			//}
-		//}
-		//
-		
-		
-		
-		
-		
-		//for(uint32_t k = 0; k<2000000; k++){
-			//asm("nop");	
-		//}
-		//// Debugging
-		//sendWord(keyframes[sendPointer].distance);
-		//sendWord(keyframes[sendPointer].horDeg);
-		//sendWord(keyframes[sendPointer].vertDeg);
-		//sendWord(keyframes[sendPointer].timeStamp);
-		//
-		//if (sendPointer < 9){
-			//sendPointer++;
-		//}else{
-			//sendPointer = 0;
-			//sendLetter(0xFF);
-			//sendLetter(0xFF);
-			//sendLetter(0xFF);
-			//sendLetter(0xFF);
-		//}
-		
+    while(1){
+			
     }
 	
 }
@@ -184,10 +130,10 @@ void startLapse(){
 //linear horizontal movement
 //recDistance given in steps, recTime in seconds
 uint16_t calcOCR1A(uint16_t curTime, uint16_t curDist, uint16_t recDistance, uint16_t recTime){
-	float wantedStepFreq = ((recDistance-curDist)*STEPDIV)/(recTime-curTime);
+	float wantedStepFreq = (abs((recDistance-curDist))*STEPDIV)/(recTime-curTime);
 	TCNT1 = 0x00;
-	uint16_t wat = (F_CPU/T1OCA_DIV)/wantedStepFreq;
-	return wat;	
+	return (uint16_t) (F_CPU/T1OCA_DIV)/wantedStepFreq;
+	//return wat;	
 }
 
 //calculates needed OCR1B value to travel needed rotation in given time
@@ -364,10 +310,12 @@ uint8_t getHorRotDir(uint16_t curHorDeg, uint16_t futureHorDeg){
 void changeDistDir(uint8_t dir){
 	if(dir){
 		// Change upper stepper DIR to FORWARD movement
-		DDRD |= (1 << PD1);
+		PORTD |= (1 << PD1);
+		distDirFlag = 1;
 	}else{
 		// Change upper stepper DIR to BACKWARD movement
-		DDRD &= ~(1 << PD1);
+		PORTD &= ~(1 << PD1);
+		distDirFlag = 0;
 	}	
 }
 
@@ -375,9 +323,11 @@ void changeHorRotDir(uint8_t dir){
 	if(dir){
 		// Change middle stepper DIR to FORWARD movement
 		DDRC |= (1 << PD7);
-		}else{
+		horDirFlag = 1;
+	}else{
 		// Change middle stepper DIR to BACKWARD movement
 		DDRC &= ~(1 << PD7);
+		horDirFlag = 0;
 	}
 }
 
@@ -385,9 +335,11 @@ void changeVerRotDir(uint8_t dir){
 	if(dir){
 		// Change upper stepper DIR to FORWARD movement
 		DDRB |= (1 << PB4);
-		}else{
+		verDirFlag = 1;
+	}else{
 		// Change upper stepper DIR to BACKWARD movement
 		DDRB &= ~(1 << PB4);
+		verDirFlag = 0;
 	}
 }
 
@@ -463,60 +415,71 @@ void init_steppers(){
 	// DIR2
 	DDRB |= (1 << PB4);
 	PORTB |= (1 << PB4);
+	
 	// STEP3 (middle stepper) is PC6
 	DDRC |= (1 << PC6);
+	// DIR3 middle (distance) stepper
+	DDRC |= (1 << PC7);
+	PORTC |= (1 << PC7);
+	
 	// STEP1 (upper stepper) is PB6
 	DDRB |= (1 << PB6);
-	// Change upper stepper DIR
+	// DIR1 upper (distance) stepper
 	DDRD |= (1 << PD1);
-	
+	PORTD |= (1 << PD1);
+		
 	//// Change step mode
 	//DDRB |= (1 << PB0) | (1 << PB1);
 	//PORTB |= (1 << PB0) | (1 << PB1);
 }
 
+// Bottom (vertical rotation) stepper
+SIGNAL(TIMER1_COMPC_vect){
+	//TEST WITHH POWER SUPPLY
+	//PB5 = STEP2
+	PORTB = PORTB^(1<<PB5);
+	PORTB = PORTB^(1<<PB5);
+	
+	if(verDirFlag){
+		curVerDeg ++;	
+	}else{
+		curVerDeg --;
+	}
+	
+}
+
+// Middle (horizontal rotation) stepper
+SIGNAL(TIMER1_COMPB_vect){
+	//TEST WITHH POWER SUPPLY
+	//PC6 = STEP3
+	PORTC = PORTC^(1<<PC6);
+	PORTC = PORTC^(1<<PC6);
+		
+	if(verDirFlag){
+		curHorDeg ++;
+	}else{
+		curHorDeg --;
+	}
+}
 
 
+// Upper (distance) stepper interrupt
 SIGNAL(TIMER1_COMPA_vect){
 	//TCNT1 = 0x0000;
 	//PD5 = DEBUG_LED
 	PORTD = PORTD^(1<<PD5);	// invert LED value
 	//Step on step2 (PB5)
-	//TEST WITHH POWER SUPPLY
-	//PB5 = STEP2
-	//PORTB = PORTB^(1<<PB5);
-	//asm("NOP");
-	//asm("NOP");
-	//asm("NOP");
-	//PORTB = PORTB^(1<<PB5);
-	//asm("NOP");
-	//asm("NOP");
-	//asm("NOP");
-	
-	//TEST WITHH POWER SUPPLY
-	//PC6 = STEP3
-	//PORTC = PORTC^(1<<PC6);
-	//asm("NOP");
-	//asm("NOP");
-	//asm("NOP");
-	//PORTC = PORTC^(1<<PC6);
-	//asm("NOP");
-	//asm("NOP");
-	//asm("NOP");
-
-	//TEST WITHH POWER SUPPLY
-	//PB6 = STEP1
-	//PORTD ^= (1 << PD1);
-	curDist ++;
+	//TEST WITHH POWER SUPPLY		
 	//upper stepper
 	PORTB = PORTB^(1<<PB6);
-	asm("NOP");
-	asm("NOP");
-	asm("NOP");
 	PORTB = PORTB^(1<<PB6);
-	asm("NOP");
-	asm("NOP");
-	asm("NOP");
+	
+	if(distDirFlag == 1){
+		curDist++;
+	}else{
+		curDist --;	
+	}
+	
 }
 
 //Interrupt, got data from HC-06 module
@@ -544,63 +507,107 @@ SIGNAL(TIMER0_OVF_vect){
 		//sendLetter(startedFlag);
 		if(startedFlag == 0x01){
 			curTime++;
-			sendLetter(0x02);
-			sendWord(keyframes[curKeyFramePointer].distance);
-			sendWord(keyframes[curKeyFramePointer].horDeg);
-			sendWord(keyframes[curKeyFramePointer].vertDeg);
-			sendWord(keyframes[curKeyFramePointer].timeStamp);
-			sendLetter(0xFF);
-			sendWord(OCR1A);
+			
 			// time to change to next keyFrame
 			if(curTime >= keyframes[curKeyFramePointer].timeStamp){
-				curKeyFramePointer++;	//go to next keyframe
+				curKeyFramePointer++;	//go to next keyFrame
 				// OCR1A = linear movement
 				OCR1A_value = calcOCR1A(curTime, curDist, keyframes[curKeyFramePointer].distance, keyframes[curKeyFramePointer].timeStamp);
-				// OCR1B = rotational movement
+				// OCR1B = horizontal rotational movement
 				OCR1B_value = calcOCR1B(curTime, curHorDeg, keyframes[curKeyFramePointer].horDeg, keyframes[curKeyFramePointer].timeStamp);
-				// OCR1C = vertical rotational movemnt
-				OCR1B_value = calcOCR1C(curTime, curVerDeg, keyframes[curKeyFramePointer].vertDeg, keyframes[curKeyFramePointer].timeStamp);
+				// OCR1C = vertical rotational movement
+				OCR1C_value = calcOCR1C(curTime, curVerDeg, keyframes[curKeyFramePointer].vertDeg, keyframes[curKeyFramePointer].timeStamp);
 				
 				////////////////////////////////////////////////// LINEAR MOTION STUFF /////////////////////////////////////////////////
 				if(OCR1A_value == 0xFFFF){		// divide by 0 aka stepper has to stop
 					halt_Timer1_A();
 				}else{
-					if(getDistDir(curDist, keyframes[curKeyFramePointer].distance) != 0x01){
-						//we have to move backwards
-						changeDistDir(0);		//now we are moving backwards
+					if(getDistDir(curDist, keyframes[curKeyFramePointer].distance) == 0x01){
+						//we have to move forward
+						changeDistDir(1);		//now we are moving forward
 					}else{
-						changeDistDir(1);		//move forward
+						changeDistDir(0);		//move backwards
 					}
-					init_Timer1_A(OCR1A_value);	//initialize timer with new OCR1A value
+					init_Timer1_A(OCR1A_value,);	//initialize timer with new OCR1A value
 				}
 				
-				///////////////////////////////////////////////// HORIZONTAL ROTATE STUFF //////////////////////////////////////////////
-				if(OCR1B_value == 0xFFFF){		// divide by 0 aka stepper has to stop
-					halt_Timer1_B();
-				}else{
-					if(getHorRotDir(curHorDeg, keyframes[curKeyFramePointer].horDeg) != 0x01){
-						//we have to move backwards
-						changeHorRotDir(0);		//now we are moving backwards
-					}else{
-						changeHorRotDir(1);		//move forward
-					}
-					init_Timer1_B(OCR1B_value);	//initialize timer with new OCR1A value
-				}
-				///////////////////////////////////////////////// VERTICAL ROTATE STUFF ////////////////////////////////////////////////
-				if(OCR1B_value == 0xFFFF){		// divide by 0 aka stepper has to stop
-					halt_Timer1_C();
-				}else{
-					if(getHorRotDir(curVerDeg, keyframes[curKeyFramePointer].vertDeg) != 0x01){
-						//we have to move backwards
-						changeVerRotDir(0);		//now we are moving backwards
-					}else{
-						changeVerRotDir(1);		//move forward
-					}
-					init_Timer1_C(OCR1C_value);	//initialize timer with new OCR1A value
-				}
-				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////							
-			}						
+				/////////////////////////////////////////////////// HORIZONTAL ROTATE STUFF //////////////////////////////////////////////
+				//if(OCR1B_value == 0xFFFF){		// divide by 0 aka stepper has to stop
+					//halt_Timer1_B();
+				//}else{
+					//if(getHorRotDir(curHorDeg, keyframes[curKeyFramePointer].horDeg) == 0x01){
+						////we have to move forward
+						//changeHorRotDir(1);		//now we are moving forward
+					//}else{
+						//changeHorRotDir(0);		//move backward
+					//}
+					//init_Timer1_B(OCR1B_value);	//initialize timer with new OCR1A value
+				//}
+				/////////////////////////////////////////////////// VERTICAL ROTATE STUFF ////////////////////////////////////////////////
+				//if(OCR1C_value == 0xFFFF){		// divide by 0 aka stepper has to stop
+					//halt_Timer1_C();
+				//}else{
+					//if(getHorRotDir(curVerDeg, keyframes[curKeyFramePointer].vertDeg) == 0x01){
+						////we have to move forward
+						//changeVerRotDir(1);		//now we are moving forward
+					//}else{
+						//changeVerRotDir(0);		//move backward
+					//}
+					//init_Timer1_C(OCR1C_value);	//initialize timer with new OCR1A value
+				//}
+				//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+				
+				
+				
+				///////////////////////////////////////////////	DEBUG  ///////////////////////////////////////////////////////////////////	
+				char dist[10];
+				sprintf(dist, "%d", keyframes[curKeyFramePointer].distance);
+				sendString("Start");
+				sendString("\nKFDist: ");
+				sendString(dist);
+				
+				sendString("\nKFHorDeg:");
+				char horDeg[10];
+				sprintf(horDeg, "%d", keyframes[curKeyFramePointer].horDeg);
+				sendString(horDeg);
+				
+				sendString("\nKFVerDeg:");
+				char verDeg[10];
+				sprintf(verDeg, "%d", keyframes[curKeyFramePointer].vertDeg);
+				sendString(verDeg);
+				
+				sendString("\nKFTime:");
+				char time[10];
+				sprintf(time, "%d", keyframes[curKeyFramePointer].timeStamp);
+				sendString(time);
+				
+				sendString("\ncurTime:");
+				char curTimes[10];
+				sprintf(curTimes, "%d", curTime);
+				sendString(curTimes);
+				
+				sendString("\ncurDist:");
+				char curDists[10];
+				sprintf(curDists, "%d", curDist);
+				sendString(curDists);
+				
+				sendString("\nOCR1A:");
+				char curOCR1A[10];
+				sprintf(curOCR1A, "%d", OCR1A);
+				sendString(curOCR1A);
+				
+					
+				
+								
+			}	
+			if(distDirFlag){
+				sendString("  Direction is forward   ");
+				
+			}else{
+				sendString("  Direction is backward   ");
+			}
+			
+			///////////////////////////////////////////////	DEBUG  ///////////////////////////////////////////////////////////////////
 		}		
-	}	
-	PORTD = PORTD^(1<<PD5);	// invert LED value	every second
+	}
 }
