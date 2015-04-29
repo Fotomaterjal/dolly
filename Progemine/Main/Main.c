@@ -33,6 +33,7 @@
 #define TIMER_16BIT_ITERATIONS 65536
 #define TIMER_8BIT_ITERATIONS 256
 #define TIMER0_DIV 256
+#define MAX_MOVE_FREQUECY 5000.0
 
 
 /////////////////// Distance related /////////////////////
@@ -113,6 +114,11 @@ struct keyFrame readKeyframe(uint8_t bits);
 uint16_t USARTgetWord();
 uint8_t USARTgetLetter();
 uint8_t getDirection(int currentPosition, uint16_t futurePosition);
+uint32_t calcMovementOCRnA(uint8_t speedPercentage);
+uint32_t calcMovementOCR0A(uint8_t speedPercentage);
+struct moveData readMoveData();
+uint32_t USARTgetDoubleWord();
+void moveDevice(uint32_t receivedMoveData);
 
 
 
@@ -149,6 +155,13 @@ struct keyFrame{
 	uint16_t timeStamp;
 };
 
+struct moveData{
+	uint8_t whichTimer;
+	uint8_t onOff;
+	uint8_t moveSpeed;
+	uint8_t moveDirection;
+};
+
 struct keyFrame keyframes[MAX_KEYFRAMES];
 
 
@@ -160,7 +173,7 @@ int main(void){
 	////////////// Initialize Stepper CurrentLimit & DDRs //////
 	cli();	// cancel all interrupts
 	// !!!TEST WITH POWER SUPPLY!!! //
-	setCurrentLimiter_T4(8);	// 8 = 3,2% duty cycle (I_tripMax = V_ref/0.8)
+	setCurrentLimiter_T4(10);	// 8 = 3,2% duty cycle (I_tripMax = V_ref/0.8)
 	init_steppers();			// PORT & DDR stuff for step and direction
 	sei();	// allow interrupts	
 	////////////// UART testing //////////////////////////
@@ -418,7 +431,7 @@ int main(void){
 
 
 void startLapse(){
-	cli();
+	//cli();
 	startedFlag = 0x01;
 	//startedFlag = 0x01;
 	
@@ -628,6 +641,26 @@ uint32_t calcReqVerSteps(uint16_t recVerDeg){
 	return neededSteps;
 }
 
+uint32_t calcMovementOCRnA(uint8_t speedPercentage){
+	float wantedStepFrequency = (float) MAX_MOVE_FREQUECY * 0.01 * (float) speedPercentage;
+	uint32_t result = (uint32_t) ((((float) F_CPU)/ ((float) T1OCA_DIV))/wantedStepFrequency);
+	if(result >= 0xFFFFFFFF || result == 0x00000000){
+		return 0xFFFFFFFF;
+	}else{
+		return result;
+	}
+}
+
+uint32_t calcMovementOCR0A(uint8_t speedPercentage){
+	float wantedStepFrequency = (float) MAX_MOVE_FREQUECY * 0.01 * (float) speedPercentage;
+	uint32_t result = (uint32_t) ((((float) F_CPU)/ ((float) TIMER0_DIV))/wantedStepFrequency);
+	if(result >= 0xFFFFFFFF || result == 0x00000000){
+		return 0xFFFFFFFF;
+		}else{
+		return result;
+	}
+}
+
 //calculates needed OCR1A value to travel needed distance in given time
 //linear horizontal movement
 //recDistance given in centimeters, recTime in seconds
@@ -724,6 +757,50 @@ struct keyFrame readKeyframe(uint8_t bytes){
 		}
 	}
 	return receivedKeyframe;
+}
+
+struct moveData readMoveData(){
+	struct moveData receivedData;
+	for(int i = 0; i < 4; i++){
+		switch(i){
+			case 0:
+				receivedData.whichTimer = USARTgetLetter();
+				break;
+			case 1:
+				receivedData.onOff = USARTgetLetter();
+				break;
+			case 2:
+				receivedData.moveSpeed = USARTgetLetter();
+				break;
+			case 3:
+				receivedData.moveDirection = USARTgetLetter();
+				break;
+		}
+	}
+	return receivedData;
+}
+
+uint32_t USARTgetDoubleWord(){
+	uint8_t receivedByte;
+	uint32_t receivedDoubleWord = 0;		//initialize variable
+
+	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	receivedByte = UDR1;
+	receivedDoubleWord |= ((uint32_t)receivedByte)<<24;		//fill the high byte
+	sendString("amhere0");
+	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	receivedByte = UDR1;
+	receivedDoubleWord |= (((uint32_t)receivedByte)<<16);		//fill the high byte
+	sendString("amhere1");
+	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	receivedByte = UDR1;
+	receivedDoubleWord |= (((uint32_t)receivedByte)<<8);		//fill the high byte
+	sendString("amhere2");
+	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	receivedByte = UDR1;
+	receivedDoubleWord |= receivedByte;			//fill the low byte
+	sendString("amhere3");
+	return receivedDoubleWord;
 }
 
 //Reads one 16-bit integer from USART
@@ -1023,6 +1100,59 @@ void changeVerRotDir(uint8_t dir){
 	}
 }
 
+void moveDevice(uint32_t receivedMoveData){
+	struct moveData myMoveData;
+	myMoveData.whichTimer =		(receivedMoveData >> 24);
+	myMoveData.onOff =			(receivedMoveData >> 16);
+	myMoveData.moveSpeed =		(receivedMoveData >> 8);
+	myMoveData.moveDirection =	receivedMoveData;			
+	switch (myMoveData.whichTimer){
+		case 1:
+		if(myMoveData.onOff == 0x01){
+			uint32_t CRC_value = calcMovementOCRnA(myMoveData.moveSpeed);
+					
+			if(myMoveData.moveDirection){
+				changeDistDir(1);
+			}else{
+				changeDistDir(0);
+			}
+			initDistTimer(CRC_value);
+		}else{
+			halt_Timer1_A();
+			curDist=0;
+		}
+		break;
+	case 2:
+		if(myMoveData.onOff == 0x01){
+			uint32_t CRC_value = calcMovementOCRnA(myMoveData.moveSpeed);
+			if(myMoveData.moveDirection){
+				changeHorRotDir(1);
+				}else{
+				changeHorRotDir(0);
+			}
+			initHorTimer(CRC_value);
+		}else{
+			halt_Timer3_A();
+			curHorDeg= 0;
+		}
+		break;
+	case 3:
+		if(myMoveData.onOff == 0x01){
+			uint32_t CRC_value = calcMovementOCR0A(myMoveData.moveSpeed);
+			if(myMoveData.moveDirection){
+				changeVerRotDir(1);
+			}else{
+				changeVerRotDir(0);
+			}
+			initVerTimer(CRC_value);
+		}else{
+			halt_timer0_A();
+			curVerDeg= 0;
+		}
+		break;
+	}
+}
+
 // current limit set, TIMER4 PWM
 // I_tripMax = V_ref/(8*R_s), R_s = 0.1 Ohm
 // 200 mA = V_ref/0.8 -> V_ref = 0.16V = 3.2% uptime -> OCR4D = 8
@@ -1126,10 +1256,10 @@ SIGNAL(TIMER1_COMPA_vect){
 			}else{
 				curDist --; 
 			}			
-			//sendString("\n\rCURDist: ");
-			//char curintdist55[10];
-			//sprintf(curintdist55, "%ld ", curDist);
-			//sendString(curintdist55);
+			sendString("\n\rCURDist: ");
+			char curintdist55[10];
+			sprintf(curintdist55, "%ld ", curDist);
+			sendString(curintdist55);
 		}
 	}else{
 		// step on that, man. not using preScalers, man
@@ -1143,12 +1273,12 @@ SIGNAL(TIMER1_COMPA_vect){
 		}
 	}
 	
-	//if(curDist%1000 == 0){
-		//sendString("\n\rCURDist: ");
-		//char curintdist[10];
-		//sprintf(curintdist, "%ld ", curDist);
-		//sendString(curintdist);
-	//}
+	if(curDist%1000 == 0){
+		sendString("\n\rCURDist: ");
+		char curintdist[10];
+		sprintf(curintdist, "%ld ", curDist);
+		sendString(curintdist);
+	}
 }
 
 // Middle (horizontal rotation) stepper
@@ -1172,10 +1302,10 @@ SIGNAL(TIMER3_COMPA_vect){
 			}else{
 			    curHorDeg --;
 		    }
-			//sendString("\n\rrCURHorDeg: ");
-			//char curintdist551[10];
-			//sprintf(curintdist551, "%ld ", curHorDeg);
-			//sendString(curintdist551);
+			sendString("\n\rrCURHorDeg: ");
+			char curintdist551[10];
+			sprintf(curintdist551, "%ld ", curHorDeg);
+			sendString(curintdist551);
 	    }
 	}else{
 	    // step on that, man. not using preScalers, man
@@ -1188,12 +1318,12 @@ SIGNAL(TIMER3_COMPA_vect){
 		    curHorDeg --;
 	    }
 		
-		//if(curHorDeg%1000 == 0){
-			//sendString("\n\rrCURHorDeg: ");
-			//char curintdist5513[10];
-			//sprintf(curintdist5513, "%ld ", curHorDeg);
-			//sendString(curintdist5513);
-		//}
+		if(curHorDeg%1000 == 0){
+			sendString("\n\rrCURHorDeg: ");
+			char curintdist5513[10];
+			sprintf(curintdist5513, "%ld ", curHorDeg);
+			sendString(curintdist5513);
+		}
     }
 }
 
@@ -1214,19 +1344,18 @@ SIGNAL(TIMER0_COMPA_vect){
 			}else{
 				curVerDeg --;
 			}
-			//if(curVerDeg%1000 == 0){
-				//sendString("\n\rCURVERDEG: ");
-				//char curintver[10];
-				//sprintf(curintver, "%ld ", curVerDeg);
-				//sendString(curintver);
-			//}
+			if(curVerDeg%1000 == 0){
+				sendString("\n\rCURVERDEG: ");
+				char curintver[10];
+				sprintf(curintver, "%ld ", curVerDeg);
+				sendString(curintver);
+			}
 			
 		}
 	}else{
 		// do the stepping action
 		//TEST WITH POWER SUPPLY
 		//PB5 = STEP2
-		//sendString(" VerStep ");
 		PORTB = PORTB^(1<<PB5);
 		PORTB = PORTB^(1<<PB5);
 		if(verDirFlag){
@@ -1236,20 +1365,20 @@ SIGNAL(TIMER0_COMPA_vect){
 		}
 	}
 	
-	//if(curVerDeg%100 == 0){
-		//sendString("\n\rCURVERDEG: ");
-		//char curintver[10];
-		//sprintf(curintver, "%ld ", curVerDeg);
-		//sendString(curintver);
-	//}
+	if(curVerDeg%1000 == 0){
+		sendString("\n\rCURVERDEG: ");
+		char curintver[10];
+		sprintf(curintver, "%ld ", curVerDeg);
+		sendString(curintver);
+	}
 }
 
 //Interrupt, got data from HC-06 module
 SIGNAL(USART1_RX_vect){
 	uint8_t firstByte = USARTgetLetter();
-	//sendLetter(firstByte);
+	sendLetter(firstByte);
 	uint8_t secondByte;
-	
+
 	if (firstByte == 'k'){	//gonna be receiving a keyFrame, aka four 16bit numbers		
 		keyframes[keyFrameReadPointer] = readKeyframe(2);	
 	}else if(firstByte == 's'){	//receiving some metadata (exactly which keyFrame is coming)
@@ -1258,6 +1387,10 @@ SIGNAL(USART1_RX_vect){
 	}else if(firstByte == 'z'){
 		sendString("\n\rStarting...");
 		startLapse();
+	}else if(firstByte == 'm'){ //gonna move initial position
+		uint32_t receivedMoveData = 0;
+		receivedMoveData = USARTgetDoubleWord();
+		moveDevice(receivedMoveData);	
 	}
 }
 
