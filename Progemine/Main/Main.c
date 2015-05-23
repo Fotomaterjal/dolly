@@ -28,8 +28,8 @@
 #define T1OCA_DIV 1
 #define MAX_KEYFRAMES 10
 #define DIST_WHEEL_CIRCUMFERENCE 4.8		// in centimeters
-#define STEPS_IN_ROTATION_DIV16 16457.143
-#define STEPS_IN_DEGREE_DIV16 45.714
+#define STEPS_IN_ROTATION_DIV16 16576.1
+#define STEPS_IN_DEGREE_DIV16 46.05
 #define TIMER_16BIT_ITERATIONS 65536UL
 #define TIMER_8BIT_ITERATIONS 256UL
 #define TIMER0_DIV 256
@@ -40,13 +40,13 @@
 void initDistTimer(uint32_t CTC_value);
 void changeDistDir(uint8_t dir);
 void halt_Timer1_A();				
-uint32_t calcOCR1A(uint32_t curTime, uint32_t curDist, uint16_t recDistance, uint16_t recTime);
+uint32_t calcOCR1A(int32_t curTime, int32_t curDist, uint16_t recDistance, uint16_t recTime);
 uint32_t calcReqDistSteps(uint16_t recDistance);
-uint8_t getDistDirection(uint32_t currentPosition, uint16_t futurePosition);
-//Define timer preScalers
-uint16_t distTimerPreSc = 0;
-uint16_t distTimerPreScCounter = 0;
-uint8_t distTimerPreScFlag = 0;
+uint8_t getDistDirection(int32_t currentPosition, uint16_t futurePosition);
+//Define timer additional counters
+uint16_t distTimerTOCounterMax = 0;
+uint16_t distTimerTOCounter = 0;
+uint8_t distTimerTOCounterFlag = 0;
 uint8_t distTimerActiveFlag = 0;
 //////////////////////////////////////////////////////////
 
@@ -55,68 +55,75 @@ uint8_t distTimerActiveFlag = 0;
 void initHorTimer(uint32_t CTC_value);
 void changeHorRotDir(uint8_t dir);
 void halt_Timer3_A();
-uint32_t calcOCR3A(uint32_t curTime, uint32_t curHorDeg, uint16_t recHorDeg, uint16_t recTime);
+uint32_t calcOCR3A(int32_t curTime, int32_t curHorDeg, uint16_t recHorDeg, uint16_t recTime);
 uint32_t calcReqHorSteps(uint16_t recHorDeg);
-uint8_t getHorDirection(uint32_t currentDegreeSteps, uint16_t futurePosition);
-//Define timer preScalers
-uint16_t horTimerPreSc = 0;
-uint16_t horTimerPreScCounter = 0;
-uint8_t horTimerPreScFlag = 0;
+uint8_t getHorDirection(int32_t currentDegreeSteps, uint16_t futurePosition);
+//Define timer additional counters
+uint16_t horTimerTOCounterMax = 0;
+uint16_t horTimerTOCounter = 0;
+uint8_t horTimerTOCounterFlag = 0;
 uint8_t horTimerActiveFlag = 0;
 /////////////////////////////////////////////////////////
-
 
 
 ///////////// Vertical rotation related /////////////////
 void initVerTimer(uint32_t CTC_value);
 void changeVerRotDir(uint8_t dir);
 void halt_timer0_A();
-uint32_t calcOCR0A(uint32_t curTime, uint32_t curVerDeg, uint16_t recVerDeg, uint16_t recTime);
+uint32_t calcOCR0A(int32_t curTime, int32_t curVerDeg, uint16_t recVerDeg, uint16_t recTime);
 uint32_t calcReqVerSteps(uint16_t recVerDeg);
-uint8_t getVerDirection(uint32_t currentDegreeSteps, uint16_t futurePosition);
-//Define timer preScalers
-uint16_t verTimerPreSc = 0;
-uint16_t verTimerPreScCounter = 0;
-uint8_t verTimerPreScFlag = 0;
+uint8_t getVerDirection(int32_t currentDegreeSteps, uint16_t futurePosition);
+//Define timer additional counters
+uint16_t verTimerTOCounterMax = 0;
+uint16_t verTimerTOCounter = 0;
+uint8_t verTimerTOCounterFlag = 0;
 uint8_t verTimerActiveFlag = 0;
 /////////////////////////////////////////////////////////
 
 
-void drive();
-void setCurrentLimiter_T4(int ocr_value);
+///////// Start position changing related //////////////
+uint32_t calcMovementOCRnA(uint8_t speedPercentage);
+uint32_t calcMovementOCR0A(uint8_t speedPercentage);
+void moveDevice(uint32_t receivedMoveData);
+////////////////////////////////////////////////////////
+
+
+/////////// UART stuff /////////////////////////////////
 void init_UART();
-void init_steppers();
-void rmCLKDIV8();
-void startLapse();
-void haltLapse();
-// USART functions
+uint16_t USARTgetWord();
+uint8_t USARTgetLetter();
+uint32_t USARTgetDoubleWord();
 void sendString(char name[]);
 void sendLetter(uint8_t letter);
 void sendWord(uint16_t word);
-struct keyFrame readKeyframe(uint8_t bits);
-uint16_t USARTgetWord();
-uint8_t USARTgetLetter();
-uint32_t calcMovementOCRnA(uint8_t speedPercentage);
-uint32_t calcMovementOCR0A(uint8_t speedPercentage);
-struct moveData readMoveData();
-uint32_t USARTgetDoubleWord();
-void moveDevice(uint32_t receivedMoveData);
-void receiveAllData();
+struct moveData readMoveData();	//// TODO: use this function instead of the other one maybe
+struct keyFrame readKeyframe();
+////////////////////////////////////////////////////////
 
+
+////////////////// Housekeeping ///////////////////////
+void setCurrentLimiter_T4(int ocr_value);
+void init_steppers();
+void rmCLKDIV8();
+///////////////////////////////////////////////////////
+
+
+//////////////////// Main workers /////////////////////
+void receiveAllData();
+void drive();
+void startLapse();
+void haltLapse();
+///////////////////////////////////////////////////////
 
 
 // Define global variables
-uint8_t keyFramePointer = 0;
-uint8_t keyFrameReadPointer = 0;
-uint8_t curKeyFramePointer = 0;
-uint8_t sendPointer = 0;
-uint8_t startedFlag = 0;
-uint8_t timer0PreScFlag = 0;
+uint8_t keyFrameReadIndex = 0;
+uint8_t curKeyFrameIndex = 0;
 
-uint32_t curDist = 0;
-uint32_t curHorDeg = 0;
-uint32_t curVerDeg = 0;
-uint32_t curTime = 0;
+int32_t curDist = 0;
+int32_t curHorDeg = 0;
+int32_t curVerDeg = 0;
+int32_t curTime = 0;
 
 uint8_t distDirFlag = 1;
 uint8_t horDirFlag = 1;
@@ -149,34 +156,27 @@ int main(void){
 	int led = 0x20;
 	DDRD |= led;	
 	////////////// Initialize Stepper CurrentLimit & DDRs //////
-	cli();	// cancel all interrupts
-	// !!!TEST WITH POWER SUPPLY!!! //
-	setCurrentLimiter_T4(10);	// 8 = 3,2% duty cycle (I_tripMax = V_ref/0.8)
+	cli();						// cancel all interrupts
+	setCurrentLimiter_T4(20);	// 8 = 3,2% duty cycle (I_tripMax = V_ref/0.8)
 	init_steppers();			// PORT & DDR stuff for step and direction
-	sei();	// allow interrupts	
+	sei();						// allow interrupts	
 	////////////// UART testing //////////////////////////
-	init_UART();		// settings and RX TX enable stuff
+	init_UART();				// settings and RX TX enable stuff
 	///////////// Main loop //////////////////////////////	
 	while(1){
-		receiveAllData();
-		drive();				
+		receiveAllData();		// halt till all data is received from phone
+		drive();				// start the sequence
     }	
 }
 
 
 void startLapse(){
-	cli();
-	//startedFlag = 0x01;
-	//startedFlag = 0x01;	
+	cli();	
 	// initialize all steppers
-	OCR1A_value = calcOCR1A(curTime, curDist, keyframes[curKeyFramePointer].distance, keyframes[curKeyFramePointer].timeStamp);
-	OCR3A_value = calcOCR3A(curTime, curHorDeg, keyframes[curKeyFramePointer].horDeg, keyframes[curKeyFramePointer].timeStamp);
-	OCR0A_value = calcOCR0A(curTime, curVerDeg, keyframes[curKeyFramePointer].vertDeg, keyframes[curKeyFramePointer].timeStamp);
-	
-	//sei();
-	
-	
-	
+	OCR1A_value = calcOCR1A(curTime, curDist, keyframes[curKeyFrameIndex].distance, keyframes[curKeyFrameIndex].timeStamp);
+	OCR3A_value = calcOCR3A(curTime, curHorDeg, keyframes[curKeyFrameIndex].horDeg, keyframes[curKeyFrameIndex].timeStamp);
+	OCR0A_value = calcOCR0A(curTime, curVerDeg, keyframes[curKeyFrameIndex].vertDeg, keyframes[curKeyFrameIndex].timeStamp);
+
 	
 	sendString("\n\rOCR1A:");
 	char curOCR1A[10];
@@ -193,14 +193,19 @@ void startLapse(){
 	sprintf(curOCR1C, "%ld", OCR0A_value);
 	sendString(curOCR1C);
 	
-	//sendString("\n\rTIMSK1:");
-	//char curOCR1C2[10];
-	//sprintf(curOCR1C2, "%d", TIMSK1);
-	//sendString(curOCR1C2);
+	distDirFlag = 1;
+	horDirFlag = 1;
+	verDirFlag = 1;
+	
+	changeDistDir(1);
+	changeHorRotDir(1);
+	changeVerRotDir(1);
+	
 	
 	initDistTimer(OCR1A_value);
 	initHorTimer(OCR3A_value);
 	initVerTimer(OCR0A_value);
+	
 	sei();
 	/*
 	sendString("\n\rcurTime:");
@@ -236,7 +241,7 @@ void startLapse(){
 	
 	sendString("\n\rverTimerPreSc:");
 	char curVerdegs1[10];
-	sprintf(curVerdegs1, "%d", verTimerPreSc);
+	sprintf(curVerdegs1, "%d", verTimerTOCounterMax);
 	sendString(curVerdegs1);
 	
 	sendString("\n\rOCR0A:");
@@ -244,14 +249,14 @@ void startLapse(){
 	sprintf(curOCR1C, "%d", OCR0A);
 	sendString(curOCR1C);
 	
-	sendString("\n\rB is curKeyFramePointer: ");
+	sendString("\n\rB is curKeyFrameIndex: ");
 	char bact[10];
-	sprintf(bact, "%d ", curKeyFramePointer);
+	sprintf(bact, "%d ", curKeyFrameIndex);
 	sendString(bact);
 	
-	sendString("\n\rB is curKeyFramePointer: ");
+	sendString("\n\rB is curKeyFrameIndex: ");
 	char bacta[10];
-	sprintf(bacta, "%d ", keyFrameReadPointer);
+	sprintf(bacta, "%d ", keyFrameReadIndex);
 	sendString(bacta);
 	
 	sei();*/
@@ -279,12 +284,10 @@ void startLapse(){
 	//char curOCR1C3[10];
 	//sprintf(curOCR1C3, "%d", SREG);
 	//sendString(curOCR1C3);
-	//startedFlag = 0x01;
-	
 }
 
 void haltLapse(){
-	//cli();
+	cli();
 	sendString("\n\rcurTime:");
 	char curTimes[10];
 	sprintf(curTimes, "%ld", curTime);
@@ -305,52 +308,62 @@ void haltLapse(){
 	sprintf(curVerdegs, "%ld", curVerDeg);
 	sendString(curVerdegs);
 	
+	sei();
+	
 	/*char dist[10];
-	sprintf(dist, "%d", keyframes[curKeyFramePointer].distance);
+	sprintf(dist, "%d", keyframes[curKeyFrameIndex].distance);
 	sendString("\n\rStart!!!!!!!!!!!!!!!!!!!!!!!!");
 	sendString("\n\rKFDist: ");
 	sendString(dist);
 	
 	sendString("\n\rKFHorDeg:");
 	char horDeg[10];
-	sprintf(horDeg, "%d", keyframes[curKeyFramePointer].horDeg);
+	sprintf(horDeg, "%d", keyframes[curKeyFrameIndex].horDeg);
 	sendString(horDeg);
 	
 	sendString("\n\rKFVerDeg:");
 	char verDeg[10];
-	sprintf(verDeg, "%d", keyframes[curKeyFramePointer].vertDeg);
+	sprintf(verDeg, "%d", keyframes[curKeyFrameIndex].vertDeg);
 	sendString(verDeg);
 	
 	sendString("\n\rKFTime:");
 	char time[10];
-	sprintf(time, "%d", keyframes[curKeyFramePointer].timeStamp);
+	sprintf(time, "%d", keyframes[curKeyFrameIndex].timeStamp);
 	sendString(time);
 	sei();*/
 	//cli();
-	startedFlag = 0x00;
-	curKeyFramePointer = 0;
-	keyFrameReadPointer = 0;
+	
+	halt_Timer1_A();
+	halt_Timer3_A();
+	halt_timer0_A();
+	
+	curKeyFrameIndex = 0;
+	keyFrameReadIndex = 0;
 	curDist = 0;
 	curHorDeg = 0;
 	curVerDeg = 0;
-	distTimerPreSc = 0;
-	distTimerPreScCounter = 0;
-	distTimerPreScFlag = 0;
+	curTime = 0;
+	
+	distTimerTOCounterMax = 0;
+	distTimerTOCounter = 0;
+	distTimerTOCounterFlag = 0;
+	distDirFlag = 1;
+	
+	horTimerTOCounterMax = 0;
+	horTimerTOCounter = 0;
+	horTimerTOCounterFlag = 0;
+	horDirFlag = 1;
+	
+	verTimerTOCounterMax = 0;
+	verTimerTOCounter = 0;
+	verTimerActiveFlag = 0;
+	verDirFlag = 1;
 	for(int i = 0; i < MAX_KEYFRAMES; i++){
 		keyframes[i].distance = 0;
 		keyframes[i].horDeg = 0;
 		keyframes[i].vertDeg = 0;
 		keyframes[i].timeStamp = 0;
-	}	
-	halt_Timer1_A();	//dist
-	halt_Timer3_A();	//hor deg
-	halt_timer0_A();
-	//halt_Timer1_C();
-	//sei();
-	//sendString("\n\rTIMELAPSE OVER, BYEBYE");
-	
-	//print out mcu data
-	
+	}
 }
 
 void receiveAllData(){
@@ -361,12 +374,10 @@ void receiveAllData(){
 		uint8_t secondByte;
 		
 		if (firstByte == 'k'){	//gonna be receiving a keyFrame, aka four 16bit numbers
-			//PORTD = PORTD^(1<<PD5);	// invert LED value	
-			keyframes[keyFrameReadPointer] = readKeyframe(2);
+			keyframes[keyFrameReadIndex] = readKeyframe();
 		}else if(firstByte == 's'){	//receiving some metadata (exactly which keyFrame is coming)
 			secondByte = USARTgetLetter();
-			keyFrameReadPointer = secondByte;
-			//PORTD = PORTD^(1<<PD5);	// invert LED value	
+			keyFrameReadIndex = secondByte;
 		}else if(firstByte == 'm'){ //gonna move initial position
 			uint32_t receivedMoveData = 0;
 			receivedMoveData = USARTgetDoubleWord();
@@ -377,18 +388,18 @@ void receiveAllData(){
 }
 
 uint32_t calcReqDistSteps(uint16_t recDistance){
-	float reqRotations = (float)recDistance/DIST_WHEEL_CIRCUMFERENCE;
-	uint32_t neededSteps = (uint32_t) abs(reqRotations*STEPS_IN_ROTATION_DIV16);
+	double reqRotations = (double)recDistance/(double)DIST_WHEEL_CIRCUMFERENCE;
+	uint32_t neededSteps = (uint32_t) ((double)reqRotations*(double)STEPS_IN_ROTATION_DIV16);
 	return neededSteps;
 }
 
 uint32_t calcReqHorSteps(uint16_t recHorDeg){
-	uint32_t neededSteps = (uint32_t) abs((float)recHorDeg * (float)STEPS_IN_DEGREE_DIV16);
+	uint32_t neededSteps = (uint32_t) ((double)recHorDeg * (double)STEPS_IN_DEGREE_DIV16);
 	return neededSteps;
 }
 
 uint32_t calcReqVerSteps(uint16_t recVerDeg){
-	uint32_t neededSteps = (uint32_t) abs((float)recVerDeg * (float)STEPS_IN_DEGREE_DIV16);
+	uint32_t neededSteps = (uint32_t) ((double)recVerDeg * (double)STEPS_IN_DEGREE_DIV16);
 	return neededSteps;
 }
 
@@ -415,14 +426,55 @@ uint32_t calcMovementOCR0A(uint8_t speedPercentage){
 //calculates needed OCR1A value to travel needed distance in given time
 //linear horizontal movement
 //recDistance given in centimeters, recTime in seconds
-uint32_t calcOCR1A(uint32_t curTime, uint32_t curDist, uint16_t recDistance, uint16_t recTime){
+uint32_t calcOCR1A(int32_t curTime, int32_t curDist, uint16_t recDistance, uint16_t recTime){
     // convert centimeters to steps
-	float reqRotationsSinceStart = ((float) recDistance)/((float) DIST_WHEEL_CIRCUMFERENCE);
-    long neededStepsSinceStart = (long) (reqRotationsSinceStart*STEPS_IN_ROTATION_DIV16);
+	double reqRotationsSinceStart = ((double) recDistance)/((double) DIST_WHEEL_CIRCUMFERENCE);
+    uint32_t neededStepsSinceStart = (uint32_t) (reqRotationsSinceStart*STEPS_IN_ROTATION_DIV16);
      
     uint16_t givenTime = abs(recTime-(uint16_t)curTime);
-    float wantedStepFreq = (float) (abs(curDist - neededStepsSinceStart))/(float) givenTime;	
-    uint32_t result = (uint32_t) ((((float) F_CPU)/ ((float) T1OCA_DIV))/wantedStepFreq);
+	uint32_t neededSteps;	
+	if(curDist > (int32_t)neededStepsSinceStart){
+		neededSteps = (uint32_t) (curDist- (int32_t)neededStepsSinceStart);
+	}else{
+		neededSteps = (uint32_t) ((int32_t) neededStepsSinceStart - curDist);
+	}
+	double wantedStepFreq = (double) ((double) neededSteps)/(double) givenTime;	
+	
+	//neededSteps = (uint32_t) abs((int32_t)curDist - (int32_t)neededStepsSinceStart);
+    uint32_t result = (uint32_t) ((((double) F_CPU)/ ((double) T1OCA_DIV))/wantedStepFreq);
+	
+	
+		//sendString("\n\rNeedeSteps:");
+		//char curocr1c2[10];
+		//sprintf(curocr1c2, "%ld", neededStepsSinceStart);
+		//sendString(curocr1c2);
+		//
+		//sendString("\n\rCurDist:");
+		//char curocr1c23[10];
+		//sprintf(curocr1c23, "%ld", curDist);
+		//sendString(curocr1c23);
+		//
+		//sendString("\n\rNeedeD!:");
+		//char curocr1c2311[10];
+		//sprintf(curocr1c2311, "%ld", neededSteps);
+		//sendString(curocr1c2311);
+		//
+		//sendString("\n\rGivenTime:");
+		//char curocr1c234[10];
+		//sprintf(curocr1c234, "%d", givenTime);
+		//sendString(curocr1c234);
+		//
+		//sendString("\n\rResult:");
+		//char curocr1c22[10];
+		//sprintf(curocr1c22, "%ld", result);
+		//sendString(curocr1c22);
+		//
+		//sendString("\n\rWantedStepFreq:");
+		//char curocr1c42[10];
+		//sprintf(curocr1c42, "%ld", (uint32_t)wantedStepFreq);
+		//sendString(curocr1c42);
+	
+	
     if(result >= 0xFFFFFFFF || result == 0x00000000){
         return 0xFFFFFFFF;
     }else{
@@ -433,14 +485,22 @@ uint32_t calcOCR1A(uint32_t curTime, uint32_t curDist, uint16_t recDistance, uin
 //calculates needed OCR1B value to travel needed rotation in given time
 //horizontal rotational movement
 //recHorDeg given in steps, recTime in seconds
-uint32_t calcOCR3A(uint32_t curTime, uint32_t curHorDeg, uint16_t recHorDeg, uint16_t recTime){
+uint32_t calcOCR3A(int32_t curTime, int32_t curHorDeg, uint16_t recHorDeg, uint16_t recTime){
 	//convert degrees to steps
-	float stepsSinceStart = (float)recHorDeg * (float)STEPS_IN_DEGREE_DIV16;
-	uint32_t neededHorSteps = abs((uint32_t)stepsSinceStart - (uint32_t)curHorDeg);
+	double stepsSinceStart = (double)recHorDeg * (double)STEPS_IN_DEGREE_DIV16;
+	//uint32_t neededHorSteps = (int32_t)stepsSinceStart - (int32_t)curHorDeg);
+	
 	
 	uint16_t givenTime = (recTime-(uint16_t)curTime);
-	float wantedStepFreq = (float)neededHorSteps / (float)givenTime;
-	uint32_t result = (uint32_t) ((((float) F_CPU)/ ((float) T1OCA_DIV))/wantedStepFreq);
+	uint32_t neededSteps;
+	if(curHorDeg > (int32_t) stepsSinceStart){
+		neededSteps = (curHorDeg - (int32_t)stepsSinceStart);
+	}else{
+		neededSteps = (uint32_t) ((int32_t) stepsSinceStart - curHorDeg);
+	}
+	
+	double wantedStepFreq = (double) ((double)neededSteps / (double)givenTime);
+	uint32_t result = (uint32_t) ((((double) F_CPU)/ ((double) T1OCA_DIV))/wantedStepFreq);
 	if(result >= 0xFFFFFFFF || result == 0x00000000){
 		return 0xFFFFFFFF;
 	}else{
@@ -451,14 +511,30 @@ uint32_t calcOCR3A(uint32_t curTime, uint32_t curHorDeg, uint16_t recHorDeg, uin
 //calculates needed OCR1C value to travel needed rotation in given time
 //vertical rotational movement
 //recVerDeg given in steps, recTime in seconds
-uint32_t calcOCR0A(uint32_t curTime, uint32_t curVerDeg, uint16_t recVerDeg, uint16_t recTime){
+uint32_t calcOCR0A(int32_t curTime, int32_t curVerDeg, uint16_t recVerDeg, uint16_t recTime){
 	//convert degrees to steps
-	float stepsSinceStart = (float)recVerDeg * (float)STEPS_IN_DEGREE_DIV16;
-	uint32_t neededVerSteps = (uint32_t) abs((long)stepsSinceStart - curVerDeg);
+	double stepsSinceStart = (double)recVerDeg * (double)STEPS_IN_DEGREE_DIV16;
+	//uint32_t neededVerSteps = (uint32_t) abs((int32_t)stepsSinceStart - (int32_t)curVerDeg);
+	
+	
 		
 	uint16_t givenTime = (recTime-(uint16_t)curTime);
-	float wantedStepFreq = (float)neededVerSteps / (float)givenTime;
+	uint32_t neededSteps;
+	if(curVerDeg > (int32_t) stepsSinceStart){
+		neededSteps = (uint32_t) (curVerDeg - (int32_t) stepsSinceStart);
+	}else{
+		neededSteps = (uint32_t) ((int32_t) stepsSinceStart - curVerDeg);
+	}
+	
+	double wantedStepFreq = (double) ((double)neededSteps / (double)givenTime);
 	uint32_t result = (uint32_t) roundf(((((float) F_CPU)/ ((float) TIMER0_DIV))/wantedStepFreq));
+	
+
+	
+	
+	
+	
+	
 	if(result >= 0xFFFFFFFF || result == 0x00000000){
 		return 0xFFFFFFFF;
 	}else{
@@ -467,7 +543,7 @@ uint32_t calcOCR0A(uint32_t curTime, uint32_t curVerDeg, uint16_t recVerDeg, uin
 }
 
 //Reads four 16-bit integers into keyframes[]
-struct keyFrame readKeyframe(uint8_t bytes){
+struct keyFrame readKeyframe(){
 	struct keyFrame receivedKeyframe;
 	for(int i=0; i<4; i++){	
 		switch(i){
@@ -535,32 +611,28 @@ uint32_t USARTgetDoubleWord(){
 //Reads one 16-bit integer from USART
 uint16_t USARTgetWord(){
 	uint8_t receivedByte;
-	uint16_t receivedWord = 0;		//initialize variable	
+	uint16_t receivedWord = 0;			//initialize variable	
 
-	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	while(!(UCSR1A & (1<<RXC1)));		//while receive not complete
 	receivedByte = UDR1;
-	receivedWord = (receivedByte<<8);		//fill the high byte	
-	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	receivedWord = (receivedByte<<8);	//fill the high byte	
+	while(!(UCSR1A & (1<<RXC1)));		//while receive not complete
 	receivedByte = UDR1;
-	receivedWord |= receivedByte;			//fill the low byte
+	receivedWord |= receivedByte;		//fill the low byte
 	return receivedWord;
 }
 
 //Reads one byte from USART
 uint8_t USARTgetLetter(){
 	uint8_t receivedByte;
-	while(!(UCSR1A & (1<<RXC1)));	//while receive not complete
+	while(!(UCSR1A & (1<<RXC1)));		//while receive not complete
 	receivedByte = UDR1;
 	return receivedByte;
 }
 
 void initDistTimer(uint32_t CTC_value){
-	//sendString("initdisttimer");
-	//sendString("\n\rCTC_value: ");
-	//char curintver332[10];
-	//sprintf(curintver332, "%ld ", CTC_value);
-	//sendString(curintver332);
-    TCNT1 = 0x0000;
+	
+	TCNT1 = 0x0000;
     TCCR1A = 0x00;
     // setting CPU clock, no preScalers
 	// enable CTC
@@ -568,75 +640,78 @@ void initDistTimer(uint32_t CTC_value){
 	
 	if(CTC_value == 0xFFFFFFFF){
 		halt_Timer1_A();
-		//sendString("AM HERE1");
-		//sendString("\n\rCTCValue: ");
-		//char curintdist[10];
-		//sprintf(curintdist, "%d ", (int)CTC_value);
-		//sendString(curintdist);
 	}else if(CTC_value > 0xFFFF){
-		distTimerPreScFlag = 1;
-		distTimerPreScCounter = 0;
+		distTimerTOCounterFlag = 1;
+		distTimerTOCounter = 0;
 		
-		distTimerPreSc = (uint16_t) ceil((float)CTC_value / (float)TIMER_16BIT_ITERATIONS);
-		uint16_t tooMuch = (uint16_t) abs((distTimerPreSc*TIMER_16BIT_ITERATIONS) - CTC_value);
-		uint16_t toSubtract = tooMuch / distTimerPreSc;	// rounding could improve accuracy	
+		distTimerTOCounterMax = (uint16_t) ceil((float)CTC_value / (float)TIMER_16BIT_ITERATIONS);
+		uint16_t tooMuch = (uint16_t) abs((distTimerTOCounterMax*TIMER_16BIT_ITERATIONS) - CTC_value);
+		uint16_t toSubtract = tooMuch / distTimerTOCounterMax;	// rounding could improve accuracy	
 		OCR1A = 65535-toSubtract;	
-			
-		// enable Timer Overflow Interrupt for COMPA
+		// enable Timer Compare Match Interrupt for COMPA
         TIMSK1 |= (1<<OCIE1A);
 		distTimerActiveFlag = 1;
-		//sendString("AM HERE2");	
 	}else{
-		distTimerPreScFlag = 0;
+		distTimerTOCounterFlag = 0;
         OCR1A = CTC_value & 0xFFFF;
-		// enable Timer Overflow Interrupt for COMPA
+		// enable Timer Compare Match Interrupt for COMPA
         TIMSK1 |= (1<<OCIE1A);
 		distTimerActiveFlag = 1;
-		//sendString("AM HERE3");
 	}
+	//sendString("\n\rOCR1A:");
+	//char curOCR1A[10];
+	//sprintf(curOCR1A, "%d", OCR1A);
+	//sendString(curOCR1A);
+	//sendString("\n\rCurDist:");
+	//char curocr1c2[10];
+	//sprintf(curocr1c2, "%ld", curDist);
+	//sendString(curocr1c2);
 }
 
 void initHorTimer(uint32_t CTC_value){
-	//sendString("inithortimer");
-	//sendString("\n\rCTC_value: ");
-	//char curintver332[10];
-	//sprintf(curintver332, "%ld ", CTC_value);
-	//sendString(curintver332);
-		TCNT3 = 0x0000;
-		TCCR3A = 0x00;
-		// setting CPU clock, no preScalers
-		// enable CTC
-		TCCR3B = (1<<CS30 | 1<<WGM32);
+	
+	//
+	
+	//
+
+	TCNT3 = 0x0000;
+	TCCR3A = 0x00;
+	// setting CPU clock, no preScalers
+	// enable CTC
+	TCCR3B = (1<<CS30 | 1<<WGM32);
 		
-		if(CTC_value == 0xFFFFFFFF){
-			halt_Timer3_A();
-		}else if(CTC_value > 0xFFFF){
-			horTimerPreScFlag = 1;
-			horTimerPreScCounter = 0;
-			// calculate so interrupts will not be very often, but precise enough
-			horTimerPreSc = (uint16_t) ceil((float)CTC_value / (float)TIMER_16BIT_ITERATIONS);
-			uint16_t tooMuch = (uint16_t) abs(((uint32_t)horTimerPreSc*TIMER_16BIT_ITERATIONS) - CTC_value);
-			uint16_t toSubtract = tooMuch / horTimerPreSc;	// rounding could improve accuracy
-			OCR3A = 65535-toSubtract;
+	if(CTC_value == 0xFFFFFFFF){
+		halt_Timer3_A();
+	}else if(CTC_value > 0xFFFF){
+		horTimerTOCounterFlag = 1;
+		horTimerTOCounter = 0;
+		// calculate so interrupts will not be very often, but precise enough
+		horTimerTOCounterMax = (uint16_t) ceil((float)CTC_value / (float)TIMER_16BIT_ITERATIONS);
+		uint16_t tooMuch = (uint16_t) abs(((uint32_t)horTimerTOCounterMax*TIMER_16BIT_ITERATIONS) - CTC_value);
+		uint16_t toSubtract = tooMuch / horTimerTOCounterMax;	// rounding could improve accuracy
+		OCR3A = 65535-toSubtract;
 			
-			TIMSK3 |= (1<<OCIE3A);
-			horTimerActiveFlag = 1;
-		}else{
-			horTimerPreScFlag = 0;
-			OCR3A = CTC_value & 0xFFFF;
-			// enable Timer CTC Interrupt for COMPA
-			TIMSK3 |= (1<<OCIE3A);
-			horTimerActiveFlag = 1;
-		}
+		TIMSK3 |= (1<<OCIE3A);
+		horTimerActiveFlag = 1;
+	}else{
+		horTimerTOCounterFlag = 0;
+		OCR3A = CTC_value & 0xFFFF;
+		// enable Timer CTC Interrupt for COMPA
+		TIMSK3 |= (1<<OCIE3A);
+		horTimerActiveFlag = 1;
+	}
+	//sendString("\n\rOCR3C:");
+	//char curOCR1B[10];
+	//sprintf(curOCR1B, "%d", OCR3A);
+	//sendString(curOCR1B);
+	//sendString("\n\rCurHorDeg:");
+	//char curocr1c2[10];
+	//sprintf(curocr1c2, "%ld", curHorDeg);
+	//sendString(curocr1c2);
 }
 
 void initVerTimer(uint32_t CTC_value){
 	// set CPU clock/256
-	//sendString("initvertimer");
-	//sendString("\n\rCTC_value: ");
-	//char curintver332[10];
-	//sprintf(curintver332, "%ld ", CTC_value);
-	//sendString(curintver332);
 	TCNT0 = 0;
 	TCCR0B |= 1<<CS02;
 	//set to CTC mode
@@ -644,40 +719,32 @@ void initVerTimer(uint32_t CTC_value){
 	if(CTC_value == 0xFFFFFFFF){
 		halt_timer0_A();
 	}else if(CTC_value > (uint32_t)0xFF){
-		verTimerPreScFlag = 1;
-		verTimerPreScCounter = 0;		
+		verTimerTOCounterFlag = 1;
+		verTimerTOCounter = 0;		
 		
-		verTimerPreSc = (uint16_t) ceil((float)CTC_value / (float)TIMER_8BIT_ITERATIONS);
-		uint16_t tooMuch = (uint16_t) abs(((uint32_t)verTimerPreSc*TIMER_8BIT_ITERATIONS) - CTC_value);
-		uint8_t toSubtract = tooMuch / verTimerPreSc;	// rounding could improve accuracy
+		verTimerTOCounterMax = (uint16_t) ceil((float)CTC_value / (float)TIMER_8BIT_ITERATIONS);
+		uint16_t tooMuch = (uint16_t) abs(((uint32_t)verTimerTOCounterMax*TIMER_8BIT_ITERATIONS) - CTC_value);
+		uint8_t toSubtract = tooMuch / verTimerTOCounterMax;	// rounding could improve accuracy
 		OCR0A = 255-toSubtract;
 		
 		//allow CTC interrupt
 		TIMSK0 |= (1<<OCIE0A);
 		verTimerActiveFlag = 1;
 	}else{
-		verTimerPreScFlag = 0;
+		verTimerTOCounterFlag = 0;
 		OCR0A = CTC_value & 0xFF;
 		//allow CTC interrupt
 		TIMSK0 |= (1<<OCIE0A);
 		verTimerActiveFlag = 1;
 	}
-	/*cli();
-	sendString("\n\rCURVERDEG: ");
-	char curintver[10];
-	sprintf(curintver, "%ld ", curVerDeg);
-	sendString(curintver);
-	
-	sendString("\n\rOCR0A: ");
-	char curintver33[10];
-	sprintf(curintver33, "%d ", OCR0A);
-	sendString(curintver33);
-	
-	sendString("\n\rCTC_value: ");
-	char curintver332[10];
-	sprintf(curintver332, "%ld ", CTC_value);
-	sendString(curintver332);
-	sei();*/
+	//sendString("\n\rocr0a:");
+	//char curocr1c[10];
+	//sprintf(curocr1c, "%d", OCR0A);
+	//sendString(curocr1c);
+	//sendString("\n\rCurVerDeg:");
+	//char curocr1c2[10];
+	//sprintf(curocr1c2, "%ld", curVerDeg);
+	//sendString(curocr1c2);
 }
 
 
@@ -697,15 +764,16 @@ void halt_Timer3_A(){
 
 void halt_timer0_A(){
 	TIMSK0 &= ~(1<<OCIE0A);
+	verTimerActiveFlag = 0;
 	TCNT0 = 0;
 }
 
 
 
-uint8_t getDistDirection(uint32_t currentPosition, uint16_t futurePosition){
-	float reqRotationsSinceStart = ((float)futurePosition/DIST_WHEEL_CIRCUMFERENCE);
-    uint32_t neededStepsSinceStart = (uint32_t) abs(reqRotationsSinceStart*16457.143);
-    if(neededStepsSinceStart < currentPosition){
+uint8_t getDistDirection(int32_t currentPosition, uint16_t futurePosition){
+	double reqRotationsSinceStart = ((double)futurePosition/(double)DIST_WHEEL_CIRCUMFERENCE);
+    uint32_t neededStepsSinceStart = (uint32_t) ((double)reqRotationsSinceStart*16457.143);
+    if((int32_t) neededStepsSinceStart < currentPosition){
         return 0x00;    //moving backwards
     }else{
         return 0x01;    //moving forward
@@ -713,18 +781,18 @@ uint8_t getDistDirection(uint32_t currentPosition, uint16_t futurePosition){
 }
 
 
-uint8_t getHorDirection(uint32_t currentDegreeSteps, uint16_t futurePosition){
-	uint32_t neededStepsSinceStart = (uint32_t) abs((float)futurePosition * (float)STEPS_IN_DEGREE_DIV16);
-	if(neededStepsSinceStart < currentDegreeSteps){
+uint8_t getHorDirection(int32_t currentDegreeSteps, uint16_t futurePosition){
+	uint32_t neededStepsSinceStart = (uint32_t) ((float)futurePosition * (float)STEPS_IN_DEGREE_DIV16);
+	if((int32_t) neededStepsSinceStart < currentDegreeSteps){
 		return 0x00;    //moving backwards
 	}else{
 		return 0x01;    //moving forward
 	}
 }
 
-uint8_t getVerDirection(uint32_t currentDegreeSteps, uint16_t futurePosition){
+uint8_t getVerDirection(int32_t currentDegreeSteps, uint16_t futurePosition){
 	uint32_t neededStepsSinceStart = (uint32_t) abs((float)futurePosition * (float)STEPS_IN_DEGREE_DIV16);
-	if(neededStepsSinceStart < currentDegreeSteps){
+	if((int32_t) neededStepsSinceStart < currentDegreeSteps){
 		return 0x00;    //moving backwards
 	}else{
 		return 0x01;    //moving forward
@@ -760,10 +828,12 @@ void changeVerRotDir(uint8_t dir){
 	if(dir){
 		// Change upper stepper DIR to FORWARD movement
 		PORTB |= (1 << PB4);
+		//PORTB &= ~(1 << PB4);
 		verDirFlag = 1;
 	}else{
 		// Change upper stepper DIR to BACKWARDS movement
 		PORTB &= ~(1 << PB4);
+		//PORTB |= (1 << PB4);
 		verDirFlag = 0;
 	}
 }
@@ -777,8 +847,7 @@ void moveDevice(uint32_t receivedMoveData){
 	switch (myMoveData.whichTimer){
 		case 1:
 		if(myMoveData.onOff == 0x01){
-			uint32_t CRC_value = calcMovementOCRnA(myMoveData.moveSpeed);
-					
+			uint32_t CRC_value = calcMovementOCRnA(myMoveData.moveSpeed);					
 			if(myMoveData.moveDirection){
 				changeDistDir(1);
 			}else{
@@ -787,6 +856,7 @@ void moveDevice(uint32_t receivedMoveData){
 			initDistTimer(CRC_value);
 		}else{
 			halt_Timer1_A();
+			distDirFlag = 1;
 			curDist=0;
 		}
 		break;
@@ -795,12 +865,13 @@ void moveDevice(uint32_t receivedMoveData){
 			uint32_t CRC_value = calcMovementOCRnA(myMoveData.moveSpeed);
 			if(myMoveData.moveDirection){
 				changeHorRotDir(1);
-				}else{
+			}else{
 				changeHorRotDir(0);
 			}
 			initHorTimer(CRC_value);
 		}else{
 			halt_Timer3_A();
+			horDirFlag = 1;
 			curHorDeg= 0;
 		}
 		break;
@@ -815,6 +886,7 @@ void moveDevice(uint32_t receivedMoveData){
 			initVerTimer(CRC_value);
 		}else{
 			halt_timer0_A();
+			verDirFlag = 1;
 			curVerDeg= 0;
 		}
 		break;
@@ -829,7 +901,7 @@ void setCurrentLimiter_T4(int ocr_value){
 	OCR4D = ocr_value;					// set count limit
 	TCCR4C |= (1<<COM4D1)|(1<<PWM4D);	// set fast PWM mode - clear on CM, enable PWM @ OCR4D
 	TCCR4B |= (1<<CS40);				// set CPU clock for timer clock
-	TCNT4 = 0x000;						// init count
+	TCNT4 = 0x000;						// initialize count
 }
 
 //Initialize USART
@@ -884,41 +956,67 @@ void drive(){
 	startLapse();
 	
 	while(1){
-		if(curKeyFramePointer <= keyFrameReadPointer){
+			//if(curDist%1000 == 0){
+				//sendString("\n\rCURDist: ");
+				//char curintdist[10];
+				//sprintf(curintdist, "%ld ", curDist);
+				//sendString(curintdist);
+			//}
+			
+			//if(curHorDeg%1000 == 0){
+				//sendString("\n\rrCURHorDeg: ");
+				//char curintdist5513[10];
+				//sprintf(curintdist5513, "%ld ", curHorDeg);
+				//sendString(curintdist5513);
+			//}
+			
+			if(curVerDeg%1000 == 0){
+				sendString("\n\rCURVERDEG: ");
+				char curintver[10];
+				sprintf(curintver, "%ld ", curVerDeg);
+				sendString(curintver);
+			}
+			
+			
+		if(curKeyFrameIndex <= keyFrameReadIndex){
 			// we are not out of keyframes yet
-			if(((curDist > calcReqDistSteps(keyframes[curKeyFramePointer].distance)
+			if(((curDist > (int32_t) calcReqDistSteps(keyframes[curKeyFrameIndex].distance)
 				&& distTimerActiveFlag && distDirFlag) ||
-				(curDist < calcReqDistSteps(keyframes[curKeyFramePointer].distance)
+				(curDist < (int32_t) calcReqDistSteps(keyframes[curKeyFrameIndex].distance)
 				&& distTimerActiveFlag && !distDirFlag)) ||
-				((curHorDeg > calcReqHorSteps(keyframes[curKeyFramePointer].horDeg)
+				((curHorDeg > (int32_t) calcReqHorSteps(keyframes[curKeyFrameIndex].horDeg)
 				&& horTimerActiveFlag && horDirFlag) ||
-				(curHorDeg < calcReqHorSteps(keyframes[curKeyFramePointer].horDeg)
+				(curHorDeg < (int32_t) calcReqHorSteps(keyframes[curKeyFrameIndex].horDeg)
 				&& horTimerActiveFlag && !horDirFlag)) ||
-				((curVerDeg > calcReqVerSteps(keyframes[curKeyFramePointer].vertDeg)
+				((curVerDeg > (int32_t) calcReqVerSteps(keyframes[curKeyFrameIndex].vertDeg)
 				&& verTimerActiveFlag && verDirFlag) ||
-				(curVerDeg < calcReqVerSteps(keyframes[curKeyFramePointer].vertDeg)
+				(curVerDeg < (int32_t) calcReqVerSteps(keyframes[curKeyFrameIndex].vertDeg)
 				&& verTimerActiveFlag && !verDirFlag))){
 		
 	
 			
-				curTime = keyframes[curKeyFramePointer].timeStamp;
-				curKeyFramePointer ++;
+				curTime = keyframes[curKeyFrameIndex].timeStamp;
+				//sendString("\n\rCURTIME: ");
+				//char curocr1c2[10];
+				//sprintf(curocr1c2, "%ld", curTime);
+				//sendString(curocr1c2);
+				curKeyFrameIndex ++;
 				cli();
 				// calculate new CTC values for timers
 				OCR1A_value = calcOCR1A(curTime, curDist,
-				keyframes[curKeyFramePointer].distance, keyframes[curKeyFramePointer].timeStamp);
+				keyframes[curKeyFrameIndex].distance, keyframes[curKeyFrameIndex].timeStamp);
 				OCR3A_value = calcOCR3A(curTime, curHorDeg,
-				keyframes[curKeyFramePointer].horDeg, keyframes[curKeyFramePointer].timeStamp);
+				keyframes[curKeyFrameIndex].horDeg, keyframes[curKeyFrameIndex].timeStamp);
 				OCR0A_value = calcOCR0A(curTime, curVerDeg,
-				keyframes[curKeyFramePointer].vertDeg, keyframes[curKeyFramePointer].timeStamp);
+				keyframes[curKeyFrameIndex].vertDeg, keyframes[curKeyFrameIndex].timeStamp);
 				// check whether user insisted on stopping any motors
 				// if not then re-initialize stepper step interrupts
-				if(curKeyFramePointer != 0){
+				if(curKeyFrameIndex != 0){
 					// check distance axis
-					if(keyframes[curKeyFramePointer].distance == keyframes[curKeyFramePointer-1].distance){
+					if(keyframes[curKeyFrameIndex].distance == keyframes[curKeyFrameIndex-1].distance){
 						halt_Timer1_A();
 					}else{
-						if(getDistDirection(curDist, keyframes[curKeyFramePointer].distance) == 0x01){
+						if(getDistDirection(curDist, keyframes[curKeyFrameIndex].distance) == 0x01){
 							//we have to move forward
 							changeDistDir(1);		//now we are moving forward
 						}else{
@@ -927,10 +1025,10 @@ void drive(){
 						initDistTimer(OCR1A_value);
 					}
 					// check horizontal rotation axis
-					if(keyframes[curKeyFramePointer].horDeg == keyframes[curKeyFramePointer-1].horDeg){
+					if(keyframes[curKeyFrameIndex].horDeg == keyframes[curKeyFrameIndex-1].horDeg){
 						halt_Timer3_A();
 					}else{
-						if(getHorDirection(curHorDeg, keyframes[curKeyFramePointer].horDeg) == 0x01){
+						if(getHorDirection(curHorDeg, keyframes[curKeyFrameIndex].horDeg) == 0x01){
 							//we have to move forward
 							changeHorRotDir(1);		//now we are moving forward
 						}else{
@@ -939,10 +1037,10 @@ void drive(){
 						initHorTimer(OCR3A_value);
 					}
 					// check vertical rotation axis
-					if(keyframes[curKeyFramePointer].vertDeg == keyframes[curKeyFramePointer-1].vertDeg){
+					if(keyframes[curKeyFrameIndex].vertDeg == keyframes[curKeyFrameIndex-1].vertDeg){
 						halt_timer0_A();
 					}else{
-						if(getVerDirection(curVerDeg, keyframes[curKeyFramePointer].vertDeg) == 0x01){
+						if(getVerDirection(curVerDeg, keyframes[curKeyFrameIndex].vertDeg) == 0x01){
 							//we have to move forward
 							changeVerRotDir(1);		//now we are moving forward
 						}else{
@@ -955,7 +1053,9 @@ void drive(){
 			}	
 		}else{
 			haltLapse();
-		}		
+			return;
+		}
+		
 	}
 }
 
@@ -990,11 +1090,11 @@ void init_steppers(){
 SIGNAL(TIMER1_COMPA_vect){
     //Step on step2 (PB5), upper stepper
     //TEST WITH POWER SUPPLY      
-	if(distTimerPreScFlag){
-		if(distTimerPreScCounter < (distTimerPreSc-1)){
-			distTimerPreScCounter++;
+	if(distTimerTOCounterFlag){
+		if(distTimerTOCounter < (distTimerTOCounterMax-1)){
+			distTimerTOCounter++;
 		}else{
-			distTimerPreScCounter = 0;
+			distTimerTOCounter = 0;
 			// step on that, man
 			PORTB = PORTB^(1<<PB6);
 			PORTB = PORTB^(1<<PB6);
@@ -1036,11 +1136,11 @@ SIGNAL(TIMER3_COMPA_vect){
 	PORTD = PORTD^(1<<PD5);	// invert LED value	
     //Step on step2 (PB5), upper stepper
     //TEST WITH POWER SUPPLY
-    if(horTimerPreScFlag){
-	    if(horTimerPreScCounter < (horTimerPreSc-1)){
-			horTimerPreScCounter++;
+    if(horTimerTOCounterFlag){
+	    if(horTimerTOCounter < (horTimerTOCounterMax-1)){
+			horTimerTOCounter++;
 		}else{
-		    horTimerPreScCounter = 0;
+		    horTimerTOCounter = 0;
 		    // step on that, man
 		    PORTC = PORTC^(1<<PC6);
 		    PORTC = PORTC^(1<<PC6);
@@ -1077,11 +1177,11 @@ SIGNAL(TIMER3_COMPA_vect){
 
 // vertical rotation
 SIGNAL(TIMER0_COMPA_vect){
-	if(verTimerPreScFlag){
-		if(verTimerPreScCounter < (verTimerPreSc-1)){
-			verTimerPreScCounter ++;
+	if(verTimerTOCounterFlag){
+		if(verTimerTOCounter < (verTimerTOCounterMax-1)){
+			verTimerTOCounter ++;
 		}else{
-			verTimerPreScCounter = 0;
+			verTimerTOCounter = 0;
 			// do the stepping action
 			//TEST WITH POWER SUPPLY
 			//PB5 = STEP2
