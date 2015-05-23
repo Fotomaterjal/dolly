@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fotomaterjal.timelapseexpress" >
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".btActivity"
+            android:label="@string/title_activity_bt" >
+        </activity>
+        <activity
+            android:name=".btDevicesListActivity"
+            android:label="@string/title_activity_bt_devices_list" >
+        </activity>
+        <activity
+            android:name=".btDevicesAdapter"
+            android:label="@string/title_activity_bt_devices_adapter" >
+        </activity>
+        <activity
+            android:name=".TimeLapseSettingsActivity"
+            android:label="@string/title_activity_time_lapse_settings" >
+        </activity>
+        <activity
+            android:name=".KeyframesListActivity"
+            android:label="@string/title_activity_keyframes_list" >
+        </activity>
+        <activity
+            android:name=".KeyframesListAdapter"
+            android:label="@string/title_activity_keyframes_list_adapter" >
+        </activity>
+        <activity
+            android:name=".EditKeyFrame"
+            android:label="@string/title_activity_edit_key_frame" >
+        </activity>
+        <activity
+            android:name=".StartSequenceActivity"
+            android:label="@string/title_activity_start_sequence" >
+        </activity>
+        <activity
+            android:name=".BaseActivity"
+            android:label="@string/title_activity_base" >
+        </activity>
+        <activity
+            android:name=".MoveDeviceActivity"
+            android:label="@string/title_activity_move_device" >
+        </activity>
+    </application>
+
+</manifest>

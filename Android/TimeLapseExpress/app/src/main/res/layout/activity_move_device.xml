@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.fotomaterjal.timelapseexpress.MoveDeviceActivity"
+    android:background="@color/Main_app_blue_color">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moveLeftButton"
+        android:src="@drawable/left_arrow"
+        android:background="@color/Button_on_blue_back_color"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moveRightButton"
+        android:src="@drawable/right_arrow"
+        android:background="@color/Button_on_blue_back_color"
+        android:layout_below="@+id/moveUpButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moveUpButton"
+        android:src="@drawable/up_arrow"
+        android:layout_above="@+id/moveLeftRotateButton"
+        android:layout_centerHorizontal="true"
+        android:background="@color/Button_on_blue_back_color" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moveDownButton"
+        android:src="@drawable/down_arrow"
+        android:layout_below="@+id/moveLeftRotateButton"
+        android:layout_alignLeft="@+id/moveUpButton"
+        android:layout_alignStart="@+id/moveUpButton"
+        android:background="@color/Button_on_blue_back_color" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moveLeftRotateButton"
+        android:src="@drawable/arrow_left_rotate"
+        android:background="@color/Button_on_blue_back_color"
+        android:layout_alignTop="@+id/moveLeftButton"
+        android:layout_toLeftOf="@+id/moveUpButton"
+        android:layout_toStartOf="@+id/moveUpButton" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/moveRightRotateButton"
+        android:src="@drawable/arrow_right_rotate"
+        android:background="@color/Button_on_blue_back_color"
+        android:layout_above="@+id/moveDownButton"
+        android:layout_toRightOf="@+id/moveDownButton"
+        android:layout_toEndOf="@+id/moveDownButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Deus ex movement"
+        android:id="@+id/textView5"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:textColor="@color/White_text" />
+</RelativeLayout>

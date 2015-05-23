@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.fotomaterjal.timelapseexpress.BaseActivity">
+    <item android:id="@+id/action_main_screen" android:title="@string/action_main_screen"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_bt_settings" android:title="@string/action_bt_settings"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_time_lapse_settings" android:title="@string/action_time_lapse_settings"
+        android:orderInCategory="100" app:showAsAction="never" />
+</menu>

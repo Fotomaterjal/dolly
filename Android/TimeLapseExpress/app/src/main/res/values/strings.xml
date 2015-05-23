@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">TimeLapseExpress</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_bt_settings">Bluetooth settings</string>
+    <string name="action_main_screen">Home</string>
+    <string name="action_time_lapse_settings">Time Lapse Settings</string>
+    <string name="title_activity_bt">btActivity</string>
+    <string name="title_activity_bt_devices_list">btDevicesListActivity</string>
+    <string name="title_activity_bt_devices_adapter">btDevicesAdapter</string>
+    <string name="title_activity_time_lapse_settings">TimeLapseSettingsActivity</string>
+    <string name="title_activity_keyframes_list">KeyframesListActivity</string>
+    <string name="title_activity_keyframes_list_adapter">KeyframesListAdapter</string>
+    <string name="title_activity_edit_key_frame">EditKeyFrame</string>
+    <string name="title_activity_start_sequence">StartSequenceActivity</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="title_activity_move_device">MoveDeviceActivity</string>
+</resources>
