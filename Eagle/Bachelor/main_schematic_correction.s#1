@@ -16468,7 +16468,6 @@ Grid 5.08 mm&lt;p&gt;
 <part name="LED2" library="adafruit" deviceset="LED" device="CHIP-LED0603"/>
 <part name="U$4" library="SFH6156" deviceset="SFH6156" device=""/>
 <part name="GND36" library="supply1" deviceset="GND" device=""/>
-<part name="C18" library="rcl" deviceset="C-EU" device="C0603K" value="100nF"/>
 <part name="C22" library="rcl" deviceset="C-EU" device="C0603K" value="100nF"/>
 <part name="C23" library="rcl" deviceset="C-EU" device="C0603K" value="100nF"/>
 <part name="GND37" library="supply1" deviceset="GND" device=""/>
@@ -16733,7 +16732,6 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <instance part="LED2" gate="G$1" x="-106.68" y="-152.4" rot="R90"/>
 <instance part="U$4" gate="SFH6156" x="10.16" y="-71.12"/>
 <instance part="GND36" gate="1" x="-10.16" y="-76.2"/>
-<instance part="C18" gate="G$1" x="-170.18" y="38.1" rot="R180"/>
 <instance part="C22" gate="G$1" x="-175.26" y="-86.36"/>
 <instance part="C23" gate="G$1" x="-185.42" y="-86.36"/>
 <instance part="GND37" gate="1" x="-180.34" y="-93.98"/>
@@ -17063,18 +17061,10 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <pinref part="GND22" gate="1" pin="GND"/>
 </segment>
 <segment>
-<wire x1="-185.42" y1="45.72" x2="-170.18" y2="45.72" width="0.1524" layer="91"/>
-<wire x1="-170.18" y1="45.72" x2="-162.56" y2="45.72" width="0.1524" layer="91"/>
+<wire x1="-185.42" y1="45.72" x2="-162.56" y2="45.72" width="0.1524" layer="91"/>
 <wire x1="-162.56" y1="45.72" x2="-162.56" y2="33.02" width="0.1524" layer="91"/>
 <pinref part="GND23" gate="1" pin="GND"/>
 <pinref part="SW9" gate="G$1" pin="S"/>
-<pinref part="C18" gate="G$1" pin="1"/>
-<wire x1="-170.18" y1="35.56" x2="-170.18" y2="33.02" width="0.1524" layer="91"/>
-<wire x1="-170.18" y1="33.02" x2="-162.56" y2="33.02" width="0.1524" layer="91"/>
-<junction x="-162.56" y="33.02"/>
-<pinref part="C18" gate="G$1" pin="2"/>
-<wire x1="-170.18" y1="43.18" x2="-170.18" y2="45.72" width="0.1524" layer="91"/>
-<junction x="-170.18" y="45.72"/>
 </segment>
 <segment>
 <pinref part="C13" gate="G$1" pin="1"/>

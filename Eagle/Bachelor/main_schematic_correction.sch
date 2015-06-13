@@ -16575,11 +16575,8 @@ Grid 5.08 mm&lt;p&gt;
 <part name="C51" library="rcl" deviceset="C-EU" device="C0805" value="10uF"/>
 <part name="GND59" library="supply1" deviceset="GND" device=""/>
 <part name="C52" library="rcl" deviceset="C-EU" device="C0603K" value="100nF"/>
-<part name="P+20" library="supply1" deviceset="VCC" device=""/>
 <part name="C53" library="rcl" deviceset="C-EU" device="C0603K" value="100nF"/>
-<part name="P+21" library="supply1" deviceset="VCC" device=""/>
 <part name="C54" library="rcl" deviceset="C-EU" device="C0603K" value="100nF"/>
-<part name="P+22" library="supply1" deviceset="VCC" device=""/>
 <part name="P+23" library="supply1" deviceset="VCC" device=""/>
 <part name="X5" library="con-wago-508" deviceset="W237-04P" device=""/>
 <part name="X7" library="con-wago-508" deviceset="W237-04P" device=""/>
@@ -16914,22 +16911,13 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <attribute name="NAME" x="119.38" y="28.067" size="1.778" layer="95"/>
 <attribute name="VALUE" x="117.348" y="30.353" size="1.778" layer="96"/>
 </instance>
-<instance part="P+20" gate="VCC" x="111.76" y="30.48" smashed="yes">
-<attribute name="VALUE" x="114.3" y="32.512" size="1.778" layer="96" rot="R180"/>
-</instance>
 <instance part="C53" gate="G$1" x="119.38" y="-30.48" smashed="yes" rot="R270">
 <attribute name="NAME" x="119.38" y="-30.353" size="1.778" layer="95"/>
 <attribute name="VALUE" x="117.348" y="-28.067" size="1.778" layer="96"/>
 </instance>
-<instance part="P+21" gate="VCC" x="111.76" y="-27.94" smashed="yes">
-<attribute name="VALUE" x="114.3" y="-25.908" size="1.778" layer="96" rot="R180"/>
-</instance>
 <instance part="C54" gate="G$1" x="119.38" y="-83.82" smashed="yes" rot="R270">
 <attribute name="NAME" x="119.38" y="-83.693" size="1.778" layer="95"/>
 <attribute name="VALUE" x="117.348" y="-81.407" size="1.778" layer="96"/>
-</instance>
-<instance part="P+22" gate="VCC" x="111.76" y="-81.28" smashed="yes">
-<attribute name="VALUE" x="114.3" y="-79.248" size="1.778" layer="96" rot="R180"/>
 </instance>
 <instance part="P+23" gate="VCC" x="-45.72" y="22.86"/>
 <instance part="X5" gate="-1" x="190.5" y="-25.4" rot="R180"/>
@@ -17535,21 +17523,6 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <wire x1="162.56" y1="-154.94" x2="213.36" y2="-154.94" width="0.1524" layer="91"/>
 <wire x1="213.36" y1="-154.94" x2="213.36" y2="-142.24" width="0.1524" layer="91"/>
 <junction x="213.36" y="-142.24"/>
-</segment>
-<segment>
-<pinref part="C52" gate="G$1" pin="2"/>
-<wire x1="114.3" y1="27.94" x2="111.76" y2="27.94" width="0.1524" layer="91"/>
-<pinref part="P+20" gate="VCC" pin="VCC"/>
-</segment>
-<segment>
-<pinref part="C53" gate="G$1" pin="2"/>
-<wire x1="114.3" y1="-30.48" x2="111.76" y2="-30.48" width="0.1524" layer="91"/>
-<pinref part="P+21" gate="VCC" pin="VCC"/>
-</segment>
-<segment>
-<pinref part="C54" gate="G$1" pin="2"/>
-<wire x1="114.3" y1="-83.82" x2="111.76" y2="-83.82" width="0.1524" layer="91"/>
-<pinref part="P+22" gate="VCC" pin="VCC"/>
 </segment>
 <segment>
 <pinref part="F1" gate="G$1" pin="P$2"/>
@@ -18442,6 +18415,7 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <pinref part="C45" gate="G$1" pin="+"/>
 <wire x1="251.46" y1="-73.66" x2="251.46" y2="-71.12" width="0.1524" layer="91"/>
 <junction x="251.46" y="-71.12"/>
+<label x="106.68" y="-83.82" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
 <wire x1="251.46" y1="-17.78" x2="251.46" y2="-7.62" width="0.1524" layer="91"/>
@@ -18510,6 +18484,26 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <pinref part="C19" gate="G$1" pin="+"/>
 <wire x1="251.46" y1="38.1" x2="251.46" y2="40.64" width="0.1524" layer="91"/>
 <junction x="251.46" y="40.64"/>
+<label x="109.22" y="27.94" size="1.27" layer="95" rot="R180" xref="yes"/>
+<label x="106.68" y="-30.48" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="N$134" class="0">
+<segment>
+<pinref part="C52" gate="G$1" pin="2"/>
+<wire x1="109.22" y1="27.94" x2="114.3" y2="27.94" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$135" class="0">
+<segment>
+<pinref part="C53" gate="G$1" pin="2"/>
+<wire x1="106.68" y1="-30.48" x2="114.3" y2="-30.48" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$136" class="0">
+<segment>
+<pinref part="C54" gate="G$1" pin="2"/>
+<wire x1="106.68" y1="-83.82" x2="114.3" y2="-83.82" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>

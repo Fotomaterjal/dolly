@@ -16978,7 +16978,7 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <busses>
 </busses>
 <nets>
-<net name="GND" class="0">
+<net name="N$101" class="0">
 <segment>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="GND1" gate="1" pin="GND"/>
@@ -17916,7 +17916,7 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <pinref part="X8" gate="-3" pin="KL"/>
 </segment>
 </net>
-<net name="N$102" class="0">
+<net name="N$100" class="0">
 <segment>
 <wire x1="251.46" y1="40.64" x2="251.46" y2="50.8" width="0.1524" layer="91"/>
 <label x="251.46" y="50.8" size="1.27" layer="95" rot="R90" xref="yes"/>

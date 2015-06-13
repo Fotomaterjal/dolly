@@ -13965,30 +13965,30 @@ Thru-hole RA Female Mini-B USB Connector 4UConnector: 18732&lt;/p&gt;
 <library name="Allegro_A4982_driver">
 <packages>
 <package name="TSSOP_24">
-<smd name="P12" x="-3.175" y="-3.48" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P11" x="-3.175" y="-2.83" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P10" x="-3.175" y="-2.18" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P9" x="-3.175" y="-1.53" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P8" x="-3.175" y="-0.88" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P7" x="-3.175" y="-0.23" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P6" x="-3.175" y="0.42" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P5" x="-3.175" y="1.07" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P4" x="-3.175" y="1.72" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P3" x="-3.175" y="2.37" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P2" x="-3.175" y="3.02" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P1" x="-3.175" y="3.67" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P13" x="2.925" y="-3.48" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P14" x="2.925" y="-2.83" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P15" x="2.925" y="-2.18" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P16" x="2.925" y="-1.53" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P17" x="2.925" y="-0.88" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P18" x="2.925" y="-0.23" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P19" x="2.925" y="0.42" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P20" x="2.925" y="1.07" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P21" x="2.925" y="1.72" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P22" x="2.925" y="2.37" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P23" x="2.925" y="3.02" dx="1.65" dy="0.45" layer="1"/>
-<smd name="P24" x="2.925" y="3.67" dx="1.65" dy="0.45" layer="1"/>
+<smd name="P12" x="-3.175" y="-3.48" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P11" x="-3.175" y="-2.83" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P10" x="-3.175" y="-2.18" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P9" x="-3.175" y="-1.53" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P8" x="-3.175" y="-0.88" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P7" x="-3.175" y="-0.23" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P6" x="-3.175" y="0.42" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P5" x="-3.175" y="1.07" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P4" x="-3.175" y="1.72" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P3" x="-3.175" y="2.37" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P2" x="-3.175" y="3.02" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P1" x="-3.175" y="3.67" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P13" x="2.925" y="-3.48" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P14" x="2.925" y="-2.83" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P15" x="2.925" y="-2.18" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P16" x="2.925" y="-1.53" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P17" x="2.925" y="-0.88" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P18" x="2.925" y="-0.23" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P19" x="2.925" y="0.42" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P20" x="2.925" y="1.07" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P21" x="2.925" y="1.72" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P22" x="2.925" y="2.37" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P23" x="2.925" y="3.02" dx="1.65" dy="0.42" layer="1"/>
+<smd name="P24" x="2.925" y="3.67" dx="1.65" dy="0.42" layer="1"/>
 <text x="-3.175" y="4.445" size="1.27" layer="21">&gt;NAME</text>
 <text x="-3.81" y="-5.715" size="1.27" layer="21">&gt;VALUE</text>
 <smd name="P$1" x="-0.102" y="0.099" dx="3" dy="4.32" layer="1"/>
@@ -16978,7 +16978,7 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <busses>
 </busses>
 <nets>
-<net name="N$101" class="0">
+<net name="GND" class="0">
 <segment>
 <pinref part="C1" gate="G$1" pin="2"/>
 <pinref part="GND1" gate="1" pin="GND"/>

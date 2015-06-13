@@ -17819,9 +17819,9 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <pinref part="SW9" gate="G$1" pin="P"/>
 </segment>
 <segment>
-<label x="48.26" y="0" size="1.27" layer="95" xref="yes"/>
-<pinref part="U1" gate="A" pin="PD6(T1/~OC4D/ADC9)"/>
-<wire x1="40.64" y1="0" x2="48.26" y2="0" width="0.1524" layer="91"/>
+<pinref part="U1" gate="A" pin="PB2(PDI/PCINT2/MOSI)"/>
+<wire x1="40.64" y1="40.64" x2="48.26" y2="40.64" width="0.1524" layer="91"/>
+<label x="48.26" y="40.64" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="UART_RX" class="0">
@@ -17871,9 +17871,9 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <label x="119.38" y="15.24" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="A" pin="PB2(PDI/PCINT2/MOSI)"/>
-<wire x1="40.64" y1="40.64" x2="48.26" y2="40.64" width="0.1524" layer="91"/>
-<label x="48.26" y="40.64" size="1.27" layer="95" xref="yes"/>
+<pinref part="U1" gate="A" pin="PD1(SDA/INT1)"/>
+<wire x1="40.64" y1="12.7" x2="48.26" y2="12.7" width="0.1524" layer="91"/>
+<label x="48.26" y="12.7" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="STEP1" class="0">
@@ -17958,14 +17958,14 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 </net>
 <net name="DIR2" class="0">
 <segment>
-<wire x1="40.64" y1="15.24" x2="48.26" y2="15.24" width="0.1524" layer="91"/>
-<label x="48.26" y="15.24" size="1.27" layer="95" xref="yes"/>
-<pinref part="U1" gate="A" pin="PD0(OC0B/SCL/INT0)"/>
-</segment>
-<segment>
 <pinref part="U$2" gate="G$1" pin="DIR"/>
 <wire x1="127" y1="-43.18" x2="119.38" y2="-43.18" width="0.1524" layer="91"/>
 <label x="119.38" y="-43.18" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U1" gate="A" pin="PB4(PCINT4/ADC11)"/>
+<wire x1="40.64" y1="35.56" x2="48.26" y2="35.56" width="0.1524" layer="91"/>
+<label x="48.26" y="35.56" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="MS1" class="0">
@@ -18019,21 +18019,21 @@ DAC FOR DRIVER CURRENT LIMIT CONTROL</text>
 <label x="119.38" y="-93.98" size="1.27" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<pinref part="U1" gate="A" pin="PB7(PCINT7/OC0A/OC1C/~RTS)"/>
-<wire x1="40.64" y1="27.94" x2="48.26" y2="27.94" width="0.1524" layer="91"/>
-<label x="48.26" y="27.94" size="1.27" layer="95" xref="yes"/>
+<pinref part="U1" gate="A" pin="PC6(OC3A/~OC4A)"/>
+<wire x1="40.64" y1="22.86" x2="48.26" y2="22.86" width="0.1524" layer="91"/>
+<label x="48.26" y="22.86" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="DIR3" class="0">
 <segment>
-<wire x1="40.64" y1="22.86" x2="48.26" y2="22.86" width="0.1524" layer="91"/>
-<label x="48.26" y="22.86" size="1.27" layer="95" xref="yes"/>
-<pinref part="U1" gate="A" pin="PC6(OC3A/~OC4A)"/>
-</segment>
-<segment>
 <pinref part="U$3" gate="G$1" pin="DIR"/>
 <wire x1="127" y1="-96.52" x2="119.38" y2="-96.52" width="0.1524" layer="91"/>
 <label x="119.38" y="-96.52" size="1.27" layer="95" rot="R180" xref="yes"/>
+</segment>
+<segment>
+<pinref part="U1" gate="A" pin="PC7(ICP3/CLK0/OC4A)"/>
+<wire x1="40.64" y1="20.32" x2="48.26" y2="20.32" width="0.1524" layer="91"/>
+<label x="48.26" y="20.32" size="1.778" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="N$39" class="0">
