@@ -153,17 +153,43 @@ struct keyFrame keyframes[MAX_KEYFRAMES];
 int main(void){
 	rmCLKDIV8();
 	////////////// Blinking LED freq ///////////////////////////
-	int led = 0x20;
-	DDRD |= led;	
+	//int led = 0x20;
+	DDRD |= (1<<PD5);	
+	//DDRF |= (1<<PORTF7 | 1<<PORTF6);	// 
+	PORTD = PORTD^(1<<PD5);	// invert LED value
+	//if((~PINF)&(1 << PF7)){
+		//////PORTD |= (1<<PD5);
+		//PORTD &= ~(1<<PD5);
+		//////PORTD = PORTD^(1<<PD5);	// invert LED value
+		//////}else{
+		//////PORTD &= ~(1<<PD5);
+	//}
+	
+	//for(int i = 0; i<100000; i++){
+		//asm("nop");
+	//}
+	//DDRF = 0x00;
+	//PORTF = 0x00;
+	
 	////////////// Initialize Stepper CurrentLimit & DDRs //////
 	cli();						// cancel all interrupts
-	setCurrentLimiter_T4(20);	// 8 = 3,2% duty cycle (I_tripMax = V_ref/0.8)
+	setCurrentLimiter_T4(15);	// 8 = 3,2% duty cycle (I_tripMax = V_ref/0.8)
 	init_steppers();			// PORT & DDR stuff for step and direction
 	sei();						// allow interrupts	
 	////////////// UART testing //////////////////////////
 	init_UART();				// settings and RX TX enable stuff
 	///////////// Main loop //////////////////////////////	
 	while(1){
+		//PORTD |= (1<<PD5);
+		//while(1){
+			//while(!PINF7){
+				//PORTD &= ~(1<<PD5);
+			//}
+			//while(PINF & (1<<PINF7)){
+				//PORTD |= (1<<PD5);
+			//}	
+		//}
+
 		receiveAllData();		// halt till all data is received from phone
 		drive();				// start the sequence
     }	
@@ -207,132 +233,10 @@ void startLapse(){
 	initVerTimer(OCR0A_value);
 	
 	sei();
-	/*
-	sendString("\n\rcurTime:");
-	char curTimes[10];
-	sprintf(curTimes, "%d", curTime);
-	sendString(curTimes);
-	
-	sendString("\n\rcurDist:");
-	char curDists[10];
-	sprintf(curDists, "%d", curDist);
-	sendString(curDists);
-	
-	sendString("\n\rOCR1A:");
-	char curOCR1A[10];
-	sprintf(curOCR1A, "%d", OCR1A);
-	sendString(curOCR1A);
-	
-	sendString("\n\rcurHorDeg:");
-	char curHordegs[10];
-	sprintf(curHordegs, "%d", curHorDeg);
-	sendString(curHordegs);
-	
-	sendString("\n\rOCR3A:");
-	char curOCR1B[10];
-	sprintf(curOCR1B, "%d", OCR3A);
-	sendString(curOCR1B);
-	
-	
-	sendString("\n\rcurVerDeg:");
-	char curVerdegs[10];
-	sprintf(curVerdegs, "%d", curVerDeg);
-	sendString(curVerdegs);
-	
-	sendString("\n\rverTimerPreSc:");
-	char curVerdegs1[10];
-	sprintf(curVerdegs1, "%d", verTimerTOCounterMax);
-	sendString(curVerdegs1);
-	
-	sendString("\n\rOCR0A:");
-	char curOCR1C[10];
-	sprintf(curOCR1C, "%d", OCR0A);
-	sendString(curOCR1C);
-	
-	sendString("\n\rB is curKeyFrameIndex: ");
-	char bact[10];
-	sprintf(bact, "%d ", curKeyFrameIndex);
-	sendString(bact);
-	
-	sendString("\n\rB is curKeyFrameIndex: ");
-	char bacta[10];
-	sprintf(bacta, "%d ", keyFrameReadIndex);
-	sendString(bacta);
-	
-	sei();*/
-	//sendString("\n\rOCR1A:");
-	////char curOCR1A[10];
-	//sprintf(curOCR1A, "%d", OCR1A);
-	//sendString(curOCR1A);
-	//
-	//sendString("\n\rOCR3C:");
-	////char curOCR1B[10];
-	//sprintf(curOCR1B, "%d", OCR3A);
-	//sendString(curOCR1B);
-	//
-	//sendString("\n\rOCR0A:");
-	////char curOCR1C[10];
-	//sprintf(curOCR1C, "%d", OCR0A);
-	//sendString(curOCR1C);
-	//
-	//sendString("\n\rTIMSK1:");
-	////char curOCR1C2[10];
-	//sprintf(curOCR1C2, "%d", TIMSK1);
-	//sendString(curOCR1C2);
-	////
-	//sendString("\n\r SREG:");
-	//char curOCR1C3[10];
-	//sprintf(curOCR1C3, "%d", SREG);
-	//sendString(curOCR1C3);
 }
 
 void haltLapse(){
-	cli();
-	sendString("\n\rcurTime:");
-	char curTimes[10];
-	sprintf(curTimes, "%ld", curTime);
-	sendString(curTimes);
-	
-	sendString("\n\rcurDist:");
-	char curDists[10];
-	sprintf(curDists, "%ld", curDist);
-	sendString(curDists);
-	
-	sendString("\n\rcurHorDeg:");
-	char curHordegs[10];
-	sprintf(curHordegs, "%ld", curHorDeg);
-	sendString(curHordegs);
-	
-	sendString("\n\rcurVerDeg:");
-	char curVerdegs[10];
-	sprintf(curVerdegs, "%ld", curVerDeg);
-	sendString(curVerdegs);
-	
-	sei();
-	
-	/*char dist[10];
-	sprintf(dist, "%d", keyframes[curKeyFrameIndex].distance);
-	sendString("\n\rStart!!!!!!!!!!!!!!!!!!!!!!!!");
-	sendString("\n\rKFDist: ");
-	sendString(dist);
-	
-	sendString("\n\rKFHorDeg:");
-	char horDeg[10];
-	sprintf(horDeg, "%d", keyframes[curKeyFrameIndex].horDeg);
-	sendString(horDeg);
-	
-	sendString("\n\rKFVerDeg:");
-	char verDeg[10];
-	sprintf(verDeg, "%d", keyframes[curKeyFrameIndex].vertDeg);
-	sendString(verDeg);
-	
-	sendString("\n\rKFTime:");
-	char time[10];
-	sprintf(time, "%d", keyframes[curKeyFrameIndex].timeStamp);
-	sendString(time);
-	sei();*/
-	//cli();
-	
+
 	halt_Timer1_A();
 	halt_Timer3_A();
 	halt_timer0_A();
@@ -369,7 +273,7 @@ void haltLapse(){
 void receiveAllData(){
 	uint8_t firstByte = 0;
 	
-	while(firstByte != 'z'){			// start command not received		
+	while(firstByte != 'z'){			// start command not received
 		firstByte = USARTgetLetter();
 		uint8_t secondByte;
 		
@@ -440,39 +344,7 @@ uint32_t calcOCR1A(int32_t curTime, int32_t curDist, uint16_t recDistance, uint1
 	}
 	double wantedStepFreq = (double) ((double) neededSteps)/(double) givenTime;	
 	
-	//neededSteps = (uint32_t) abs((int32_t)curDist - (int32_t)neededStepsSinceStart);
     uint32_t result = (uint32_t) ((((double) F_CPU)/ ((double) T1OCA_DIV))/wantedStepFreq);
-	
-	
-		//sendString("\n\rNeedeSteps:");
-		//char curocr1c2[10];
-		//sprintf(curocr1c2, "%ld", neededStepsSinceStart);
-		//sendString(curocr1c2);
-		//
-		//sendString("\n\rCurDist:");
-		//char curocr1c23[10];
-		//sprintf(curocr1c23, "%ld", curDist);
-		//sendString(curocr1c23);
-		//
-		//sendString("\n\rNeedeD!:");
-		//char curocr1c2311[10];
-		//sprintf(curocr1c2311, "%ld", neededSteps);
-		//sendString(curocr1c2311);
-		//
-		//sendString("\n\rGivenTime:");
-		//char curocr1c234[10];
-		//sprintf(curocr1c234, "%d", givenTime);
-		//sendString(curocr1c234);
-		//
-		//sendString("\n\rResult:");
-		//char curocr1c22[10];
-		//sprintf(curocr1c22, "%ld", result);
-		//sendString(curocr1c22);
-		//
-		//sendString("\n\rWantedStepFreq:");
-		//char curocr1c42[10];
-		//sprintf(curocr1c42, "%ld", (uint32_t)wantedStepFreq);
-		//sendString(curocr1c42);
 	
 	
     if(result >= 0xFFFFFFFF || result == 0x00000000){
@@ -514,9 +386,6 @@ uint32_t calcOCR3A(int32_t curTime, int32_t curHorDeg, uint16_t recHorDeg, uint1
 uint32_t calcOCR0A(int32_t curTime, int32_t curVerDeg, uint16_t recVerDeg, uint16_t recTime){
 	//convert degrees to steps
 	double stepsSinceStart = (double)recVerDeg * (double)STEPS_IN_DEGREE_DIV16;
-	//uint32_t neededVerSteps = (uint32_t) abs((int32_t)stepsSinceStart - (int32_t)curVerDeg);
-	
-	
 		
 	uint16_t givenTime = (recTime-(uint16_t)curTime);
 	uint32_t neededSteps;
@@ -528,12 +397,6 @@ uint32_t calcOCR0A(int32_t curTime, int32_t curVerDeg, uint16_t recVerDeg, uint1
 	
 	double wantedStepFreq = (double) ((double)neededSteps / (double)givenTime);
 	uint32_t result = (uint32_t) roundf(((((float) F_CPU)/ ((float) TIMER0_DIV))/wantedStepFreq));
-	
-
-	
-	
-	
-	
 	
 	if(result >= 0xFFFFFFFF || result == 0x00000000){
 		return 0xFFFFFFFF;
@@ -658,22 +521,9 @@ void initDistTimer(uint32_t CTC_value){
         TIMSK1 |= (1<<OCIE1A);
 		distTimerActiveFlag = 1;
 	}
-	//sendString("\n\rOCR1A:");
-	//char curOCR1A[10];
-	//sprintf(curOCR1A, "%d", OCR1A);
-	//sendString(curOCR1A);
-	//sendString("\n\rCurDist:");
-	//char curocr1c2[10];
-	//sprintf(curocr1c2, "%ld", curDist);
-	//sendString(curocr1c2);
 }
 
 void initHorTimer(uint32_t CTC_value){
-	
-	//
-	
-	//
-
 	TCNT3 = 0x0000;
 	TCCR3A = 0x00;
 	// setting CPU clock, no preScalers
@@ -700,14 +550,6 @@ void initHorTimer(uint32_t CTC_value){
 		TIMSK3 |= (1<<OCIE3A);
 		horTimerActiveFlag = 1;
 	}
-	//sendString("\n\rOCR3C:");
-	//char curOCR1B[10];
-	//sprintf(curOCR1B, "%d", OCR3A);
-	//sendString(curOCR1B);
-	//sendString("\n\rCurHorDeg:");
-	//char curocr1c2[10];
-	//sprintf(curocr1c2, "%ld", curHorDeg);
-	//sendString(curocr1c2);
 }
 
 void initVerTimer(uint32_t CTC_value){
@@ -737,14 +579,6 @@ void initVerTimer(uint32_t CTC_value){
 		TIMSK0 |= (1<<OCIE0A);
 		verTimerActiveFlag = 1;
 	}
-	//sendString("\n\rocr0a:");
-	//char curocr1c[10];
-	//sprintf(curocr1c, "%d", OCR0A);
-	//sendString(curocr1c);
-	//sendString("\n\rCurVerDeg:");
-	//char curocr1c2[10];
-	//sprintf(curocr1c2, "%ld", curVerDeg);
-	//sendString(curocr1c2);
 }
 
 
@@ -956,28 +790,7 @@ void drive(){
 	startLapse();
 	
 	while(1){
-			//if(curDist%1000 == 0){
-				//sendString("\n\rCURDist: ");
-				//char curintdist[10];
-				//sprintf(curintdist, "%ld ", curDist);
-				//sendString(curintdist);
-			//}
-			
-			//if(curHorDeg%1000 == 0){
-				//sendString("\n\rrCURHorDeg: ");
-				//char curintdist5513[10];
-				//sprintf(curintdist5513, "%ld ", curHorDeg);
-				//sendString(curintdist5513);
-			//}
-			
-			if(curVerDeg%1000 == 0){
-				sendString("\n\rCURVERDEG: ");
-				char curintver[10];
-				sprintf(curintver, "%ld ", curVerDeg);
-				sendString(curintver);
-			}
-			
-			
+	
 		if(curKeyFrameIndex <= keyFrameReadIndex){
 			// we are not out of keyframes yet
 			if(((curDist > (int32_t) calcReqDistSteps(keyframes[curKeyFrameIndex].distance)
@@ -996,10 +809,6 @@ void drive(){
 	
 			
 				curTime = keyframes[curKeyFrameIndex].timeStamp;
-				//sendString("\n\rCURTIME: ");
-				//char curocr1c2[10];
-				//sprintf(curocr1c2, "%ld", curTime);
-				//sendString(curocr1c2);
 				curKeyFrameIndex ++;
 				cli();
 				// calculate new CTC values for timers
@@ -1104,10 +913,6 @@ SIGNAL(TIMER1_COMPA_vect){
 			}else{
 				curDist --; 
 			}			
-			//sendString("\n\rCURDist: ");
-			//char curintdist55[10];
-			//sprintf(curintdist55, "%ld ", curDist);
-			//sendString(curintdist55);
 		}
 	}else{
 		// step on that, man. not using preScalers, man
@@ -1121,19 +926,13 @@ SIGNAL(TIMER1_COMPA_vect){
 		}
 	}
 	
-	//if(curDist%1000 == 0){
-		//sendString("\n\rCURDist: ");
-		//char curintdist[10];
-		//sprintf(curintdist, "%ld ", curDist);
-		//sendString(curintdist);
-	//}
 }
 
 // Middle (horizontal rotation) stepper
 SIGNAL(TIMER3_COMPA_vect){
 	//TEST WITHH POWER SUPPLY
 	//PC6 = STEP3
-	PORTD = PORTD^(1<<PD5);	// invert LED value	
+	//PORTD = PORTD^(1<<PD5);	// invert LED value	
     //Step on step2 (PB5), upper stepper
     //TEST WITH POWER SUPPLY
     if(horTimerTOCounterFlag){
@@ -1150,10 +949,6 @@ SIGNAL(TIMER3_COMPA_vect){
 			}else{
 			    curHorDeg --;
 		    }
-			//sendString("\n\rrCURHorDeg: ");
-			//char curintdist551[10];
-			//sprintf(curintdist551, "%ld ", curHorDeg);
-			//sendString(curintdist551);
 	    }
 	}else{
 	    // step on that, man. not using preScalers, man
@@ -1164,14 +959,7 @@ SIGNAL(TIMER3_COMPA_vect){
 		    curHorDeg++;
 		}else{
 		    curHorDeg --;
-	    }
-		
-		//if(curHorDeg%1000 == 0){
-			//sendString("\n\rrCURHorDeg: ");
-			//char curintdist5513[10];
-			//sprintf(curintdist5513, "%ld ", curHorDeg);
-			//sendString(curintdist5513);
-		//}
+	    }		
     }
 }
 
@@ -1192,12 +980,6 @@ SIGNAL(TIMER0_COMPA_vect){
 			}else{
 				curVerDeg --;
 			}		
-			//if(curVerDeg%1000 == 0){
-				//sendString("\n\rCURVERDEG: ");
-				//char curintver[10];
-				//sprintf(curintver, "%ld ", curVerDeg);
-				//sendString(curintver);
-			//}	
 		}
 	}else{
 		// do the stepping action
@@ -1211,13 +993,6 @@ SIGNAL(TIMER0_COMPA_vect){
 			curVerDeg --;
 		}
 	}
-	
-	//if(curVerDeg%1000 == 0){
-		//sendString("\n\rCURVERDEG: ");
-		//char curintver[10];
-		//sprintf(curintver, "%ld ", curVerDeg);
-		//sendString(curintver);
-	//}
 }
 
 
