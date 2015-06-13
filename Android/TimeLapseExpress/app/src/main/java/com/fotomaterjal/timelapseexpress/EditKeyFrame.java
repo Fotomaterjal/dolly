@@ -85,7 +85,7 @@ public class EditKeyFrame extends BaseActivity {
         verDegEditText.setText(String.valueOf(mVerDeg));
         timeEditText.setText(String.valueOf(mTime));
 
-        distSeekBar.setMax(110);
+        distSeekBar.setMax(92);
         horDegSeekBar.setMax(360);
         verDegSeekBar.setMax(360);
         timeEditSeekBar.setMax(maxDuration);

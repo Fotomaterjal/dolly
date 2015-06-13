@@ -154,8 +154,13 @@ public class StartSequenceActivity extends BaseActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
-                        sendBtData(keyFrameList);
-                        sendStartSequenceCommand();
+                        if(checkDataCorrect(keyFrameList)){
+                            sendBtData(keyFrameList);
+                            sendStartSequenceCommand();
+                        }else{
+
+                        }
+
                     }
                 }
         );
@@ -165,12 +170,12 @@ public class StartSequenceActivity extends BaseActivity {
                 switch (theMotion.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         //send data to distTimer, direction = 1
-                        sendMoveCommand(1, 1, speedPercentage, 0);
+                        sendMoveCommand(1, 1, 100, 1);
                         Log.i(TAG, "I JUST ACTION DOWN");
                         break;
                     case MotionEvent.ACTION_UP:
                         //send data to distTimer, halt timer
-                        sendMoveCommand(1, 0, speedPercentage, 0);
+                        sendMoveCommand(1, 0, 100, 1);
                         Log.i(TAG, "I JUST ACTION UP");
                         break;
                 }
@@ -182,14 +187,14 @@ public class StartSequenceActivity extends BaseActivity {
             public boolean onTouch(View yourButton, MotionEvent theMotion) {
                 switch (theMotion.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        //send data to distTimer, direction = 0
-                        sendMoveCommand(1, 1, speedPercentage, 1);
-                        Log.i(TAG, "I JUST ACTION DOWN l");
+                        //send data to distTimer, direction = 1
+                        sendMoveCommand(1, 1, 100, 0);
+                        Log.i(TAG, "I JUST ACTION DOWN");
                         break;
                     case MotionEvent.ACTION_UP:
                         //send data to distTimer, halt timer
-                        sendMoveCommand(1, 0, speedPercentage, 1);
-                        Log.i(TAG, "I JUST ACTION UP l");
+                        sendMoveCommand(1, 0, 100, 0);
+                        Log.i(TAG, "I JUST ACTION UP");
                         break;
                 }
                 return true;
@@ -201,12 +206,12 @@ public class StartSequenceActivity extends BaseActivity {
                 switch (theMotion.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         //send data to horTimer, direction = 1 (clockwise)
-                        sendMoveCommand(2, 1, speedPercentage/2, 1);
+                        sendMoveCommand(2, 1, 20, 1);
                         Log.i(TAG, "I JUST ACTION DOWN l");
                         break;
                     case MotionEvent.ACTION_UP:
                         //send data to distTimer, halt timer
-                        sendMoveCommand(2, 0, speedPercentage/2, 1);
+                        sendMoveCommand(2, 0, 20, 1);
                         Log.i(TAG, "I JUST ACTION UP l");
                         break;
                 }
@@ -219,12 +224,12 @@ public class StartSequenceActivity extends BaseActivity {
                 switch (theMotion.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         //send data to horTimer, direction = 0 (anticlockwise)
-                        sendMoveCommand(2, 1, speedPercentage/2, 0);
+                        sendMoveCommand(2, 1, 20, 0);
                         Log.i(TAG, "I JUST ACTION DOWN l");
                         break;
                     case MotionEvent.ACTION_UP:
                         //send data to distTimer, halt timer
-                        sendMoveCommand(2, 0, speedPercentage/2, 0);
+                        sendMoveCommand(2, 0, 20, 0);
                         Log.i(TAG, "I JUST ACTION UP l");
                         break;
                 }
@@ -237,12 +242,12 @@ public class StartSequenceActivity extends BaseActivity {
                 switch (theMotion.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         //send data to horTimer, direction = 1 (anticlockwise)
-                        sendMoveCommand(3, 1, 50, 1);
+                        sendMoveCommand(3, 1, 20, 1);
                         Log.i(TAG, "I JUST ACTION DOWN l");
                         break;
                     case MotionEvent.ACTION_UP:
                         //send data to distTimer, halt timer
-                        sendMoveCommand(3, 0, 50, 1);
+                        sendMoveCommand(3, 0, 20, 1);
                         Log.i(TAG, "I JUST ACTION UP l");
                         break;
                 }
@@ -255,12 +260,12 @@ public class StartSequenceActivity extends BaseActivity {
                 switch (theMotion.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         //send data to horTimer, direction = 0 (anticlockwise)
-                        sendMoveCommand(3, 1, 50, 0);
+                        sendMoveCommand(3, 1, 20, 0);
                         Log.i(TAG, "I JUST ACTION DOWN l");
                         break;
                     case MotionEvent.ACTION_UP:
                         //send data to distTimer, halt timer
-                        sendMoveCommand(3, 0, 50, 0);
+                        sendMoveCommand(3, 0, 20, 0);
                         Log.i(TAG, "I JUST ACTION UP l");
                         break;
                 }
@@ -335,6 +340,20 @@ public class StartSequenceActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    private boolean checkDataCorrect(ArrayList<keyFrame> keyFrameList){
+        boolean timeStampCorrect = true;
+        int keyTime = keyFrameList.get(0).mTime;
+        for(int k = 1; k<keyFrameList.size(); k++){
+            if(keyFrameList.get(k).mTime < keyTime){
+                timeStampCorrect = false;
+                return false;
+            }else {
+                keyTime = keyFrameList.get(k).mTime;
+            }
+        }
+        return timeStampCorrect;
     }
 
 
@@ -420,6 +439,14 @@ public class StartSequenceActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+
+        try {
+            sendMoveCommand(1, 0, 20, 1);
+            sendMoveCommand(2, 0, 20, 1);
+            sendMoveCommand(3, 0, 20, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onBackPressed();
         try{
             conBT.cancel();

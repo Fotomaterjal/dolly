@@ -67,7 +67,7 @@ public class KeyframesListAdapter extends BaseAdapter {
 
         Log.i(TAG, "NULLPOIUNTER: " + String.valueOf(mKeyframe.mDistance));
 
-        keyframeTitleText.setText("Keyframe " + String.valueOf(position));
+        keyframeTitleText.setText("Keyframe " + String.valueOf(position+1));
         distText.setText("Distance: " + String.valueOf(mKeyframe.mDistance));
         horDegText.setText("Hor degrees: " + String.valueOf(mKeyframe.mHorDeg));
         verDegText.setText("Ver degrees: " + String.valueOf(mKeyframe.mVerDeg));

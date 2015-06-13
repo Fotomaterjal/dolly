@@ -42,7 +42,8 @@ public class TimeLapseSettingsActivity extends BaseActivity {
                     Log.i(TAG, "AYY LMAO");
                     Log.i(TAG, nrOfKeyFramesString);
                     Log.i(TAG, durationString);
-                    if(!(nrOfKeyFramesString.equals("")) && !(durationString.equals(""))) {
+                    if(!(nrOfKeyFramesString.equals("")) && !(durationString.equals("")) &&
+                            Integer.valueOf(nrOfKeyFramesString) <=10) {
 
                         int nrOfKeyframes = Integer.valueOf(String.valueOf(nrOfKeyramesEditText.getText()));
                         int duration = Integer.valueOf(String.valueOf(durationEditText.getText()));
