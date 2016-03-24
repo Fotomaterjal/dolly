@@ -905,8 +905,19 @@ SIGNAL(TIMER1_COMPA_vect){
 		}else{
 			distTimerTOCounter = 0;
 			// step on that, man
-			PORTB = PORTB^(1<<PB6);
-			PORTB = PORTB^(1<<PB6);
+			if(distDirFlag && (PINF & (1<<PINF1))){
+				//not touching end position but moving forward
+				PORTB = PORTB^(1<<PB6);
+				PORTB = PORTB^(1<<PB6);
+				PORTD |= (1<<PD5);
+				} else if(!distDirFlag && (PINF & (1<<PINF0))){
+				//not touching start position and moving backward
+				PORTB = PORTB^(1<<PB6);
+				PORTB = PORTB^(1<<PB6);
+				PORTD |= (1<<PD5);
+				}else{
+				PORTD &= ~(1<<PD5);
+			}
 			// where am I going?
 			if(distDirFlag){
 				curDist++;
@@ -916,8 +927,20 @@ SIGNAL(TIMER1_COMPA_vect){
 		}
 	}else{
 		// step on that, man. not using preScalers, man
-		PORTB = PORTB^(1<<PB6);
-		PORTB = PORTB^(1<<PB6);
+		if(distDirFlag && (PINF & (1<<PINF1))){
+			//not touching end position but moving forward
+			PORTB = PORTB^(1<<PB6);
+			PORTB = PORTB^(1<<PB6);
+			PORTD |= (1<<PD5);
+		} else if(!distDirFlag && (PINF & (1<<PINF0))){
+			//not touching start position and moving backward
+			PORTB = PORTB^(1<<PB6);
+			PORTB = PORTB^(1<<PB6);
+			PORTD |= (1<<PD5);
+		}else{
+			PORTD &= ~(1<<PD5);
+		}
+		
 		// where am I going?
 		if(distDirFlag){
 			curDist++;
